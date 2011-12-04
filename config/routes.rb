@@ -1,5 +1,7 @@
 Trailsy::Application.routes.draw do
   
+  resources :words
+
   root :to => "home#index"
   
   #get "home/index"
