@@ -17,7 +17,7 @@ class WordsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @word }
+      format.json { render :json => @word.to_json(:include => :language) }
     end
   end
 
