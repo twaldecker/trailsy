@@ -1,13 +1,11 @@
 class WordsController < ApplicationController
+  respond_to :json
+
   # GET /words
   # GET /words.json
   def index
     @words = Word.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @words }
-    end
+    respond_with @words, :include => :language, :include => :translations
   end
 
   # GET /words/1
@@ -57,10 +55,9 @@ class WordsController < ApplicationController
   # PUT /words/1.json
   def update
     @word = Word.find(params[:id])
-
     respond_to do |format|
-      if @word.update_attributes(params[:word])
-        format.html { redirect_to @word, :notice => 'Word was successfully updated.' }
+      if @word.updateWord(params)
+        #format.html { redirect_to @word, :notice => 'Word was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render :action => "edit" }
