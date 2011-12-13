@@ -15,7 +15,7 @@ class Word < ActiveRecord::Base
         @translation.update_attributes(translation)
         params[:translations][key] = @translation
       else
-        @translation = Word.translations.create(translation)
+        @translation = self.translations.create(translation)
         params[:translations][key] = @translation
       end
     end
