@@ -11,12 +11,9 @@ class WordsController < ApplicationController
   # GET /words/1
   # GET /words/1.json
   def show
-    @word = Word.find(params[:id], :joins => :language)
+    @word = Word.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @word.to_json(:include => :language) }
-    end
+    respond_with @word, :include => :language, :include => :translations
   end
 
   # GET /words/new
