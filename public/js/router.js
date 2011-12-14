@@ -7,7 +7,7 @@ define(['backbone','views/detailResultList'],function(Backbone,detailResultListV
             '': 'home'
         },
         'home': function(){
-            detailResultListView.render();
+            //detailResultListView.render();
         }
     });
 
