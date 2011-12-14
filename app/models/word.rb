@@ -7,6 +7,13 @@ class Word < ActiveRecord::Base
   accepts_nested_attributes_for :translations
   
   validates :word, :presence => true
+  
+  # this method returns words starting with the parameter word.
+  def Word.find_starting_with word
+    return Word.where("word LIKE ?", word + '%')
+  end
+  
+  
 
   #update a single word including translations
   def updateWord(params)

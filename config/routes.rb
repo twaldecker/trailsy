@@ -1,6 +1,9 @@
 Trailsy::Application.routes.draw do
   
+  match '/words/search' => 'words#search'
   resources :words
+  
+
 
   root :to => "home#index"
   
