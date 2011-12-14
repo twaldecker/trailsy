@@ -1,15 +1,16 @@
 class WordsController < ApplicationController
+  # only respond do json calls
   respond_to :json
 
-  # GET /words
   # GET /words.json
+  # This action responds with a list of all words
   def index
     @words = Word.all
-    respond_with @words, :include => :language, :include => :translations
+    respond_with @words, :include => [:language, :translations]
   end
 
-  # GET /words/1
   # GET /words/1.json
+  # This action returns the json data for a specific word
   def show
     @word = Word.find(params[:id])
 

@@ -1,9 +1,12 @@
 class Word < ActiveRecord::Base
   belongs_to :language
-  validates :word, :presence => true
+  
   has_many :connections, :class_name => "Connection", :foreign_key => :lang1_id
   has_many :translations, :through  => :connections, :source => :lang2
+  
   accepts_nested_attributes_for :translations
+  
+  validates :word, :presence => true
 
   #update a single word including translations
   def updateWord(params)

@@ -1,3 +1,3 @@
 class Language < ActiveRecord::Base
-  has_many :word
+  has_many :words
 end
