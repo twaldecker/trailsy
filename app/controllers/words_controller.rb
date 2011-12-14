@@ -13,11 +13,9 @@ class WordsController < ApplicationController
   # This action returns the json data for a specific word
   def show
     @word = Word.find(params[:id])
-
-    respond_with @word, :include => :language, :include => :translations
+    respond_with @word, :include => [:language, :translations]
   end
 
-  # GET /words/new
   # GET /words/new.json
   def new
     @word = Word.new
@@ -33,7 +31,6 @@ class WordsController < ApplicationController
     @word = Word.find(params[:id])
   end
 
-  # POST /words
   # POST /words.json
   def create
     @word = Word.new(params[:word])
@@ -49,7 +46,6 @@ class WordsController < ApplicationController
     end
   end
 
-  # PUT /words/1
   # PUT /words/1.json
   def update
     @word = Word.find(params[:id])
@@ -64,7 +60,6 @@ class WordsController < ApplicationController
     end
   end
 
-  # DELETE /words/1
   # DELETE /words/1.json
   def destroy
     @word = Word.find(params[:id])
