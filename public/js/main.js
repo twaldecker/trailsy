@@ -1,5 +1,5 @@
 require.config({
-    jquery: 'vendor/jquery/dist/jquery',
+    jquery: 'vendor/jquery',
     underscore: 'vendor/underscore/underscore',
     backbone: 'vendor/backbone'
 })

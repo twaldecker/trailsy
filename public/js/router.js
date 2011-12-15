@@ -1,15 +1,33 @@
-define(['backbone','views/detailResultList'],function(Backbone,detailResultListView){
-    var homeRouter = Backbone.Router.extend({
-        initialize: function(){
-            Backbone.history.start();
-        },
+define(['jquery',
+        'backbone',
+        'views/detailResultList',
+        'views/searchResultList',
+        'collections/words'],
+function($, Backbone, detailResultListView, searchResultListView, words){
+    var appRouter = Backbone.Router.extend({
         routes: {
-            '': 'home'
+            '': 'home',
+            'search/:query': 'search'
         },
         'home': function(){
-            //detailResultListView.render();
+        },
+
+        search: function(query) {
+            words.fetch({data: jQuery.param({word: query}),
+                         url:'words/search',
+                         success: function(){
+                             searchResultListView.render();
+                            }});
+            var input = $('#searchInput');
+            input.val(query);
         }
     });
 
-    return new homeRouter();
+    var init = function(){
+        var app_router = new appRouter;
+        Backbone.history.start({pushStack:true});
+    };
+    return {
+        init: init
+    };
 });

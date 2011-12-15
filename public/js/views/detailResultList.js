@@ -13,9 +13,8 @@ define(['jquery','backbone','underscore',
 
         initialize: function() {
             this.items_element = $("#searchResultList"); //we append our translations to this alement
-            _.bindAll(this, 'render', 'add', 'appendItem', 'setFromModel', 'unrender');
-            this.collection = new words();
-            words.fetch();
+            _.bindAll(this, 'render', 'add', 'appendItem', 'unrender');
+            this.collection = words;
         },
 
         add: function() {
@@ -27,7 +26,7 @@ define(['jquery','backbone','underscore',
         },
 
         appendItem: function(item, key) {
-            var model = this.collection.get(item._id);
+            var model = this.collection.get(item.id);
             var view = new detailResultView({
                 'model': model}),
                 el = view.render(this.search).el;
@@ -36,10 +35,10 @@ define(['jquery','backbone','underscore',
 
         render: function () {
             this.unrender();
-            _(this.collection).each(function(item, key){ // in case collection is not empty
+            this.collection.each(function(item, key){ // in case collection is not empty
                 this.appendItem(item, key);
             }, this);
         }
     });
-    return detailResultListView;
+    return new detailResultListView;
 });
