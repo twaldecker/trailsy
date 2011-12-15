@@ -7,9 +7,15 @@ function($, Backbone, detailResultListView, searchResultListView, words){
     var appRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
-            'search/:query': 'search'
+            'search/:query': 'search',
+            'words/:word':  'words'
         },
         'home': function(){
+        },
+
+        words: function(id) {
+            console.log('load detail view for word: '+ id);
+            words.getOrFetch(id);
         },
 
         search: function(query) {
