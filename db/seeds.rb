@@ -5,6 +5,9 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+
+#please run rake db:reset
+#rake db:seed will duplicate the words
 langs   = Language.create([{:code => 'en', :language => 'English'},
                            {:code => 'de', :language => 'Deutsch'},
                            {:code => 'mk', :language => 'Makedonski'}])
