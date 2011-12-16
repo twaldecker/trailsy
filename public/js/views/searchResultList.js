@@ -78,7 +78,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 if (em.length) {
                     var model_id = em.attr('data-id');
                     AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10), true);
-                    this.blur();
+                    $("#searchInput").blur();
                     return false;
                 }
                 this.search();
@@ -138,6 +138,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 this.appendItem(item);
             }, this);
             this.items_element.show('fast', 'swing');
+            $("#searchInput").focus();
         }
     });
     return new searchResultListView;
