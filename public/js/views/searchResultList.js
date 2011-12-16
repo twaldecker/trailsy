@@ -10,6 +10,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
 
         collection: null,
         targetLang: 'en',
+        searchTimeout: null,
 
         events : {
             "keydown #searchInput":   "keyDown",
@@ -22,7 +23,8 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
 
         initialize: function() {
             this.items_element = $("#searchResultList");
-            _.bindAll(this, 'unrender', 'render', 'search', 'changeLang', 'appendItem', 'focus', 'blur','keyDown', 'keyUp');
+            _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
+                     'appendItem', 'focus', 'blur','keyDown', 'keyUp', 'delayedSearch');
             this.collection = words;
             this.collection.bind('refresh', this.render);
             this.collection.bind('add', this.render);
@@ -48,11 +50,24 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
 
         keyUp: function(e) {
             console.log(e);
-            if (e.keyCode == 27 || e.keyCode == 13 || e.keyCode == 9) return true;
-            this.search();
+            if (e.keyCode == 27 || e.keyCode == 13 || e.keyCode == 9
+                || e.keyCode == 40 || e.keyCode == 38) return true;
+            this.delayedSearch();
+        },
+
+        delayedSearch: function() {
+            if (this.searchTimeout) {
+                clearTimeout(this.searchTimeout);
+            }
+            this.searchTimeout = setTimeout(_.bind(function(){
+                this.search();
+            }, this), 350);
         },
 
         search: function() {
+            if (this.searchTimeout) {
+                clearTimeout(this.searchTimeout);
+            }
             var input = $("#searchInput");
             var searchText = input.val();
             if (searchText.length < 3) {
