@@ -226,7 +226,7 @@ body {
 
 #searchInput {
     margin: 10px 10px 0px 10px;
-    width: 240px;
+    width: 258px;
     padding: 5px 0px 5px 5px;
 }
 
@@ -241,8 +241,6 @@ input {
     height: 57px;
 }
 
-
-
 ul {
     list-style: none;
 }
@@ -250,7 +248,7 @@ ul {
 #searchResultList {
     margin: auto;
     position: relative;
-    left: -8px;
+    left: -18px;
 }
 
 #translations {
