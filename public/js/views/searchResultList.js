@@ -68,6 +68,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             if (e.keyCode == 27) {
                 e.preventDefault();
                 this.blur();
+                AppRouter.navigate('home', true);
                 return false;
             }
             // Enter
