@@ -17,7 +17,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, words){
         words: function(id) {
             console.log('load detail view for word: '+ id);
             words.getOrFetch(id,_.bind(function() {
-                console.log('rendering word id: '+id);
+                console.log('loaded word id: '+id);
                 detailResultListView.render(id);
             }, this));
 
@@ -35,7 +35,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, words){
     });
 
     var init = function(){
-        var app_router = new appRouter;
+        window.AppRouter = new appRouter;
         Backbone.history.start({pushStack:true});
     };
     return {

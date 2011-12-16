@@ -36,11 +36,10 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             var searchText = input.val();
             if (searchText.length < 3) {
                 this.unrender();
-                window.location.hash = '';
+                AppRouter.navigate('home', true);
                 return;
             }
-            window.location.hash = 'search/'+searchText;
-            //router.navigate('search/'+searchText, true);
+            AppRouter.navigate('search/'+searchText, true);
         },
 
         unrender: function() {
@@ -53,7 +52,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 el = view.render().el;
             var that = this;
             $(el).bind('click', function(){
-                window.location.hash = that.collection.url+'/'+item.get('id');
+                AppRouter.navigate(that.collection.url+'/'+item.get('id'), true);
             });
             this.items_element.append(el);
         },
