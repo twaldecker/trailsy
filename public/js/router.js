@@ -1,9 +1,10 @@
 define(['jquery',
+        'underscore',
         'backbone',
         'views/detailResultList',
         'views/searchResultList',
         'collections/words'],
-function($, Backbone, detailResultListView, searchResultListView, words){
+function($, _, Backbone, detailResultListView, searchResultListView, words){
     var appRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
@@ -15,7 +16,11 @@ function($, Backbone, detailResultListView, searchResultListView, words){
 
         words: function(id) {
             console.log('load detail view for word: '+ id);
-            words.getOrFetch(id);
+            words.getOrFetch(id,_.bind(function() {
+                console.log('rendering word id: '+id);
+                detailResultListView.render(id);
+            }, this));
+
         },
 
         search: function(query) {

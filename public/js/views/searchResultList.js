@@ -40,7 +40,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 return;
             }
             window.location.hash = 'search/'+searchText;
-            //router.navigate('search/'+input, true);
+            //router.navigate('search/'+searchText, true);
         },
 
         unrender: function() {
@@ -53,7 +53,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 el = view.render().el;
             var that = this;
             $(el).bind('click', function(){
-                detailResultListView.render();
+                window.location.hash = that.collection.url+'/'+item.get('id');
             });
             this.items_element.append(el);
         },
