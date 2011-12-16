@@ -12,7 +12,7 @@ define(['jquery','underscore','backbone',
         },
 
         initialize: function() {
-            this.items_element = $("#searchResultList"); //we append our translations to this alement
+            this.items_element = $("#translationList"); //we append our translations to this alement
             _.bindAll(this, 'render', 'add', 'appendItem', 'unrender');
             this.collection = words;
         },

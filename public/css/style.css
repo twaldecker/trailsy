@@ -225,7 +225,9 @@ body {
 }
 
 #searchInput {
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
+    width: 240px;
+    padding: 5px 0px 5px 5px;
 }
 
 input {
@@ -238,20 +240,27 @@ input {
     top: 15px;
 }
 
+
+
 ul {
     list-style: none;
+}
+
+#searchResultList {
+    margin: auto;
+    position: relative;
+    left: -8px;
+}
+
+#translations {
+    margin-top: 30px;
 }
 
 
 li {
     margin-left:auto;
     margin-right:auto;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-box-shadow: inset 0px 0px 2px 2px #06266F;
-    -webkit-box-shadow: inset 0px 0px 2px 2px #06266F;
-    box-shadow: inset 0px 0px 2px 2px #06266F;
+    border: 1px solid #778899;
     padding: 5px 15px;
     overflow: hidden;
 }
@@ -282,6 +291,10 @@ li.detailResult .rateDown {
 li.detailResult .rateUp {
     position: relative;
     top: -5px;
+}
+
+li.selected {
+    background-color: #add8e6;
 }
 
 

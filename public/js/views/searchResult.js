@@ -22,6 +22,7 @@ define(['jquery','underscore','backbone'], function($,_,Backbone){
         render: function() {
             var model = this.model.toJSON();
             var el = $(this.el);
+            el.attr('data-id', model.id);
             el.html(this.template(model));
             this.model.el = el;
             return this;

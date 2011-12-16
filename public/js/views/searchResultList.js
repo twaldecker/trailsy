@@ -12,14 +12,17 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         targetLang: 'en',
 
         events : {
-            "keyup #searchInput":     "search",
+            "keydown #searchInput":   "keyDown",
+            "keyup #searchInput":     "keyUp",
             "search #searchInput":    "search",
+            "blur #searchInput":      "blur",
+            "focus #searchInput":     "focus",
             "change #targetLanguage": "changeLang"
         },
 
         initialize: function() {
             this.items_element = $("#searchResultList");
-            _.bindAll(this, 'unrender', 'render', 'search', 'changeLang', 'appendItem');
+            _.bindAll(this, 'unrender', 'render', 'search', 'changeLang', 'appendItem', 'focus', 'blur','keyDown', 'keyUp');
             this.collection = words;
             this.collection.bind('refresh', this.render);
             this.collection.bind('add', this.render);
@@ -31,15 +34,86 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             console.log('selected lang: ' + this.targetLang);
         },
 
+        focus: function() {
+            console.log('focused search input');
+        },
+
+        blur: function() {
+            this.items_element.hide('slow', 'swing');
+            var em = this.items_element.children('li.selected');
+            if (em.length) {
+                em.removeClass('selected');
+            }
+        },
+
+        keyUp: function(e) {
+            console.log(e);
+            if (e.keyCode == 27 || e.keyCode == 13 || e.keyCode == 9) return true;
+            this.search();
+        },
+
         search: function() {
             var input = $("#searchInput");
             var searchText = input.val();
             if (searchText.length < 3) {
-                this.unrender();
+                this.blur();
                 AppRouter.navigate('home', true);
-                return;
+                return true;
             }
             AppRouter.navigate('search/'+searchText, true);
+        },
+
+        keyDown: function(e) {
+            // Esc
+            if (e.keyCode == 27) {
+                e.preventDefault();
+                this.blur();
+                return false;
+            }
+            // Enter
+            if (e.keyCode == 13 || e.keyCode == 9) {
+                // If an item is selected, change input value
+                var em = this.items_element.children('li.selected');
+                if (em.length) {
+                    var model_id = em.attr('data-id');
+                    AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10), true);
+                    this.blur();
+                    return false;
+                }
+                this.search();
+                return true;
+            }
+            // Down
+            if (e.keyCode == 40) {
+                e.preventDefault();
+                var em = this.items_element.children('li.selected');
+                if (em.length == 0) {
+                    this.items_element.children('li:first').addClass('selected');
+                } else {
+                    if (em == this.items_element.children('li:last')) {
+                        em.removeClass('selected');
+                    } else {
+                        em.removeClass('selected').next('li').addClass('selected');
+                    }
+                }
+                return false;
+            }
+            // Up
+            if (e.keyCode == 38) {
+                e.preventDefault();
+                var em = this.items_element.children('li.selected');
+                if (em.length == 0) {
+                    this.items_element.children('li:last').addClass('selected');
+                } else {
+                    if (em == this.items_element.children('li:first')) {
+                        em.removeClass('selected');
+                    } else {
+                        em.removeClass('selected').prev('li').addClass('selected');
+                    }
+                }
+                return false;
+            }
+            return true;
         },
 
         unrender: function() {
@@ -51,7 +125,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             var view = new searchResultView({model: item}),
                 el = view.render().el;
             var that = this;
-            $(el).bind('click', function(){
+            $(el).on('mousedown', function(){
                 AppRouter.navigate(that.collection.url+'/'+item.get('id'), true);
             });
             this.items_element.append(el);
@@ -62,6 +136,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             this.collection.each(function(item){ // in case collection is not empty
                 this.appendItem(item);
             }, this);
+            this.items_element.show('fast', 'swing');
         }
     });
     return new searchResultListView;
