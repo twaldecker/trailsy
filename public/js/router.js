@@ -24,7 +24,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, words){
         },
 
         search: function(query) {
-            words.fetch({data: jQuery.param({word: query}),
+            words.fetch({data: jQuery.param({word: query, lang: searchResultListView.targetLang}),
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();

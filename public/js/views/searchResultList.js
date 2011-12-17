@@ -9,7 +9,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         el: $("#searchResults"),
 
         collection: null,
-        targetLang: 'en',
+        targetLang: '1',
         searchTimeout: null,
 
         events : {
