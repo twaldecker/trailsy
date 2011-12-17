@@ -16,10 +16,10 @@ class WordsController < ApplicationController
     respond_with @word, :include => [:language, :translations]
   end
 
-  # GET /words/search?word=ab
+  # GET /words/search?word=ab&lang=2
   # This action returns a json array with words starting with a parameter
   def search
-    @words = Word.find_starting_with params[:word]
+    @words = Word.find_starting_with params[:word], params[:lang]
 
     respond_to do |format|
       format.html {render :html => @words, :include => [:language, :translations], :template => 'home/index'}

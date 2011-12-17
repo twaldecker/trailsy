@@ -9,8 +9,11 @@ class Word < ActiveRecord::Base
   validates :word, :presence => true
   
   # this method returns words starting with the parameter word.
-  def Word.find_starting_with word
-    return Word.where("word LIKE ?", word + '%')
+  def Word.find_starting_with word, lang
+    return Word.find_by_sql(['select * from words as w1 '\
+                            'join connections on w1.id = connections.lang1_id '\
+                            'join words as w2 on w2.id = connections.lang2_id '\
+                            'where w1.word like ? and w1.language_id != ? and w2.language_id = ?',  word + '%', lang, lang])
   end
   
   
