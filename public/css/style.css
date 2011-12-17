@@ -224,6 +224,31 @@ body {
 #searchBox {
 }
 
+#heading {
+    font-size: 100px;
+    margin: 0;
+}
+
+.green {
+    color: green;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.orange {
+    color: orange;
+}
+
 #searchInput {
     margin: 10px 10px 0px 10px;
     width: 258px;

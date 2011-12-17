@@ -1,19 +1,32 @@
 <div id="container">
     <header>
-        <h1 style="text-align:center;font-size:100px"><span style="color:green">T</span><span style="color:yellow">r</span><span style="color:red">a</span><span style="color:blue">n</span><span style="color:orange">s</span><span style="color:blue">i</span></h1>
+        <h1 id="heading">
+          <span class="green">T</span>
+          <span class="yellow">r</span>
+          <span class="red">a</span>
+          <span class="blue">n</span>
+          <span class="orange">s</span>
+          <span class="blue">i</span>
+        </h1>
     </header>
     <div id="main" role="main">
 
 		<section id="searchResults">
+          <form action="words/search" method="get" onsubmit="return false;">
             <label for="targetLang">Select Target Language</label>
             <select name="targetLang" id="targetLanguage">
                 <option value="en">EN</option>
                 <option value="de">DE</option>
             </select>
             <br />
-            <input id="searchInput" type='search' placeholder='Search' />
+            <input name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
+          </form>
             <ul id="searchResultList">
-
+              <% if !@words.nil? %>
+                  <% @words.each do |word| %>
+                        <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
+                  <% end %>
+              <% end %>
             </ul>
 		</section>
         <section id="translations">

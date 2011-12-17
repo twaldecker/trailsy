@@ -20,7 +20,11 @@ class WordsController < ApplicationController
   # This action returns a json array with words starting with a parameter
   def search
     @words = Word.find_starting_with params[:word]
-    respond_with @words, :include => [:language, :translations]
+
+    respond_to do |format|
+      format.html {render :html => @words, :include => [:language, :translations], :template => 'home/index'}
+      format.json {render :json => @words, :include => [:language, :translations]}
+    end
   end
 
   # PUT /words/1.json
