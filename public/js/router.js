@@ -20,6 +20,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, words, deta
                 console.log('loaded word id: '+id);
                 var tmpWords = new detailWords();
                 var model = words.get(id);
+                this.setSearchText(model.get('word'));
                 tmpWords.add(model);
                 tmpWords.add(model.get('translations'));
                 detailResultListView.setCollection(tmpWords);
@@ -34,14 +35,18 @@ function($, _, Backbone, detailResultListView, searchResultListView, words, deta
             searchResultListView.setTargetLang(targetLang);
         },
 
+        setSearchText: function(text) {
+            var input = $('#searchInput');
+            input.val(text);
+        },
+
         search: function(query, targetLang) {
             words.fetch({data: jQuery.param({word: query, lang: targetLang}),
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();
                             }});
-            var input = $('#searchInput');
-            input.val(query);
+            this.setSearchText(query);
             this.setTargetLangValue(targetLang);
         }
     });
