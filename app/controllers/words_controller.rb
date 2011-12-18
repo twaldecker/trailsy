@@ -1,4 +1,5 @@
 class WordsController < ApplicationController
+  before_filter :logged_in?, :only => [:update, :create, :destroy]
   # only respond do json calls
   respond_to :json
 

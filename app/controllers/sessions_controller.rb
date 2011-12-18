@@ -11,9 +11,11 @@ class SessionsController < ApplicationController
       flash.now.alert = "Invalid email or password"
       render "new"
     end
+    logger.debug "userid: #{session[:user_id]}"
   end
   
   def destroy
+    logger.debug "log out"
     session[:user_id] = nil
     redirect_to root_url, :notice => "logged out"
   end
