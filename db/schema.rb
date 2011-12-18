@@ -10,8 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111218035859) do
-
+ActiveRecord::Schema.define(:version => 20111218124258) do
   create_table "connections", :force => true do |t|
     t.integer  "lang1_id",   :null => false
     t.integer  "lang2_id",   :null => false
@@ -25,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20111218035859) do
   create_table "languages", :force => true do |t|
     t.string   "language"
     t.string   "code",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
