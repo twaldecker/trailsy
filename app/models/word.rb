@@ -21,7 +21,7 @@ class Word < ActiveRecord::Base
   #update a single word including translations
   def updateWord(params)
     success = true
-    logger.debug "params: #{params}"
+    logger.debug "params: #{YAML.dump(params)}"
     Word.transaction do
       begin
         params[:translations].each_index do |key|
@@ -44,6 +44,7 @@ class Word < ActiveRecord::Base
         self.update_attributes(params[:all])
 
       rescue Exception => e
+        logger.error "Error updating word: #{e}"
         success = false
       end
       raise ActiveRecord::Rollback if !success

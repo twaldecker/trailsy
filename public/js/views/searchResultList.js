@@ -146,7 +146,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 el = view.render().el;
             var that = this;
             $(el).on('mousedown', function(){
-                AppRouter.navigate(that.collection.url+'/'+item.get('id')+'/targetLang/'+this.targetLang, true);
+                AppRouter.navigate(that.collection.url+'/'+item.get('id')+'/targetLang/'+that.targetLang, true);
             });
             this.items_element.append(el);
         },
