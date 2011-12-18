@@ -1049,7 +1049,14 @@
         var type = methodMap[method];
 
         // Default JSON-request options.
-        var params = {type : type, dataType : 'json'};
+        var params = {type : type,
+                      dataType : 'json',
+                      //add csrf token for rails update
+                      beforeSend: function( xhr ) {
+                        var token = $('meta[name="csrf-token"]').attr('content');
+                        if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+            }};
+
 
         // Ensure that we have a URL.
         if (!options.url) {
