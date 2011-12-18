@@ -1,6 +1,6 @@
 define(['jquery','underscore','backbone',
-        'collections/words', 'views/detailResult'],
-function($,  _, Backbone, words, detailResultView){
+        'views/detailResult'],
+function($,  _, Backbone, detailResultView){
     /**
      * list view for detail results
      */
@@ -14,12 +14,16 @@ function($,  _, Backbone, words, detailResultView){
 
         initialize: function() {
             this.items_element = $("#translationList"); //we append our translations to this alement
-            _.bindAll(this, 'render', 'add', 'appendItem', 'unrender');
-            this.collection = words;
+            _.bindAll(this, 'render', 'add', 'appendItem', 'unrender', 'setCollection');
+            //this.collection = words;
         },
 
         add: function() {
             console.log('clicked add');
+        },
+
+        setCollection: function(collection) {
+            this.collection = collection;
         },
 
         unrender: function() {
@@ -27,9 +31,9 @@ function($,  _, Backbone, words, detailResultView){
         },
 
         appendItem: function(item, key) {
-            //var model = this.collection.get(item.id);
+            var model = this.collection.get(item.id);
             var view = new detailResultView({
-                'model': item}),
+                'model': model}),
                 el = view.render(this.search).el;
             this.items_element.append(el);
         },

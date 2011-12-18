@@ -3,8 +3,9 @@ define(['jquery',
         'backbone',
         'views/detailResultList',
         'views/searchResultList',
-        'collections/words'],
-function($, _, Backbone, detailResultListView, searchResultListView, words){
+        'collections/words',
+        'collections/detailWords'],
+function($, _, Backbone, detailResultListView, searchResultListView, words, detailWords){
     var appRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
@@ -15,10 +16,13 @@ function($, _, Backbone, detailResultListView, searchResultListView, words){
         },
 
         words: function(id, targetLang) {
-            console.log('load detail view for word: '+ id);
-
             words.getOrFetch(id,_.bind(function() {
                 console.log('loaded word id: '+id);
+                var tmpWords = new detailWords();
+                var model = words.get(id);
+                tmpWords.add(model);
+                tmpWords.add(model.get('translations'));
+                detailResultListView.setCollection(tmpWords);
                 detailResultListView.render(id, targetLang);
             }, this));
             this.setTargetLangValue(targetLang);
