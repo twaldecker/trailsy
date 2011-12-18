@@ -45,7 +45,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         },
 
         blur: function() {
-            this.items_element.hide('slow', 'swing');
+            this.items_element.hide();
             var em = this.items_element.children('li.selected');
             if (em.length) {
                 em.removeClass('selected');
@@ -156,7 +156,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             this.collection.each(function(item){ // in case collection is not empty
                 this.appendItem(item);
             }, this);
-            this.items_element.show('fast', 'swing');
+            this.items_element.show();
             $("#searchInput").focus();
         }
     });

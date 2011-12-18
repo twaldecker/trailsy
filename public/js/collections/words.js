@@ -3,6 +3,18 @@ define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
         model: wordModel,
         url: 'words',
 
+        initialize: function(attributes, options) {
+            options || (options = {});
+            this.bind("error", this.defaultErrorHandler);
+            this.init && this.init(attributes, options);
+        },
+
+        defaultErrorHandler: function(model, error) {
+            if (error.status == 401 || error.status == 403) {
+                AppRouter.navigate('login', true);
+            }
+        },
+
         /**
          * create own models for each translation
          * @param response

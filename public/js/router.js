@@ -3,12 +3,14 @@ define(['jquery',
         'backbone',
         'views/detailResultList',
         'views/searchResultList',
+        'views/loginDialog',
         'collections/words',
         'collections/detailWords'],
-function($, _, Backbone, detailResultListView, searchResultListView, words, detailWords){
+function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, words, detailWords){
     var appRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
+            'login': 'login',
             'search/:query/targetLang/:lang': 'search',
             'words/:word/targetLang/:lang':  'words'
         },
@@ -48,6 +50,11 @@ function($, _, Backbone, detailResultListView, searchResultListView, words, deta
                             }});
             this.setSearchText(query);
             this.setTargetLangValue(targetLang);
+        },
+
+        login: function() {
+            console.log('show login dialog');
+            loginDialog.show();
         }
     });
 

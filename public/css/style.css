@@ -298,6 +298,24 @@ li.detailResult {
     width: 480px;
 }
 
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+
+    border-bottom: 5px solid black;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+
+    border-top: 20px solid #f00;
+}
+
 li.detailResult .rateUp,
 li.detailResult .rateDown {
     cursor: pointer;
@@ -321,7 +339,6 @@ li.detailResult .rateUp {
 li.selected {
     background-color: #add8e6;
 }
-
 
 
 /*
