@@ -92,5 +92,6 @@ form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #
 
 #login-error {
     color: red;
+    font-size: 13px;
     display: none;
 }
