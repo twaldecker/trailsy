@@ -38,6 +38,7 @@ function($, _, html) {
         //hide popup and mask
         hide: function() {
             $('#mask , .login-popup').fadeOut(300 , _.bind(function() {
+                $('#login-error', this.loginHtml).hide();
                 this.loginHtml.remove();
                 $('#mask').remove();
             }, this));
