@@ -6,7 +6,7 @@ define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
         /**
          * create own models for each translation
          * @param response
-         */
+         *
         parse: function(response) {
             var words = [];
             var tmpWords = [];
@@ -23,7 +23,7 @@ define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
             });
 
             return words;
-        },
+        },*/
 
         getOrFetch: function(id, callback) {
             var word = this.get(id);

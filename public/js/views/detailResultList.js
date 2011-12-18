@@ -1,5 +1,6 @@
 define(['jquery','underscore','backbone',
-        'collections/words', 'views/detailResult'],function($,  _, Backbone, words, detailResultView){
+        'collections/words', 'views/detailResult'],
+function($,  _, Backbone, words, detailResultView){
     /**
      * list view for detail results
      */
@@ -26,14 +27,14 @@ define(['jquery','underscore','backbone',
         },
 
         appendItem: function(item, key) {
-            var model = this.collection.get(item.id);
+            //var model = this.collection.get(item.id);
             var view = new detailResultView({
-                'model': model}),
+                'model': item}),
                 el = view.render(this.search).el;
             this.items_element.append(el);
         },
 
-        render: function (id) {
+        render: function (id, targetLang) {
             this.unrender();
             if ('' === id) {
                 return
@@ -41,6 +42,7 @@ define(['jquery','underscore','backbone',
             var word = this.collection.get(id);
 
             _(word.get('translations')).each(function(item, key){ // in case collection is not empty
+                if (item.language_id == targetLang)
                 this.appendItem(item, key);
             }, this);
         }

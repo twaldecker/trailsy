@@ -20,20 +20,33 @@ class Word < ActiveRecord::Base
 
   #update a single word including translations
   def updateWord(params)
-    success = false
-    params[:translations].each_index do |key|
-      translation = params[:translations][key]
-      @translation = Word.find_by_word(translation[:word])
-      if @translation
-        @translation.update_attributes(translation)
-        params[:translations][key] = @translation
-      else
-        @translation = self.translations.create(translation)
-        params[:translations][key] = @translation
+    success = true
+    logger.debug "params: #{params}"
+    Word.transaction do
+      begin
+        params[:translations].each_index do |key|
+          translation = params[:translations][key]
+          @translation = Word.find_by_word(translation[:word])
+          if @translation
+            @translation.update_attributes(translation)
+            params[:translations][key] = @translation
+          else
+            @translation = self.translations.create(translation)
+            params[:translations][key] = @translation
+          end
+          #add opposite translation if not present
+          @oppositeTranslation = @translation.translations.find_by_word(self.word)
+          if @oppositeTranslation.nil?
+            Connection.create({:lang1_id => @translation.id, :lang2_id => self.id})
+          end
+
+        end
+        self.update_attributes(params[:all])
+
+      rescue Exception => e
+        success = false
       end
-    end
-    if self.update_attributes(params[:all])
-      success = true
+      raise ActiveRecord::Rollback if !success
     end
     return success
   end

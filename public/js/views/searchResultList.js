@@ -24,10 +24,14 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         initialize: function() {
             this.items_element = $("#searchResultList");
             _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
-                     'appendItem', 'focus', 'blur','keyDown', 'keyUp', 'delayedSearch');
+                     'appendItem', 'focus', 'blur','keyDown', 'keyUp', 'delayedSearch', 'setTargetLang');
             this.collection = words;
             this.collection.bind('refresh', this.render);
             this.collection.bind('add', this.render);
+        },
+
+        setTargetLang: function(targetLang) {
+            this.targetLang = targetLang;
         },
 
         changeLang: function() {
@@ -75,7 +79,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 AppRouter.navigate('home', true);
                 return true;
             }
-            AppRouter.navigate('search/'+searchText, true);
+            AppRouter.navigate('search/'+searchText+'/targetLang/'+this.targetLang, true);
         },
 
         keyDown: function(e) {
@@ -92,7 +96,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 var em = this.items_element.children('li.selected');
                 if (em.length) {
                     var model_id = em.attr('data-id');
-                    AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10), true);
+                    AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10)+'/targetLang/'+this.targetLang, true);
                     $("#searchInput").blur();
                     return false;
                 }
@@ -142,7 +146,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
                 el = view.render().el;
             var that = this;
             $(el).on('mousedown', function(){
-                AppRouter.navigate(that.collection.url+'/'+item.get('id'), true);
+                AppRouter.navigate(that.collection.url+'/'+item.get('id')+'/targetLang/'+this.targetLang, true);
             });
             this.items_element.append(el);
         },

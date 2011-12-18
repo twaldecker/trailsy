@@ -15,7 +15,7 @@ define(['jquery','backbone','underscore'],function($,Backbone,_){
         initialize: function() {
             _.bindAll(this, 'render', 'unrender');
             this.model = this.options.model;
-            this.model.bind('change', this.render);
+            //this.model.bind('change', this.render);
             this.model.view = this;
         },
 
@@ -27,7 +27,7 @@ define(['jquery','backbone','underscore'],function($,Backbone,_){
         render: function() {
             var model = this.model;
             var el = $(this.el);
-            el.html(this.template(model.toJSON()));
+            el.html(this.template(model));
             var that = this;
             $('.rateUp', el).bind('click', function(){
                 console.log('clicked rate up');

@@ -15,8 +15,9 @@
           <form action="words/search" method="get" onsubmit="return false;">
             <label for="targetLang">Select Target Language</label>
             <select name="targetLang" id="targetLanguage">
-                <option value="1">EN</option>
-                <option value="2">DE</option>
+                <% @languages.each do |language| %>
+                  <option value="<%= language.id %>"><%= language.code.upcase %></option>
+                <% end %>
             </select>
             <br />
             <input name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />

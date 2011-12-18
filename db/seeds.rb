@@ -15,7 +15,7 @@ langs   = Language.create([{:code => 'en', :language => 'English'},
 screen = Word.create({   :word        => 'Screen',
                          :example     => 'The screen is nice',
                          :language_id => 1})
-screen.translations.create([
+screen.updateWord({:translations => [
                       {  :word        => 'Monitor',
                          :example     => 'Der Monitor hat eine gute Auflösung',
                          :language_id => 2},
@@ -25,4 +25,4 @@ screen.translations.create([
                        { :word        => 'Bildschirm',
                          :example     => 'Der Bildschirm hat eine gute Auflösung',
                          :language_id => 2}
-                      ])
+                      ]})

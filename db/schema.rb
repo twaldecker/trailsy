@@ -10,28 +10,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213100855) do
+ActiveRecord::Schema.define(:version => 20111218035859) do
 
   create_table "connections", :id => false, :force => true do |t|
-    t.integer  "lang1_id"
-    t.integer  "lang2_id"
+    t.integer  "lang1_id",   :null => false
+    t.integer  "lang2_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "connections", ["lang1_id"], :name => "index_connections_on_lang1_id"
+  add_index "connections", ["lang2_id"], :name => "index_connections_on_lang2_id"
+
   create_table "languages", :force => true do |t|
     t.string   "language"
-    t.string   "code"
+    t.string   "code",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "words", :force => true do |t|
-    t.string   "word"
+    t.string   "word",        :null => false
     t.string   "example"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "language_id"
+    t.integer  "language_id", :null => false
   end
+
+  add_index "words", ["language_id"], :name => "index_words_on_language_id"
+  add_index "words", ["word"], :name => "index_words_on_word"
 
 end
