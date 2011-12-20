@@ -1,6 +1,6 @@
 <div id="container">
     <header>
-      <div id="user_nav">
+      <nav>
         <% if current_user %>
             Logged in as <%= current_user.email %>.
             <%= link_to "log out", log_out_path %>
@@ -8,7 +8,7 @@
             <%= link_to "Sign up", sign_up_path %> or
             <a href="#login">Log in</a>
         <% end %>
-      </div>
+      </nav>
     </header>
     <div id="main" role="main">
       <h1 id="heading">

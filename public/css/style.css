@@ -213,6 +213,20 @@ td { vertical-align: top; }
 
 body {
 }
+
+header {
+    background-color: black;
+    color: #d3d3d3;
+    height: 30px;
+}
+
+nav {
+    font-size: 18px;
+    padding: 5px;
+    float: right;
+    text-shadow: none;
+}
+
 #container {
     text-align: center;
     text-shadow: 2px 2px 2px lightGrey;
@@ -323,7 +337,7 @@ li {
         width: 320px;
     }
     #heading {
-        font-size: 20px;
+        font-size: 30px;
     }
     #searchInput {
         width: 240px;
