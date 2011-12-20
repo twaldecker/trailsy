@@ -284,15 +284,6 @@ li {
 */
 
 
-
-
-
-
-
-
-
-
-
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
    ========================================================================== */
@@ -328,18 +319,25 @@ li {
 
 /* für alle devices in landscape mode */
 @media all and (orientation:portrait) {
+    #container {
+        width: 320px;
+    }
     #heading {
         font-size: 20px;
     }
+    #searchInput {
+        width: 240px;
+    }
     ul {
-        width: auto;
+        width: 300px;
+        padding: 0;
     }
     
     li {
-        width: auto;
+        width: 300px;
     }
     li.detailResult {
-        width: auto;
+        width: 300px;
     }
 }
 
