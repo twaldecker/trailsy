@@ -224,9 +224,28 @@ body {
 #searchBox {
 }
 
-#heading {
-    font-size: 100px;
-    margin: 0;
+
+input {
+    text-shadow: 2px 2px 2px lightGrey;
+    color: grey;
+}
+
+#searchResults {
+    position: relative;
+    top: 15px;
+    height: 57px;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    margin-left:auto;
+    margin-right:auto;
+    border: 1px solid #778899;
+    padding: 5px 15px;
+    overflow: hidden;
 }
 
 .green {
@@ -249,96 +268,6 @@ body {
     color: orange;
 }
 
-#searchInput {
-    margin: 10px 10px 0px 10px;
-    width: 258px;
-    padding: 5px 0px 5px 5px;
-}
-
-input {
-    text-shadow: 2px 2px 2px lightGrey;
-    color: grey;
-}
-
-#searchResults {
-    position: relative;
-    top: 15px;
-    height: 57px;
-}
-
-ul {
-    list-style: none;
-}
-
-#searchResultList {
-    margin: auto;
-    position: relative;
-    left: -18px;
-}
-
-#translations {
-    margin-top: 30px;
-}
-
-
-li {
-    margin-left:auto;
-    margin-right:auto;
-    border: 1px solid #778899;
-    padding: 5px 15px;
-    overflow: hidden;
-}
-li.searchResult {
-    cursor: pointer;
-    width: 240px;
-    background-color: white;
-}
-
-li.detailResult {
-    width: 480px;
-}
-
-.arrow-up {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-
-    border-bottom: 5px solid black;
-}
-
-.arrow-down {
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-
-    border-top: 20px solid #f00;
-}
-
-li.detailResult .rateUp,
-li.detailResult .rateDown {
-    cursor: pointer;
-    margin: 0 4px;
-}
-.rateUp:hover,
-.rateDown:hover {
-    background-color: LightBlue;
-}
-li.detailResult .rateDown {
-    position: relative;
-    top: 5px;
-    left: -16px;
-}
-
-li.detailResult .rateUp {
-    position: relative;
-    top: -5px;
-}
-
-li.selected {
-    background-color: #add8e6;
-}
 
 
 /*
@@ -397,8 +326,103 @@ li.selected {
    Modify as content requires.
    ========================================================================== */
 
+/* für alle devices in landscape mode */
+@media all and (orientation:portrait) {
+    #heading {
+        font-size: 20px;
+    }
+    ul {
+        width: auto;
+    }
+    
+    li {
+        width: auto;
+    }
+    li.detailResult {
+        width: auto;
+    }
+}
+
+@media all and (orientation:landscape) {
+
+}
+
 @media only screen and (min-width: 480px) {
   /* Style adjustments for viewports 480px and over go here */
+    #heading {
+        font-size: 100px;
+        margin: 0;
+    }
+
+    #searchInput {
+        margin: 10px 10px 0px 10px;
+        width: 258px;
+        padding: 5px 0px 5px 5px;
+    }
+
+    #translations {
+        margin-top: 30px;
+    }
+
+    #searchResultList {
+        margin: auto;
+        position: relative;
+        left: -18px;
+    }
+
+
+
+    li.searchResult {
+        cursor: pointer;
+        width: 240px;
+        background-color: white;
+    }
+
+    li.detailResult {
+        width: 258px;
+    }
+
+    .arrow-up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+
+        border-bottom: 5px solid black;
+    }
+
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+
+        border-top: 20px solid #f00;
+    }
+
+    li.detailResult .rateUp,
+    li.detailResult .rateDown {
+        cursor: pointer;
+        margin: 0 4px;
+    }
+    .rateUp:hover,
+    .rateDown:hover {
+        background-color: LightBlue;
+    }
+    li.detailResult .rateDown {
+        position: relative;
+        top: 5px;
+        left: -16px;
+    }
+
+    li.detailResult .rateUp {
+        position: relative;
+        top: -5px;
+    }
+
+    li.selected {
+        background-color: #add8e6;
+    }
 
 }
 
