@@ -250,8 +250,15 @@ input {
     height: 57px;
 }
 
+#translations {
+    margin-top: 40px;
+}
+
 ul {
+    margin-left:auto;
+    margin-right:auto;
     list-style: none;
+    padding: 0px;
 }
 
 li {
@@ -259,7 +266,39 @@ li {
     margin-right:auto;
     border: 1px solid #778899;
     padding: 5px 15px;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+li.detailResult {
+    text-align: left;
+}
+
+span.detailWord {
+    margin-left: 15px;
+}
+
+div.rating {
+    padding-left: 5px;
+}
+
+.arrowUp {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+
+    border-bottom: 10px solid black;
+    cursor: pointer;
+}
+
+.arrowDown {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+
+    border-top: 10px solid #f00;
+    cursor: pointer;
 }
 
 .green {
@@ -334,24 +373,27 @@ li {
 /* für alle devices in landscape mode */
 @media all and (orientation:portrait) {
     #container {
-        width: 320px;
+        width: 100%;
+        font-size: 16px;
     }
     #heading {
+        display: none;
         font-size: 30px;
     }
     #searchInput {
-        width: 240px;
+        width: 90%;
+        font-size: 16px;
     }
     ul {
-        width: 300px;
-        padding: 0;
+        width: 90%;
+        padding: 0px;
     }
     
     li {
-        width: 300px;
+
     }
     li.detailResult {
-        width: 300px;
+
     }
 }
 
@@ -372,21 +414,17 @@ li {
         padding: 5px 0px 5px 5px;
     }
 
-    #translations {
-        margin-top: 30px;
-    }
+
 
     #searchResultList {
         margin: auto;
-        position: relative;
-        left: -18px;
     }
 
 
 
     li.searchResult {
         cursor: pointer;
-        width: 240px;
+        width: 243px;
         background-color: white;
     }
 
@@ -394,43 +432,12 @@ li {
         width: 258px;
     }
 
-    .arrow-up {
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
 
-        border-bottom: 5px solid black;
-    }
-
-    .arrow-down {
-        width: 0;
-        height: 0;
-        border-left: 20px solid transparent;
-        border-right: 20px solid transparent;
-
-        border-top: 20px solid #f00;
-    }
-
-    li.detailResult .rateUp,
-    li.detailResult .rateDown {
-        cursor: pointer;
-        margin: 0 4px;
-    }
     .rateUp:hover,
     .rateDown:hover {
         background-color: LightBlue;
     }
-    li.detailResult .rateDown {
-        position: relative;
-        top: 5px;
-        left: -16px;
-    }
 
-    li.detailResult .rateUp {
-        position: relative;
-        top: -5px;
-    }
 
     li.selected {
         background-color: #add8e6;
