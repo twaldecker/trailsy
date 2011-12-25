@@ -321,6 +321,16 @@ li.detailResult {
     text-align: left;
 }
 
+li.searchResult .lang {
+    background-color: #d3d3d3;
+    padding: 1px 3px;
+    margin-right: 10px;
+}
+
+li.searchResult span {
+    float: left;
+}
+
 span.detailWord {
     margin-left: 15px;
 }
