@@ -7,8 +7,6 @@ function($,_,Backbone, searchResultTemplate){
         tagName: "li",
         className: "searchResult",
 
-        template: _.template('<span class="word"><%= word %></span>'),
-
         initialize: function() {
             _.bindAll(this, 'render', 'unrender');
             this.model.bind('change', this.render);
