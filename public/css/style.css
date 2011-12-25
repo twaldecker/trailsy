@@ -298,19 +298,23 @@ input {
     margin-top: 40px;
 }
 
+
 ul {
     margin-left:auto;
     margin-right:auto;
     list-style: none;
     padding: 0px;
+    border-bottom: 1px solid #778899;
+    border-right: 1px solid #778899;
+    border-left: 1px solid #778899;
 }
 
 li {
     margin-left:auto;
     margin-right:auto;
-    border: 1px solid #778899;
     padding: 5px 15px;
     overflow-x: hidden;
+    border-top: 1px solid #778899;
 }
 
 li.detailResult {
@@ -415,7 +419,7 @@ div.rating {
    ========================================================================== */
 
 /* für alle devices in landscape mode */
-@media all and (orientation:portrait) and (max-width: 480px) {
+@media all and (max-width: 480px) {
     #container {
         width: 100%;
         font-size: 16px;
@@ -462,17 +466,18 @@ div.rating {
 
     #searchResultList {
         margin: auto;
+        width: 268px;
     }
 
 
 
     li.searchResult {
         cursor: pointer;
-        width: 243px;
+
         background-color: white;
     }
 
-    li.detailResult {
+    #translationList {
         width: 480px;
     }
 

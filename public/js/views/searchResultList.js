@@ -23,6 +23,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
 
         initialize: function() {
             this.items_element = $("#searchResultList");
+            this.items_element.hide();
             _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
                      'appendItem', 'focus', 'blur','keyDown', 'keyUp', 'delayedSearch', 'setTargetLang');
             this.collection = words;
@@ -156,7 +157,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             this.collection.each(function(item){ // in case collection is not empty
                 this.appendItem(item);
             }, this);
-            this.items_element.show();
+            this.items_element.fadeIn(200);
             $("#searchInput").focus();
         }
     });
