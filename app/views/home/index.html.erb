@@ -6,7 +6,7 @@
             <%= link_to "log out", log_out_path %>
         <% else %>
             <%= link_to "Sign up", sign_up_path %> or
-            <a href="#login">Log in</a>
+            <a href="#login" >Log in</a>
         <% end %>
       </nav>
     </header>
@@ -28,7 +28,7 @@
                 <% end %>
             </select>
             <br />
-            <input name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
+            <input  name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
           </form>
             <ul id="searchResultList">
               <% if !@words.nil? %>

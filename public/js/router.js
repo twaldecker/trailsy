@@ -43,11 +43,14 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         },
 
         search: function(query, targetLang) {
+            $("#searchInput").addClass('loading');
             words.fetch({data: jQuery.param({word: query, lang: targetLang}),
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();
-                            }});
+                             $("#searchInput").removeClass('loading');
+                            },
+                         error: function() {$("#searchInput").removeClass('loading');}});
             this.setSearchText(query);
             this.setTargetLangValue(targetLang);
         },

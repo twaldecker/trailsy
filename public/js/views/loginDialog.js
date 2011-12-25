@@ -1,9 +1,18 @@
 define(['jquery', 'underscore', 'text!templates/login.html'],
 function($, _, html) {
     var loginDialog = {
-        loginHtml: $(html),
+        loginHtml: null,
+
+        appdendDiv: function() {
+            this.loginHtml = $(html);
+            $('nav').append(this.loginHtml);
+        },
+
         show: function() {
-            $('#container').append(this.loginHtml);
+
+            if (null === this.loginHtml) {
+                this.appdendDiv();
+            }
             //Fade in the Popup
             this.loginHtml.fadeIn(300);
 
@@ -19,7 +28,7 @@ function($, _, html) {
             // Add the mask to body
             $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
-            $('a.close, #mask').on('click', _.bind(this.hide, this));
+            $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
             $('.signin', this.loginHtml).on('submit', _.bind(this.submitForm, this));
         },
 
@@ -39,7 +48,6 @@ function($, _, html) {
         hide: function() {
             $('#mask , .login-popup').fadeOut(300 , _.bind(function() {
                 $('#login-error', this.loginHtml).hide();
-                this.loginHtml.remove();
                 $('#mask').remove();
             }, this));
             AppRouter.navigate('home', true);
