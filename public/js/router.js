@@ -11,6 +11,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         routes: {
             '': 'home',
             'login': 'login',
+            'logout': 'logout',
             'search/:query/targetLang/:lang': 'search',
             'words/:word/targetLang/:lang':  'words'
         },
@@ -58,6 +59,22 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         login: function() {
             console.log('show login dialog');
             loginDialog.show();
+        },
+
+        logout: function() {
+            $.ajax({url:'/log_out',
+                type:'GET',
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function( xhr ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                success: _.bind(function(){
+                    $('#logoutLink').addClass('hidden');
+                    $('#loginLink').removeClass('hidden');
+                }, this),
+                error: _.bind(console.log, this)
+            });
         }
     });
 
