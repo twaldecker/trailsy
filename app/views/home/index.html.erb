@@ -21,7 +21,7 @@
       </h1>
 		<section id="searchResults">
           <form action="words/search" method="get" onsubmit="return false;">
-            <label for="targetLang">Select Target Language</label>
+            <label for="targetLang">To Language</label>
             <select name="targetLang" id="targetLanguage">
                 <% @languages.each do |language| %>
                   <option value="<%= language.id %>"><%= language.code.upcase %></option>

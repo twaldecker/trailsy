@@ -280,7 +280,9 @@ input {
   }
 
 
-
+.rating {
+    margin-left: 5px;
+}
 
 .loading {
     background-image: url("/images/ajax-loader.gif");
@@ -446,7 +448,13 @@ div.rating {
         width: 100%;
         padding: 0px;
     }
-    
+
+    .arrowUp,
+    .arrowDown,
+    .rating {
+        zoom: 2.0;
+    }
+
     li {
 
     }
@@ -471,8 +479,6 @@ div.rating {
         width: 258px;
         padding: 5px 0px 5px 5px;
     }
-
-
 
     #searchResultList {
         margin: auto;
