@@ -1,4 +1,8 @@
-define(['jquery','backbone','underscore'],function($,Backbone,_){
+define(['jquery',
+        'backbone',
+        'underscore',
+        'text!templates/detailResult.html'],
+function($,Backbone,_,detailResultTemplate){
     /**
      * view for single detail result
      */
@@ -9,14 +13,14 @@ define(['jquery','backbone','underscore'],function($,Backbone,_){
         tagName: "li",
         className: "detailResult",
 
-        template: _.template('<span class="rateUp"> &#000043;</span><span class="rateDown">&#008722;</span>   ' +
-                             '<span class="word"> Translation: <%= word %></span>'),
+        template: null,
 
         initialize: function() {
             _.bindAll(this, 'render', 'unrender');
             this.model = this.options.model;
             this.model.bind('change', this.render);
             this.model.view = this;
+            this.template = _.template(detailResultTemplate);
         },
 
         unrender: function() {

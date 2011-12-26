@@ -13,9 +13,9 @@ function($,  _, Backbone, detailResultView){
         },
 
         initialize: function() {
-            this.items_element = $("#translationList"); //we append our translations to this alement
+            this.items_element = $("#translationList"); //we append our translations to this lement
             _.bindAll(this, 'render', 'add', 'appendItem', 'unrender', 'setCollection');
-            //this.collection = words;
+            this.items_element.hide();
         },
 
         add: function() {
@@ -28,6 +28,7 @@ function($,  _, Backbone, detailResultView){
 
         unrender: function() {
             this.items_element.html("");
+            this.items_element.hide();
         },
 
         appendItem: function(item, key) {
@@ -40,6 +41,7 @@ function($,  _, Backbone, detailResultView){
 
         render: function (id, targetLang) {
             this.unrender();
+            this.items_element.show();
             if ('' === id) {
                 return
             }

@@ -11,7 +11,8 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20111218124258) do
-  create_table "connections", :force => true do |t|
+
+  create_table "connections", :id => false, :force => true do |t|
     t.integer  "lang1_id",   :null => false
     t.integer  "lang2_id",   :null => false
     t.datetime "created_at"

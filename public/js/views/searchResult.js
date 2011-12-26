@@ -1,4 +1,5 @@
-define(['jquery','underscore','backbone'], function($,_,Backbone){
+define(['jquery','underscore','backbone', 'text!templates/searchResult.html'],
+function($,_,Backbone, searchResultTemplate){
     /**
      * view for single search result
      */
@@ -6,12 +7,11 @@ define(['jquery','underscore','backbone'], function($,_,Backbone){
         tagName: "li",
         className: "searchResult",
 
-        template: _.template('<span class="word"><%= word %></span>'),
-
         initialize: function() {
             _.bindAll(this, 'render', 'unrender');
             this.model.bind('change', this.render);
             this.model.view = this;
+            this.template = _.template(searchResultTemplate);
         },
 
         unrender: function() {

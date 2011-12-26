@@ -1,16 +1,24 @@
 <div id="container">
     <header>
-        <h1 id="heading">
-          <span class="green">T</span>
-          <span class="yellow">r</span>
-          <span class="red">a</span>
-          <span class="blue">n</span>
-          <span class="orange">s</span>
-          <span class="blue">i</span>
-        </h1>
+      <nav>
+        <% if current_user %>
+            Logged in as <%= current_user.email %>.
+            <%= link_to "log out", log_out_path %>
+        <% else %>
+            <%= link_to "Sign up", sign_up_path %> or
+            <a href="#login" >Log in</a>
+        <% end %>
+      </nav>
     </header>
     <div id="main" role="main">
-
+      <h1 id="heading">
+        <span class="green">T</span>
+        <span class="yellow">r</span>
+        <span class="red">a</span>
+        <span class="blue">n</span>
+        <span class="orange">s</span>
+        <span class="blue">i</span>
+      </h1>
 		<section id="searchResults">
           <form action="words/search" method="get" onsubmit="return false;">
             <label for="targetLang">Select Target Language</label>
@@ -20,7 +28,7 @@
                 <% end %>
             </select>
             <br />
-            <input name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
+            <input  name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
           </form>
             <ul id="searchResultList">
               <% if !@words.nil? %>
