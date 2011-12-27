@@ -4,9 +4,10 @@ define(['jquery',
         'views/detailResultList',
         'views/searchResultList',
         'views/loginDialog',
+        'views/signupDialog',
         'collections/words',
         'collections/detailWords'],
-function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, words, detailWords){
+function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, words, detailWords){
     var appRouter = Backbone.Router.extend({
         loginState: false,
 
@@ -14,6 +15,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             '': 'home',
             'login': 'login',
             'logout': 'logout',
+            'signup': 'signup',
             'search/:query/targetLang/:lang': 'search',
             'words/:word/targetLang/:lang':  'words'
         },
@@ -103,6 +105,11 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 }, this),
                 error: _.bind(console.log, this)
             });
+        },
+        
+        signup: function() {
+            console.log('show signup dialog');
+            signupDialog.show();
         }
     });
 

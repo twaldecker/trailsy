@@ -1,26 +1,26 @@
 define(['jquery', 'underscore', 'text!templates/signup.html'],
 function($, _, html) {
-    var loginDialog = {
-        loginHtml: null,
+    var signupDialog = {
+        signupHtml: null,
 
         appdendDiv: function() {
-            this.loginHtml = $(html);
-            $('nav').append(this.loginHtml);
+            this.signupHtml = $(html);
+            $('nav').append(this.signupHtml);
         },
 
         show: function() {
 
-            if (null === this.loginHtml) {
+            if (null === this.signupHtml) {
                 this.appdendDiv();
             }
             //Fade in the Popup
-            this.loginHtml.fadeIn(300);
+            this.signupHtml.fadeIn(300);
 
             //Set the center alignment padding + border see css style
-            var popMargTop = (this.loginHtml.height() + 24) / 2;
-            var popMargLeft = (this.loginHtml.width() + 24) / 2;
+            var popMargTop = (this.signupHtml.height() + 24) / 2;
+            var popMargLeft = (this.signupHtml.width() + 24) / 2;
 
-            this.loginHtml.css({
+            this.signupHtml.css({
                 'margin-top' : -popMargTop,
                 'margin-left' : -popMargLeft
             });
@@ -29,7 +29,7 @@ function($, _, html) {
             $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
             $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
-            $('.signin', this.loginHtml).on('submit', _.bind(this.submitForm, this));
+            $('.signin', this.signupHtml).on('submit', _.bind(this.submitForm, this));
         },
 
         //callback on successful login
@@ -71,5 +71,5 @@ function($, _, html) {
             }
         }
     }
-    return loginDialog;
+    return signupDialog;
 })
