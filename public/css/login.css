@@ -10,7 +10,7 @@
 }
 
 /* You can customize to your needs  */
-.login-popup{
+.popup{
     display:none;
     background: #333;
     padding: 10px;
@@ -58,30 +58,31 @@
      background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
      background-color:#dfdfdf;
- }.closeButton:active {
-      top:-21px;
-  }
+}.closeButton:active {
+     top:-21px;
+}
 
 fieldset {
     border:none;
 }
 
-form.signin .textbox label {
+.popup form fieldset label {
     display:block;
     padding-bottom:7px;
 }
 
-form.signin .textbox span {
+.popup form fieldset span {
     display:block;
 }
 
-form.signin p, form.signin span {
+.popup form p,
+.popup form span {
     color:#999;
     font-size:11px;
     line-height:18px;
 }
 
-form.signin .textbox input {
+.popup form fieldset input {
     background:#666666;
     border-bottom:1px solid #333;
     border-left:1px solid #000;
@@ -96,8 +97,14 @@ form.signin .textbox input {
     width:200px;
 }
 
-form.signin input:-moz-placeholder { color:#bbb; text-shadow:0 0 2px #000; }
-form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #000;  }
+.popup form input:-moz-placeholder { 
+    color:#bbb; 
+    text-shadow:0 0 2px #000; 
+}
+.popup form input::-webkit-input-placeholder { 
+    color:#bbb; 
+    text-shadow:0 0 2px #000;  
+}
 
 .button {
     background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
@@ -119,7 +126,7 @@ form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #
 }
 .button:hover { background:#ddd; }
 
-#login-error {
+.popup .error {
     color: red;
     font-size: 13px;
     display: none;

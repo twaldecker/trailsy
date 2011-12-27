@@ -227,9 +227,9 @@ nav {
     text-shadow: none;
 }
 
-nav a {
+nav a, nav a.visited {
     text-decoration: none;
-    color: #d3d3d3;;
+    color: #d3d3d3 !important;
 }
 
 #container {
@@ -536,3 +536,4 @@ div.rating {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+

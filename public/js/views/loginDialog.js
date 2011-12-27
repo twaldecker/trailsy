@@ -29,7 +29,7 @@ function($, _, html) {
             $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
             $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
-            $('.signin', this.loginHtml).on('submit', _.bind(this.submitForm, this));
+            $('#login-box form').on('submit', _.bind(this.submitForm, this));
         },
 
         //callback on successful login
@@ -43,13 +43,13 @@ function($, _, html) {
         },
 
         loginFailed: function() {
-            $('#login-error', this.loginHtml).text('Wrong Username or Password');
-            $('#login-error', this.loginHtml).show();
+            $('#login-box .error').text('Wrong Username or Password');
+            $('#login-box .error').show();
         },
 
         //hide popup and mask
         hide: function() {
-            $('#mask , .login-popup').fadeOut(300 , _.bind(function() {
+            $('#mask , #login-box').fadeOut(300 , _.bind(function() {
                 $('#login-error', this.loginHtml).hide();
                 $('#mask').remove();
             }, this));
@@ -58,7 +58,7 @@ function($, _, html) {
 
         //submit form
         submitForm: function() {
-            var form = $('.signin', this.loginHtml);
+            var form = $('#login-box form');
             if (form.length) {
                 var formData = form.serialize();
                 $.ajax({url:'/sessions',
