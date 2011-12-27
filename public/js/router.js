@@ -8,13 +8,41 @@ define(['jquery',
         'collections/detailWords'],
 function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, words, detailWords){
     var appRouter = Backbone.Router.extend({
+        loginState: false,
+
         routes: {
             '': 'home',
             'login': 'login',
+            'logout': 'logout',
             'search/:query/targetLang/:lang': 'search',
             'words/:word/targetLang/:lang':  'words'
         },
+
+        initialize: function() {
+            //if loginLink is hidden we are logged in
+            this.setLoginState( $('#loginLink').hasClass('hidden') );
+        },
+
         'home': function(){
+        },
+
+        /**
+         *
+         * @param bool loggedIn
+         */
+        setLoginState: function(loggedIn) {
+            if (false === loggedIn) {
+                $('.editIcon').addClass('hidden');
+            }
+            if (true === loggedIn) {
+                $('.editIcon').removeClass('hidden');
+            }
+
+            this.loginState = loggedIn;
+        },
+
+        getLoginState: function() {
+            return this.loginState;
         },
 
         words: function(id, targetLang) {
@@ -58,6 +86,23 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         login: function() {
             console.log('show login dialog');
             loginDialog.show();
+        },
+
+        logout: function() {
+            $.ajax({url:'/log_out',
+                type:'GET',
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function( xhr ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                success: _.bind(function(){
+                    $('#logoutLink').addClass('hidden');
+                    $('#loginLink').removeClass('hidden');
+                    this.setLoginState(false);
+                }, this),
+                error: _.bind(console.log, this)
+            });
         }
     });
 
