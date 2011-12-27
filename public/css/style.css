@@ -227,9 +227,9 @@ nav {
     text-shadow: none;
 }
 
-nav a, nav a.visited {
+nav a, nav a:visited {
     text-decoration: none;
-    color: #d3d3d3 !important;
+    color: #d3d3d3;
 }
 
 #container {

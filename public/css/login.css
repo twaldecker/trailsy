@@ -53,7 +53,8 @@
     position: relative;
     top: -22px;
     right: -18px;
-}.closeButton:hover {
+}
+.closeButton:hover {
      background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
      background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
@@ -62,38 +63,40 @@
      top:-21px;
 }
 
+.popup h1 {
+    font-size: 1.2em;
+}
+
 fieldset {
     border:none;
 }
 
-.popup form fieldset label {
-    display:block;
-    padding-bottom:7px;
-}
-
-.popup form fieldset span {
+.popup form label {
     display:block;
 }
 
 .popup form p,
-.popup form span {
+.popup form label {
     color:#999;
     font-size:11px;
     line-height:18px;
+    width: 200px;
 }
 
-.popup form fieldset input {
+.popup form input {
     background:#666666;
     border-bottom:1px solid #333;
     border-left:1px solid #000;
     border-right:1px solid #333;
     border-top:1px solid #000;
+    display:block;
     color:#fff;
     border-radius: 3px 3px 3px 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     font:13px Arial, Helvetica, sans-serif;
     padding:6px 6px 4px;
+    margin-bottom: 6px;
     width:200px;
 }
 

@@ -3,7 +3,7 @@ function($, _, html) {
     var signupDialog = {
         signupHtml: null,
 
-        appdendDiv: function() {
+        appendDiv: function() {
             this.signupHtml = $(html);
             $('nav').append(this.signupHtml);
         },
@@ -11,7 +11,7 @@ function($, _, html) {
         show: function() {
 
             if (null === this.signupHtml) {
-                this.appdendDiv();
+                this.appendDiv();
             }
             //Fade in the Popup
             this.signupHtml.fadeIn(300);
@@ -46,7 +46,7 @@ function($, _, html) {
 
         //hide popup and mask
         hide: function() {
-            $('#mask , .login-popup').fadeOut(300 , _.bind(function() {
+            $('#mask , #signup-box').fadeOut(300 , _.bind(function() {
                 $('#login-error', this.loginHtml).hide();
                 $('#mask').remove();
             }, this));
