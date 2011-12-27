@@ -8,6 +8,8 @@ define(['jquery',
         'collections/detailWords'],
 function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, words, detailWords){
     var appRouter = Backbone.Router.extend({
+        loginState: false,
+
         routes: {
             '': 'home',
             'login': 'login',
@@ -15,7 +17,32 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             'search/:query/targetLang/:lang': 'search',
             'words/:word/targetLang/:lang':  'words'
         },
+
+        initialize: function() {
+            //if loginLink is hidden we are logged in
+            this.setLoginState( $('#loginLink').hasClass('hidden') );
+        },
+
         'home': function(){
+        },
+
+        /**
+         *
+         * @param bool loggedIn
+         */
+        setLoginState: function(loggedIn) {
+            if (false === loggedIn) {
+                $('.editIcon').addClass('hidden');
+            }
+            if (true === loggedIn) {
+                $('.editIcon').removeClass('hidden');
+            }
+
+            this.loginState = loggedIn;
+        },
+
+        getLoginState: function() {
+            return this.loginState;
         },
 
         words: function(id, targetLang) {
@@ -72,6 +99,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 success: _.bind(function(){
                     $('#logoutLink').addClass('hidden');
                     $('#loginLink').removeClass('hidden');
+                    this.setLoginState(false);
                 }, this),
                 error: _.bind(console.log, this)
             });

@@ -16,11 +16,25 @@ function($,Backbone,_,detailResultTemplate){
         template: null,
 
         initialize: function() {
-            _.bindAll(this, 'render', 'unrender');
+            _.bindAll(this, 'render', 'unrender', 'editWord', 'saveWord');
             this.model = this.options.model;
             this.model.bind('change', this.render);
             this.model.view = this;
             this.template = _.template(detailResultTemplate);
+        },
+
+        editWord: function() {
+            $('.detailWord', this.model.el).attr('contentEditable', true);
+            $('.detailExample', this.model.el).attr('contentEditable', true);
+            $('.saveIcon', this.model.el).removeClass('hidden');
+            $('.saveIcon', this.model.el).on('click', _.bind(this.saveWord, this));
+        },
+
+        saveWord: function() {
+            this.model.set({word: $('.detailWord', this.model.el).text()});
+            this.model.set({example: $('.detailExample', this.model.el).text()});
+            this.model.set({translations: []});
+            this.model.save();
         },
 
         unrender: function() {
@@ -33,12 +47,16 @@ function($,Backbone,_,detailResultTemplate){
             var el = $(this.el);
             el.html(this.template(model.toJSON()));
             var that = this;
-            $('.rateUp', el).bind('click', function(){
+            $('.rateUp', el).on('click', function(){
                 console.log('clicked rate up');
             });
-            $('.rateDown', el).bind('click', function(){
+            $('.rateDown', el).on('click', function(){
                 console.log('clicked rate down');
             });
+            $('.editIcon', el).on('click', _.bind(this.editWord, this));
+            if (true === AppRouter.getLoginState()) {
+                $('.editIcon', el).removeClass('hidden');
+            }
             this.model.el = el;
             return this;
         }

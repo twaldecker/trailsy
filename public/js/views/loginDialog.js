@@ -39,6 +39,7 @@ function($, _, html) {
             this.hide();
             $('#loginLink').addClass('hidden');
             $('#logoutLink').removeClass('hidden');
+            AppRouter.setLoginState(true);
         },
 
         loginFailed: function() {
