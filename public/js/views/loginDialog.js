@@ -3,7 +3,7 @@ function($, _, html) {
     var loginDialog = {
         loginHtml: null,
 
-        appdendDiv: function() {
+        appendDiv: function() {
             this.loginHtml = $(html);
             $('nav').append(this.loginHtml);
         },
@@ -11,7 +11,7 @@ function($, _, html) {
         show: function() {
 
             if (null === this.loginHtml) {
-                this.appdendDiv();
+                this.appendDiv();
             }
             //Fade in the Popup
             this.loginHtml.fadeIn(300);
