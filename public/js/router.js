@@ -4,9 +4,10 @@ define(['jquery',
         'views/detailResultList',
         'views/searchResultList',
         'views/loginDialog',
+        'views/signupDialog',
         'collections/words',
         'collections/detailWords'],
-function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, words, detailWords){
+function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, words, detailWords){
     var appRouter = Backbone.Router.extend({
         loginState: false,
 
@@ -14,6 +15,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             '': 'home',
             'login': 'login',
             'logout': 'logout',
+            'signup': 'signup',
             'search/:query/targetLang/:lang': 'search',
             'words/:word/targetLang/:lang':  'words'
         },
@@ -31,13 +33,6 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
          * @param bool loggedIn
          */
         setLoginState: function(loggedIn) {
-            if (false === loggedIn) {
-                $('.editIcon').addClass('hidden');
-            }
-            if (true === loggedIn) {
-                $('.editIcon').removeClass('hidden');
-            }
-
             this.loginState = loggedIn;
         },
 
@@ -47,14 +42,12 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
 
         words: function(id, targetLang) {
             words.getOrFetch(id,_.bind(function() {
-                console.log('loaded word id: '+id);
-                var tmpWords = new detailWords();
                 var model = words.get(id);
                 this.setSearchText(model.get('word'));
-                tmpWords.add(model);
-                tmpWords.add(model.get('translations'));
+                var tmpWords = new detailWords(model.get('translations') );
+                tmpWords.url = 'words/'+id+'/translations';
                 detailResultListView.setCollection(tmpWords);
-                detailResultListView.render(id, targetLang);
+                detailResultListView.render(targetLang);
             }, this));
             this.setTargetLangValue(targetLang);
         },
@@ -99,10 +92,16 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 success: _.bind(function(){
                     $('#logoutLink').addClass('hidden');
                     $('#loginLink').removeClass('hidden');
+                    $('#signupLink').removeClass('hidden');
                     this.setLoginState(false);
                 }, this),
                 error: _.bind(console.log, this)
             });
+        },
+        
+        signup: function() {
+            console.log('show signup dialog');
+            signupDialog.show();
         }
     });
 

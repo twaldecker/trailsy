@@ -16,7 +16,30 @@ class Word < ActiveRecord::Base
                             'where w1.word like ? and w1.language_id != ? and w2.language_id = ?',  word + '%', lang, lang])
   end
   
-  
+
+  def addOrUpdateTranslation(translation)
+    success = true
+    Word.transaction do
+      begin
+        @translation = Word.find_by_word(translation[:word])
+        if @translation
+          @translation.update_attributes(translation)
+        else
+          @translation = self.translations.create(translation)
+        end
+        #add opposite translation if not present
+        @oppositeTranslation = @translation.translations.find_by_word(self.word)
+        if @oppositeTranslation.nil?
+          Connection.create({:lang1_id => @translation.id, :lang2_id => self.id})
+        end
+      rescue Exception => e
+        logger.error "Error updating word: #{e}"
+        success = false
+      end
+      raise ActiveRecord::Rollback if !success
+    end
+    return success
+  end
 
   #update a single word including translations
   def updateWord(params)
@@ -24,24 +47,14 @@ class Word < ActiveRecord::Base
     logger.debug "params: #{YAML.dump(params)}"
     Word.transaction do
       begin
-        params[:translations].each_index do |key|
-          translation = params[:translations][key]
-          @translation = Word.find_by_word(translation[:word])
-          if @translation
-            @translation.update_attributes(translation)
-            params[:translations][key] = @translation
-          else
-            @translation = self.translations.create(translation)
-            params[:translations][key] = @translation
+        if !params[:translations].empty?
+          params[:translations].each_index do |key|
+            translation = params[:translations][key]
+            self.addOrUpdateTranslation(translation)
           end
-          #add opposite translation if not present
-          @oppositeTranslation = @translation.translations.find_by_word(self.word)
-          if @oppositeTranslation.nil?
-            Connection.create({:lang1_id => @translation.id, :lang2_id => self.id})
-          end
-
         end
-        self.update_attributes(params[:all])
+        params.delete(:translations)
+        self.update_attributes(params)
 
       rescue Exception => e
         logger.error "Error updating word: #{e}"

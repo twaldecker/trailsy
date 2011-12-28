@@ -2,11 +2,13 @@
     <header>
       <nav>
         <% if current_user %>
-            <a href="#login" id="loginLink" class="hidden">Log in</a>
-            <a href="#logout" id="logoutLink">Log out</a>
+            <a href="#login" id="loginLink" class="greyButton hidden">Log in</a>
+            <a href="#logout" id="logoutLink" class="greyButton">Log out</a>
+            <a href="#signup" id="signupLink" class="greyButton hidden">Sign up</a>
         <% else %>
-            <a href="#login" id="loginLink">Log in</a>
-            <a href="#logout" id="logoutLink" class="hidden">Log out</a>
+            <a href="#login" id="loginLink" class="greyButton">Log in</a>
+            <a href="#logout" id="logoutLink" class="greyButton hidden">Log out</a>
+            <a href="#signup" id="signupLink" class="greyButton">Sign up</a>
         <% end %>
       </nav>
     </header>
@@ -30,7 +32,7 @@
             <br />
             <input  name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
           </form>
-            <ul id="searchResultList">
+            <ul id="searchResultList" class="hidden">
               <% if !@words.nil? %>
                   <% @words.each do |word| %>
                         <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
@@ -39,7 +41,7 @@
             </ul>
 		</section>
         <section id="translations">
-            <ul id="translationList">
+            <ul id="translationList" class="hidden">
                 
             </ul>
             <!--

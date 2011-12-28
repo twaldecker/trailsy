@@ -1,26 +1,26 @@
 define(['jquery', 'underscore', 'text!templates/signup.html'],
 function($, _, html) {
-    var loginDialog = {
-        loginHtml: null,
+    var signupDialog = {
+        signupHtml: null,
 
-        appdendDiv: function() {
-            this.loginHtml = $(html);
-            $('nav').append(this.loginHtml);
+        appendDiv: function() {
+            this.signupHtml = $(html);
+            $('nav').append(this.signupHtml);
         },
 
         show: function() {
 
-            if (null === this.loginHtml) {
-                this.appdendDiv();
+            if (null === this.signupHtml) {
+                this.appendDiv();
             }
             //Fade in the Popup
-            this.loginHtml.fadeIn(300);
+            this.signupHtml.fadeIn(300);
 
             //Set the center alignment padding + border see css style
-            var popMargTop = (this.loginHtml.height() + 24) / 2;
-            var popMargLeft = (this.loginHtml.width() + 24) / 2;
+            var popMargTop = (this.signupHtml.height() + 24) / 2;
+            var popMargLeft = (this.signupHtml.width() + 24) / 2;
 
-            this.loginHtml.css({
+            this.signupHtml.css({
                 'margin-top' : -popMargTop,
                 'margin-left' : -popMargLeft
             });
@@ -29,25 +29,25 @@ function($, _, html) {
             $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
             $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
-            $('.signin', this.loginHtml).on('submit', _.bind(this.submitForm, this));
+            $('#signup-box form').on('submit', _.bind(this.submitForm, this));
         },
 
         //callback on successful login
-        loginSuccess: function(formData) {
+        signupSuccess: function(formData) {
             console.log(formData);
-            $('#login-error', this.loginHtml).hide();
+            $('#signup-box div.error', this.loginHtml).hide();
             this.hide();
         },
 
-        loginFailed: function() {
-            $('#login-error', this.loginHtml).text('Wrong Username or Password');
-            $('#login-error', this.loginHtml).show();
+        signupError: function() {
+            $('#signup-box div.error', this.loginHtml).text('Wrong Username or Password');
+            $('#signup-box div.error', this.loginHtml).show();
         },
 
         //hide popup and mask
         hide: function() {
-            $('#mask , .login-popup').fadeOut(300 , _.bind(function() {
-                $('#login-error', this.loginHtml).hide();
+            $('#mask , #signup-box').fadeOut(300 , _.bind(function() {
+                $('#signup-box div.error', this.loginHtml).hide();
                 $('#mask').remove();
             }, this));
             AppRouter.navigate('home', true);
@@ -55,21 +55,21 @@ function($, _, html) {
 
         //submit form
         submitForm: function() {
-            var form = $('.signin', this.loginHtml);
+            var form = $('#signup-box form', this.loginHtml);
             if (form.length) {
                 var formData = form.serialize();
-                $.ajax({url:'/sessions',
+                $.ajax({url:'/users',
                         data: formData,
                         type:'POST',
                         beforeSend: function( xhr ) {
                             var token = $('meta[name="csrf-token"]').attr('content');
                             if (token) xhr.setRequestHeader('X-CSRF-Token', token);
                             },
-                        success: _.bind(this.loginSuccess, this, formData),
-                        error: _.bind(this.loginFailed, this)
-                        });
+                        success: _.bind(this.signupSuccess, this, formData),
+                        error: _.bind(this.signupError, this)
+                });
             }
         }
     }
-    return loginDialog;
+    return signupDialog;
 })

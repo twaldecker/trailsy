@@ -24,16 +24,21 @@ function($,Backbone,_,detailResultTemplate){
         },
 
         editWord: function() {
-            $('.detailWord', this.model.el).attr('contentEditable', true);
-            $('.detailExample', this.model.el).attr('contentEditable', true);
-            $('.saveIcon', this.model.el).removeClass('hidden');
-            $('.saveIcon', this.model.el).on('click', _.bind(this.saveWord, this));
+            if (true === AppRouter.getLoginState()) {
+                $('.detailWord', this.model.el).attr('contentEditable', true);
+                $('.detailWord', this.model.el).focus();
+                $('.detailExample', this.model.el).attr('contentEditable', true);
+                $('.editIcon', this.model.el).addClass('hidden');
+                $('.saveIcon', this.model.el).removeClass('hidden');
+                $('.saveIcon', this.model.el).on('click', _.bind(this.saveWord, this));
+            } else  {
+                AppRouter.navigate('login', true);
+            }
         },
 
         saveWord: function() {
             this.model.set({word: $('.detailWord', this.model.el).text()});
             this.model.set({example: $('.detailExample', this.model.el).text()});
-            this.model.set({translations: []});
             this.model.save();
         },
 
@@ -54,9 +59,7 @@ function($,Backbone,_,detailResultTemplate){
                 console.log('clicked rate down');
             });
             $('.editIcon', el).on('click', _.bind(this.editWord, this));
-            if (true === AppRouter.getLoginState()) {
-                $('.editIcon', el).removeClass('hidden');
-            }
+            $('.editIcon', el).removeClass('hidden');
             this.model.el = el;
             return this;
         }

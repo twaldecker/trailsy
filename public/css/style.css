@@ -217,7 +217,7 @@ body {
 header {
     background-color: black;
     color: #d3d3d3;
-    height: 30px;
+    height: 34px;
 }
 
 nav {
@@ -227,9 +227,9 @@ nav {
     text-shadow: none;
 }
 
-nav a {
+nav a, nav a:visited {
     text-decoration: none;
-    color: #d3d3d3;;
+    color: #d3d3d3;
 }
 
 #container {
@@ -238,6 +238,7 @@ nav a {
     color: grey;
 }
 #main {
+    clear:right;
 }
 
 #searchBox {
@@ -248,7 +249,6 @@ input {
     text-shadow: 2px 2px 2px lightGrey;
     color: grey;
 }
-
 .greyButton {
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -277,12 +277,15 @@ input {
  }.greyButton:active {
       position:relative;
       top:1px;
-  }
+}.greyButton:visited {
+    color:#777;
+}
 
 
 .rating {
     margin-left: 5px;
 }
+
 
 .loading {
     background-image: url("/images/ajax-loader.gif");
@@ -333,6 +336,9 @@ li.searchResult span {
     float: left;
 }
 
+span.detailWord, span.detailExample {
+    padding: 3px;
+}
 span.detailWord {
     margin-left: 15px;
 }
@@ -359,6 +365,17 @@ div.rating {
 
     border-top: 10px solid #f00;
     cursor: pointer;
+}
+
+.editIcon, .saveIcon {
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    color: blue;
+}
+
+[contentEditable="true"] {
+    border: 1px solid #add8e6;
 }
 
 .green {
@@ -536,3 +553,4 @@ div.rating {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+
