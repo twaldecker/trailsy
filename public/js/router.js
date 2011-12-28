@@ -77,7 +77,6 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         },
 
         login: function() {
-            console.log('show login dialog');
             loginDialog.show();
         },
 

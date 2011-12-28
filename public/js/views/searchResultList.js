@@ -41,7 +41,6 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         },
 
         focus: function() {
-            console.log('focused search input');
         },
 
         blur: function() {
@@ -53,7 +52,6 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         },
 
         keyUp: function(e) {
-            console.log(e);
             if (e.keyCode == 27 || e.keyCode == 13 || e.keyCode == 9
                 || e.keyCode == 40 || e.keyCode == 38) return true;
             this.delayedSearch();

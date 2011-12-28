@@ -1,4 +1,5 @@
 class TranslationsController < ApplicationController
+  before_filter :logged_in?, :only => [:update, :create]
   def index
     @word = Word.find(params[:word_id])
     if @word
@@ -38,10 +39,12 @@ class TranslationsController < ApplicationController
     params.delete(:controller)
     params.delete(:word_id)
     params.delete(:translation)
-    if @word.addOrUpdateTranslation(params)
-      render :json => @word, :status => :created
-    else
+    @translation = @word.addOrUpdateTranslation(params)
+
+    if @translation.nil?
       render :json => {:message => 'errorCreating'}, :status => :not_acceptable
+    else
+      render :json => @translation, :status => :created
     end
 
   end

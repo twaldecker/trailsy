@@ -13,13 +13,17 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
         collection: null,
 
         events : {
-            "click #addTranslation": "add",
+            "click #addTranslation": "onClickAdd",
             "click #addTranslation-box .submit": "submitTranslation"
         },
 
         initialize: function() {
             this.items_element = $("#translationList"); //we append our translations to this lement
-            _.bindAll(this, 'render', 'add', 'appendItem', 'unrender', 'setCollection', 'submitTranslation');
+            _.bindAll(this, 'render', 'onClickAdd',
+                            'appendItem', 'unrender',
+                            'setCollection',
+                            'submitTranslation',
+                            'appendAddWordLink');
             this.addWordTemplate = _.template(addWordHtml);
         },
 
@@ -35,12 +39,28 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
             }
         },
 
-        add: function() {
-            console.log('clicked add');
-            $('#addTranslation-box').fadeIn(200);
+        onClickAdd: function(e) {
+            e.preventDefault();
+            var translationBox = $('#addTranslation-box');
+            //Set the center alignment padding + border see css style
+            var popMargTop = (translationBox.height() + 24) / 2;
+            var popMargLeft = (translationBox.width() + 24) / 2;
+            translationBox.css({
+                'margin-top' : -popMargTop,
+                'margin-left' : -popMargLeft
+            });
+            translationBox.fadeIn(200);
             $('#addTranslation-box .closeButton').on('click', _.bind(function() {
                 $('#addTranslation-box').fadeOut(200);
             }, this));
+        },
+
+        appendAddWordLink: function() {
+            var word = $('#searchInput').val();
+            var addWordModel = {currentWord: word, addTranslationFor: i18n.addTranslationFor,
+                                word: i18n.word, example: i18n.example, add: i18n.add,
+                                sentence: i18n.sentence};
+            this.items_element.append(this.addWordTemplate(addWordModel));
         },
 
         setCollection: function(collection) {
@@ -62,7 +82,7 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
         },
 
         render: function (targetLang) {
-            if (targetLang)
+            if ('string' === typeof targetLang)
                 this.targetLang = targetLang;
             this.unrender();
             this.items_element.removeClass('hidden');
@@ -71,10 +91,8 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
                 if (item.get('language_id') == this.targetLang)
                     this.appendItem(item);
             }, this);
-            var word = $('#searchInput').val();
-            var addWordModel = {currentWord: word, addTranslationFor: i18n.addTranslationFor,
-                                word: i18n.word, example: i18n.example, add: i18n.add, sentence: i18n.sentence};
-            this.items_element.append(this.addWordTemplate(addWordModel));
+
+            this.appendAddWordLink();
         }
     });
     return new detailResultListView;

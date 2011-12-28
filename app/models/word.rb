@@ -38,7 +38,7 @@ class Word < ActiveRecord::Base
       end
       raise ActiveRecord::Rollback if !success
     end
-    return success
+    return @translation
   end
 
   #update a single word including translations
