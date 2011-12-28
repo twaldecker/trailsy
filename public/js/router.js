@@ -42,15 +42,12 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
 
         words: function(id, targetLang) {
             words.getOrFetch(id,_.bind(function() {
-                console.log('loaded word id: '+id);
-                //var tmpWords = new detailWords({url:'words/'+id+'/translations'});
                 var model = words.get(id);
                 this.setSearchText(model.get('word'));
-                //tmpWords.add(model);
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
                 detailResultListView.setCollection(tmpWords);
-                detailResultListView.render(id, targetLang);
+                detailResultListView.render(targetLang);
             }, this));
             this.setTargetLangValue(targetLang);
         },
