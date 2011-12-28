@@ -2,13 +2,13 @@
     <header>
       <nav>
         <% if current_user %>
-            <a href="#login" id="loginLink" class="hidden">Log in</a>
-            <a href="#logout" id="logoutLink">Log out</a>
-            <a href="#signup" id="signupLink" class="hidden">Sign up</a>
+            <a href="#login" id="loginLink" class="greyButton hidden">Log in</a>
+            <a href="#logout" id="logoutLink" class="greyButton">Log out</a>
+            <a href="#signup" id="signupLink" class="greyButton hidden">Sign up</a>
         <% else %>
-            <a href="#login" id="loginLink">Log in</a>
-            <a href="#logout" id="logoutLink" class="hidden">Log out</a>
-            <a href="#signup" id="signupLink">Sign up</a>
+            <a href="#login" id="loginLink" class="greyButton">Log in</a>
+            <a href="#logout" id="logoutLink" class="greyButton hidden">Log out</a>
+            <a href="#signup" id="signupLink" class="greyButton">Sign up</a>
         <% end %>
       </nav>
     </header>
