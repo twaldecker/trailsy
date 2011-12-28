@@ -25,7 +25,9 @@ function($,Backbone,_,detailResultTemplate){
 
         editWord: function() {
             $('.detailWord', this.model.el).attr('contentEditable', true);
+            $('.detailWord', this.model.el).focus();
             $('.detailExample', this.model.el).attr('contentEditable', true);
+            $('.editIcon', this.model.el).addClass('hidden');
             $('.saveIcon', this.model.el).removeClass('hidden');
             $('.saveIcon', this.model.el).on('click', _.bind(this.saveWord, this));
         },
