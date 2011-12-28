@@ -28,26 +28,26 @@ function($, _, html) {
             // Add the mask to body
             $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
-            $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
-            $('.signin', this.signupHtml).on('submit', _.bind(this.submitForm, this));
+            $('a.closeButton, #mask', this.signupHtml).on('click', _.bind(this.hide, this));
+            $('#signup-box form').on('submit', _.bind(this.submitForm, this));
         },
 
         //callback on successful login
-        loginSuccess: function(formData) {
+        signupSuccess: function(formData) {
             console.log(formData);
-            $('#login-error', this.loginHtml).hide();
+            $('#signup-box div.error', this.loginHtml).hide();
             this.hide();
         },
 
-        loginFailed: function() {
-            $('#login-error', this.loginHtml).text('Wrong Username or Password');
-            $('#login-error', this.loginHtml).show();
+        signupError: function() {
+            $('#signup-box div.error', this.loginHtml).text('Wrong Username or Password');
+            $('#signup-box div.error', this.loginHtml).show();
         },
 
         //hide popup and mask
         hide: function() {
             $('#mask , #signup-box').fadeOut(300 , _.bind(function() {
-                $('#login-error', this.loginHtml).hide();
+                $('#signup-box div.error', this.loginHtml).hide();
                 $('#mask').remove();
             }, this));
             AppRouter.navigate('home', true);
@@ -55,19 +55,19 @@ function($, _, html) {
 
         //submit form
         submitForm: function() {
-            var form = $('.signin', this.loginHtml);
+            var form = $('#signup-box form', this.loginHtml);
             if (form.length) {
                 var formData = form.serialize();
-                $.ajax({url:'/sessions',
+                $.ajax({url:'/users',
                         data: formData,
                         type:'POST',
                         beforeSend: function( xhr ) {
                             var token = $('meta[name="csrf-token"]').attr('content');
                             if (token) xhr.setRequestHeader('X-CSRF-Token', token);
                             },
-                        success: _.bind(this.loginSuccess, this, formData),
-                        error: _.bind(this.loginFailed, this)
-                        });
+                        success: _.bind(this.signupSuccess, this, formData),
+                        error: _.bind(this.signupError, this)
+                });
             }
         }
     }

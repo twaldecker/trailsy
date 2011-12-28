@@ -3,21 +3,22 @@
     
     <h1>Create a new account</h1>
     
-    <form action="#" class="signup" method="post" onsubmit="return false;">
+    <form action="#" method="post" onsubmit="return false;">
         <fieldset>
 
             <label for="user[email]">Email</label>
-            <input id="user_email" name="user[email]" size="30" type="text" />
+            <input name="user[email]" size="30" type="email" autocomplete="on" placeholder="Email" />
 
             <label for="user[password]">Password:</label>
-            <input id="user_email" name="user[password]" size="30" type="text" />
+            <input name="user[password]" size="30" type="password" placeholder="Password" />
             
             <label for="user[password2]">Password confirmation:</label>
-            <input id="user_email" name="user[password2]" size="30" type="text" />
+            <input name="user[password2]" size="30" type="password" placeholder="Password confirmation"/>
 
-            <button class="submit button" type="submit">Sign in</button>
+            <button class="submit button" type="submit">Sign up</button>
 
         </fieldset>
     </form>
-
+    
+    <div class="error"></div>
 </div>
