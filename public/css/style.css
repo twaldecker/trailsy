@@ -369,6 +369,9 @@ div.rating {
 
 .editIcon, .saveIcon {
     cursor: pointer;
+    float: right;
+    font-size: 20px;
+    color: blue;
 }
 
 [contentEditable="true"] {
