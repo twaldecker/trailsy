@@ -30,7 +30,7 @@ function($,  _, Backbone, detailResultView){
             this.items_element.addClass('hidden');
         },
 
-        appendItem: function(item, key) {
+        appendItem: function(item) {
             var model = this.collection.get(item.id);
             var view = new detailResultView({
                 'model': model}),
@@ -44,11 +44,10 @@ function($,  _, Backbone, detailResultView){
             if ('' === id) {
                 return
             }
-            var word = this.collection.get(id);
 
-            _(word.get('translations')).each(function(item, key){ // in case collection is not empty
-                if (item.language_id == targetLang)
-                this.appendItem(item, key);
+            this.collection.each(function(item){ // in case collection is not empty
+                if (item.get('language_id') == targetLang)
+                    this.appendItem(item);
             }, this);
         }
     });
