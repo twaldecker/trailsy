@@ -31,12 +31,12 @@ class WordsController < ApplicationController
   # PUT /words/1.json
   def update
     @word = Word.find(params[:id])
+    params.delete(:action)
+    params.delete(:controller)
     respond_to do |format|
       if @word.updateWord(params)
-        #format.html { redirect_to @word, :notice => 'Word was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render :action => "edit" }
         format.json { render :json => @word.errors, :status => :unprocessable_entity }
       end
     end
