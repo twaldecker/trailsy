@@ -238,6 +238,7 @@ nav a, nav a:visited {
     color: grey;
 }
 #main {
+    clear:right;
 }
 
 #searchBox {
