@@ -2,9 +2,9 @@ define(['jquery',
         'underscore',
         'backbone',
         'views/detailResult',
-        'text!templates/addWord.html',
+        'views/addWordDialog',
         'i18n!nls/trailsy'],
-function($,  _, Backbone, detailResultView, addWordHtml, i18n){
+function($,  _, Backbone, detailResultView, addWordDialog, i18n){
     /**
      * list view for detail results
      */
@@ -13,8 +13,8 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
         collection: null,
 
         events : {
-            "click #addTranslation": "onClickAdd",
-            "click #addTranslation-box .submit": "submitTranslation"
+            "click #addWord": "onClickAdd"
+
         },
 
         initialize: function() {
@@ -22,47 +22,20 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
             _.bindAll(this, 'render', 'onClickAdd',
                             'appendItem', 'unrender',
                             'setCollection',
-                            'submitTranslation',
                             'appendAddWordLink');
-            this.addWordTemplate = _.template(addWordHtml);
-        },
-
-        submitTranslation: function() {
-            console.log('clicked submit translation');
-            var form = $('#addTranslation-box form');
-            if (form.length) {
-                var formData = form.serializeArray();
-                var newWord = {word: formData[0].value, example: formData[1].value,
-                               language_id: this.targetLang};
-                this.collection.create(newWord);
-                $('#addTranslation-box').fadeOut(200);
-            }
         },
 
         onClickAdd: function(e) {
             e.preventDefault();
             e.stopPropagation();
-            var translationBox = $('#addTranslation-box');
-            //Set the center alignment padding + border see css style
-            var popMargTop = (translationBox.height() + 24) / 2;
-            var popMargLeft = (translationBox.width() + 24) / 2;
-            translationBox.css({
-                'margin-top' : -popMargTop,
-                'margin-left' : -popMargLeft
-            });
-            translationBox.fadeIn(200);
-            $('#addTranslation-box .closeButton').on('click', _.bind(function() {
-                $('#addTranslation-box').fadeOut(200);
-            }, this));
-
+            addWordDialog.setCollection(this.collection);
+            addWordDialog.show();
         },
 
         appendAddWordLink: function() {
             var word = $('#searchInput').val();
-            var addWordModel = {currentWord: word, addTranslationFor: i18n.addTranslationFor,
-                                word: i18n.word, example: i18n.example, add: i18n.add,
-                                sentence: i18n.sentence};
-            this.items_element.append(this.addWordTemplate(addWordModel));
+            this.items_element.append('<li class="detailResult">' +
+                '<a href="#" id="addWord">' + i18n.addTranslationFor + ' '+ word +'</a></li>');
         },
 
         setCollection: function(collection) {

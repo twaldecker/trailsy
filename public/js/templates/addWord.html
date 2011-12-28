@@ -1,9 +1,7 @@
-<li class="detailResult">
-
-    <div id="addTranslation-box" class="addTranslation popup">
+    <div id="addWord-box" class="addWord popup">
         <a href="#" class="closeButton">x</a>
 
-        <h1><%= addTranslationFor %> <%= currentWord %></h1>
+        <h1><%= linkText %></h1>
 
         <form method="post" action="#" onsubmit="return false;">
             <fieldset>
@@ -19,7 +17,5 @@
             </fieldset>
         </form>
 
-        <div class="error"></div>
+        <div class="error hidden"></div>
     </div>
-    <a href="#" id="addTranslation"> <%= addTranslationFor %> <%= currentWord %> </a>
-</li>
