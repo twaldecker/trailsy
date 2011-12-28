@@ -60,8 +60,12 @@
      background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
      background-color:#dfdfdf;
-}.closeButton:active {
+}
+.closeButton:active {
      top:-21px;
+}
+.closeButton:visited {
+     color:#777;
 }
 
 .popup h1 {
