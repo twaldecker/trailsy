@@ -101,6 +101,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 success: _.bind(function(){
                     $('#logoutLink').addClass('hidden');
                     $('#loginLink').removeClass('hidden');
+                    $('#signupLink').removeClass('hidden');
                     this.setLoginState(false);
                 }, this),
                 error: _.bind(console.log, this)

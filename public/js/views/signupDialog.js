@@ -28,7 +28,7 @@ function($, _, html) {
             // Add the mask to body
             $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
-            $('a.closeButton, #mask', this.signupHtml).on('click', _.bind(this.hide, this));
+            $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
             $('#signup-box form').on('submit', _.bind(this.submitForm, this));
         },
 
