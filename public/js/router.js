@@ -33,13 +33,6 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
          * @param bool loggedIn
          */
         setLoginState: function(loggedIn) {
-            if (false === loggedIn) {
-                $('.editIcon').addClass('hidden');
-            }
-            if (true === loggedIn) {
-                $('.editIcon').removeClass('hidden');
-            }
-
             this.loginState = loggedIn;
         },
 

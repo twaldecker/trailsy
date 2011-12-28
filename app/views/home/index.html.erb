@@ -32,7 +32,7 @@
             <br />
             <input  name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
           </form>
-            <ul id="searchResultList">
+            <ul id="searchResultList" class="hidden">
               <% if !@words.nil? %>
                   <% @words.each do |word| %>
                         <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
@@ -41,7 +41,7 @@
             </ul>
 		</section>
         <section id="translations">
-            <ul id="translationList">
+            <ul id="translationList" class="hidden">
                 
             </ul>
             <!--

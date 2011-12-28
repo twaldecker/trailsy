@@ -286,6 +286,7 @@ input {
     margin-left: 5px;
 }
 
+
 .loading {
     background-image: url("/images/ajax-loader.gif");
     background-repeat: no-repeat;
@@ -335,6 +336,9 @@ li.searchResult span {
     float: left;
 }
 
+span.detailWord, span.detailExample {
+    padding: 3px;
+}
 span.detailWord {
     margin-left: 15px;
 }
@@ -361,6 +365,17 @@ div.rating {
 
     border-top: 10px solid #f00;
     cursor: pointer;
+}
+
+.editIcon, .saveIcon {
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    color: blue;
+}
+
+[contentEditable="true"] {
+    border: 1px solid #add8e6;
 }
 
 .green {

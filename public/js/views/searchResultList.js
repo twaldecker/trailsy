@@ -23,7 +23,6 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
 
         initialize: function() {
             this.items_element = $("#searchResultList");
-            this.items_element.hide();
             _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
                      'appendItem', 'focus', 'blur','keyDown', 'keyUp', 'delayedSearch', 'setTargetLang');
             this.collection = words;
@@ -46,7 +45,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         },
 
         blur: function() {
-            this.items_element.hide();
+            this.items_element.addClass('hidden');
             var em = this.items_element.children('li.selected');
             if (em.length) {
                 em.removeClass('selected');
@@ -157,7 +156,7 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             this.collection.each(function(item){ // in case collection is not empty
                 this.appendItem(item);
             }, this);
-            this.items_element.fadeIn(200);
+            this.items_element.removeClass('hidden');
             $("#searchInput").focus();
         }
     });
