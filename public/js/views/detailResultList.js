@@ -41,6 +41,7 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
 
         onClickAdd: function(e) {
             e.preventDefault();
+            e.stopPropagation();
             var translationBox = $('#addTranslation-box');
             //Set the center alignment padding + border see css style
             var popMargTop = (translationBox.height() + 24) / 2;
@@ -53,6 +54,7 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
             $('#addTranslation-box .closeButton').on('click', _.bind(function() {
                 $('#addTranslation-box').fadeOut(200);
             }, this));
+
         },
 
         appendAddWordLink: function() {
