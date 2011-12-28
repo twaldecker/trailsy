@@ -21,7 +21,7 @@ class Word < ActiveRecord::Base
     success = true
     Word.transaction do
       begin
-        @translation = Word.find_by_word(translation[:word])
+        @translation = self.translations.find_by_word(translation[:word])
         if @translation
           @translation.update_attributes(translation)
         else
