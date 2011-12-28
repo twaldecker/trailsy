@@ -39,7 +39,6 @@ function($,Backbone,_,detailResultTemplate){
         saveWord: function() {
             this.model.set({word: $('.detailWord', this.model.el).text()});
             this.model.set({example: $('.detailExample', this.model.el).text()});
-            this.model.set({translations: []});
             this.model.save();
         },
 

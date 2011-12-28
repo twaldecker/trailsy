@@ -20,8 +20,9 @@ class TranslationsController < ApplicationController
   end
 
   def update
-    @word = Word.find(params[:word_id])
-    @translation = @word.translations.find(params[:id])
+    params.delete(:translation)
+    params.delete(:word_id)
+    @translation = Word.find(params[:id])
     params.delete(:action)
     params.delete(:controller)
     if @translation.update_attributes(params)
@@ -36,10 +37,11 @@ class TranslationsController < ApplicationController
     params.delete(:action)
     params.delete(:controller)
     params.delete(:word_id)
+    params.delete(:translation)
     if @word.addOrUpdateTranslation(params)
-      render :json => {:message => 'updated'}, :status => :created
+      render :json => @word, :status => :created
     else
-      render :json => {:message => 'errorUpdating'}, :status => :unprocessable_entity
+      render :json => {:message => 'errorCreating'}, :status => :not_acceptable
     end
 
   end

@@ -1,7 +1,6 @@
 define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
     var detailWords = Backbone.Collection.extend({
         model: wordModel,
-        url: 'words',
 
         initialize: function(attributes, options) {
             options || (options = {});
