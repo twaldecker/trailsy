@@ -23,6 +23,17 @@ define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
             } else {
                 callback();
             }
+        },
+
+        addOrUpdate: function(attributes, options) {
+            var oldWord = this.find(function(word){
+                return word.get('word') == attributes.word
+            });
+            if (!oldWord) {
+                this.create(attributes, options);
+            } else {
+                oldWord.save(attributes, options);
+            }
         }
     });
 

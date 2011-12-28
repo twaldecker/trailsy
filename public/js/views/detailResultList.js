@@ -2,9 +2,9 @@ define(['jquery',
         'underscore',
         'backbone',
         'views/detailResult',
-        'text!templates/addWord.html',
+        'views/addWordDialog',
         'i18n!nls/trailsy'],
-function($,  _, Backbone, detailResultView, addWordHtml, i18n){
+function($,  _, Backbone, detailResultView, addWordDialog, i18n){
     /**
      * list view for detail results
      */
@@ -13,34 +13,30 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
         collection: null,
 
         events : {
-            "click #addTranslation": "add",
-            "click #addTranslation-box .submit": "submitTranslation"
+            "click #addWord": "onClickAdd"
+
         },
 
         initialize: function() {
             this.items_element = $("#translationList"); //we append our translations to this lement
-            _.bindAll(this, 'render', 'add', 'appendItem', 'unrender', 'setCollection', 'submitTranslation');
-            this.addWordTemplate = _.template(addWordHtml);
+            _.bindAll(this, 'render', 'onClickAdd',
+                            'appendItem', 'unrender',
+                            'setCollection',
+                            'appendAddWordLink');
         },
 
-        submitTranslation: function() {
-            console.log('clicked submit translation');
-            var form = $('#addTranslation-box form');
-            if (form.length) {
-                var formData = form.serializeArray();
-                var newWord = {word: formData[0].value, example: formData[1].value,
-                               language_id: this.targetLang};
-                this.collection.create(newWord);
-                $('#addTranslation-box').fadeOut(200);
-            }
+        onClickAdd: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            addWordDialog.setCollection(this.collection);
+            addWordDialog.setDialogType('addTranslation');
+            addWordDialog.show();
         },
 
-        add: function() {
-            console.log('clicked add');
-            $('#addTranslation-box').fadeIn(200);
-            $('#addTranslation-box .closeButton').on('click', _.bind(function() {
-                $('#addTranslation-box').fadeOut(200);
-            }, this));
+        appendAddWordLink: function() {
+            var word = $('#searchInput').val();
+            this.items_element.append('<li class="detailResult">' +
+                '<a href="#" id="addWord">' + i18n.addTranslationFor + ' '+ word +'</a></li>');
         },
 
         setCollection: function(collection) {
@@ -62,7 +58,7 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
         },
 
         render: function (targetLang) {
-            if (targetLang)
+            if ('string' === typeof targetLang)
                 this.targetLang = targetLang;
             this.unrender();
             this.items_element.removeClass('hidden');
@@ -71,10 +67,8 @@ function($,  _, Backbone, detailResultView, addWordHtml, i18n){
                 if (item.get('language_id') == this.targetLang)
                     this.appendItem(item);
             }, this);
-            var word = $('#searchInput').val();
-            var addWordModel = {currentWord: word, addTranslationFor: i18n.addTranslationFor,
-                                word: i18n.word, example: i18n.example, add: i18n.add, sentence: i18n.sentence};
-            this.items_element.append(this.addWordTemplate(addWordModel));
+
+            this.appendAddWordLink();
         }
     });
     return new detailResultListView;

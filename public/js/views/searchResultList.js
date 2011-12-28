@@ -1,7 +1,12 @@
-define(['jquery','underscore','backbone',
-        'views/searchResult','views/detailResultList',
+define(['jquery',
+        'underscore',
+        'backbone',
+        'views/searchResult',
+        'views/detailResultList',
+        'views/addWordDialog',
+        'i18n!nls/trailsy',
         'collections/words'],
-function($, _, Backbone, searchResultView, detailResultListView, words){
+function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, i18n, words){
     /**
      * view for search result list
      */
@@ -18,13 +23,15 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             "search #searchInput":    "search",
             "blur #searchInput":      "blur",
             "focus #searchInput":     "focus",
-            "change #targetLanguage": "changeLang"
+            "change #targetLanguage": "changeLang",
+            "mousedown #addWord":     "onClickAdd"
         },
 
         initialize: function() {
             this.items_element = $("#searchResultList");
             _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
-                     'appendItem', 'focus', 'blur','keyDown', 'keyUp', 'delayedSearch', 'setTargetLang');
+                            'appendItem', 'focus', 'blur','keyDown', 'keyUp',
+                            'delayedSearch', 'setTargetLang', 'onClickAdd');
             this.collection = words;
             this.collection.bind('refresh', this.render);
             this.collection.bind('add', this.render);
@@ -34,6 +41,14 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             this.targetLang = targetLang;
         },
 
+        onClickAdd: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            addWordDialog.setCollection(this.collection);
+            addWordDialog.setDialogType('addWord');
+            addWordDialog.show(true);
+        },
+
         changeLang: function() {
             this.targetLang = $("#targetLanguage").val();
             this.search();
@@ -41,7 +56,6 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         },
 
         focus: function() {
-            console.log('focused search input');
         },
 
         blur: function() {
@@ -53,7 +67,6 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
         },
 
         keyUp: function(e) {
-            console.log(e);
             if (e.keyCode == 27 || e.keyCode == 13 || e.keyCode == 9
                 || e.keyCode == 40 || e.keyCode == 38) return true;
             this.delayedSearch();
@@ -136,8 +149,14 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
             return true;
         },
 
+        appendAddWordLink: function() {
+            var word = $('#searchInput').val();
+            this.el.append('<a href="#" id="addWord">' + i18n.add +' '+ i18n.word +' '+ word +'</a>');
+        },
+
         unrender: function() {
             this.items_element.html("");
+            $('#addWord', this.el).remove();
             detailResultListView.unrender();
         },
 
@@ -153,11 +172,15 @@ function($, _, Backbone, searchResultView, detailResultListView, words){
 
         render: function () {
             this.unrender();
+            this.items_element.removeClass('hidden');
+            $("#searchInput").focus();
+            if (0 === this.collection.length) {
+                this.appendAddWordLink();
+            }
             this.collection.each(function(item){ // in case collection is not empty
                 this.appendItem(item);
             }, this);
-            this.items_element.removeClass('hidden');
-            $("#searchInput").focus();
+
         }
     });
     return new searchResultListView;

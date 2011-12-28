@@ -15,28 +15,6 @@ define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
             }
         },
 
-        /**
-         * create own models for each translation
-         * @param response
-         *
-        parse: function(response) {
-            var words = [];
-            var tmpWords = [];
-            if (!_.isArray(response)) {
-                tmpWords.push(response);
-            } else {
-                tmpWords = response;
-            }
-            _(tmpWords).each(function(word){
-                words.push(word);
-                _(word.translations).each(function(translation){
-                    words.push(translation);
-                });
-            });
-
-            return words;
-        },*/
-
         getOrFetch: function(id, callback) {
             var word = this.get(id);
             if ('undefined' === typeof word) {
@@ -45,6 +23,17 @@ define(['backbone','underscore','models/word'],function(Backbone,_,wordModel){
                 });
             } else {
                 callback();
+            }
+        },
+
+        addOrUpdate: function(attributes, options) {
+            var oldWord = this.find(function(word){
+                return word.get('word') == attributes.word
+            });
+            if (!oldWord) {
+                this.create(attributes, options);
+            } else {
+                oldWord.save(attributes, options);
             }
         }
     });

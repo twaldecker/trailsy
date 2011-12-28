@@ -1,22 +1,21 @@
-<input type="button" id="addTranslation" value="Add Translation" />
-<div id="addTranslation-box" class="addTranslation popup">
-    <a href="#" class="closeButton">x</a>
+    <div id="addWord-box" class="addWord popup">
+        <a href="#" class="closeButton">x</a>
 
-    <h1><%= addTranslationFor %> <%= currentWord %></h1>
+        <h1><%= linkText %></h1>
 
-    <form method="post" action="#" onsubmit="return false;">
-        <fieldset>
+        <form method="post" action="#" onsubmit="return false;">
+            <fieldset>
 
-            <label for="word"><%= word %></label>
-            <input id="word" name="word" value="" type="text" autocomplete="on" placeholder="Word">
+                <label for="word"><%= word %></label>
+                <input id="word" name="word" value="" type="text" autocomplete="on" placeholder="Word">
 
-            <label for="example"><%= example %> <%= sentence %></label>
-            <input id="example" name="example" value="" type="text" placeholder="<%= example %> <%= sentence %>">
+                <label for="example"><%= example %> <%= sentence %></label>
+                <input id="example" name="example" value="" type="text" placeholder="<%= example %> <%= sentence %>">
 
-            <button class="submit button" type="submit"><%= add %></button>
+                <button class="submit button" type="submit"><%= add %></button>
 
-        </fieldset>
-    </form>
+            </fieldset>
+        </form>
 
-    <div class="error"></div>
-</div>
+        <div class="error hidden"></div>
+    </div>

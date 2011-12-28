@@ -60,16 +60,24 @@ class WordsController < ApplicationController
 
   # POST /words.json
   def create
-    @word = Word.new(params[:word])
-
-    respond_to do |format|
-      if @word.save
-        format.html { redirect_to @word, :notice => 'Word was successfully created.' }
-        format.json { render :json => @word, :status => :created, :location => @word }
+    params.delete(:action)
+    params.delete(:controller)
+    @oldWord = Word.where(:word => params[:word]).where(:language_id => params[:language_id]).first
+    if @oldWord
+      if @oldWord.update_attributes(params)
+        render :json => @oldWord, :status => :ok, :location => @oldWord
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @word.errors, :status => :unprocessable_entity }
+        render :json => @oldWord.errors, :status => :unprocessable_entity
       end
+      return
+    end
+
+    @word = Word.new(params)
+
+    if @word.save
+      render :json => @word, :status => :created, :location => @word
+    else
+      render :json => @word.errors, :status => :unprocessable_entity
     end
   end
 

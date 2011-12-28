@@ -21,8 +21,12 @@ class Word < ActiveRecord::Base
     success = true
     Word.transaction do
       begin
-        @translation = Word.find_by_word(translation[:word])
+        @translation = Word.where(:word => translation[:word]).where(:language_id => translation[:language_id]).first
         if @translation
+          @ownTranslation = self.translations.find(@translation.id)
+          if @ownTranslation.nil?
+            Connection.create({:lang1_id => self.id, :lang2_id => @translation.id})
+          end
           @translation.update_attributes(translation)
         else
           @translation = self.translations.create(translation)
@@ -38,7 +42,7 @@ class Word < ActiveRecord::Base
       end
       raise ActiveRecord::Rollback if !success
     end
-    return success
+    return @translation
   end
 
   #update a single word including translations
