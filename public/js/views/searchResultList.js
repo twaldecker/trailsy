@@ -45,6 +45,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
             e.preventDefault();
             e.stopPropagation();
             addWordDialog.setCollection(this.collection);
+            addWordDialog.setDialogType('addWord');
             addWordDialog.show(true);
         },
 

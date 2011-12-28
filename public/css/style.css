@@ -1,4 +1,4 @@
-/* 
+/*
  * HTML5 ✰ Boilerplate
  *
  * What follows is the result of much research on cross-browser styling. 
@@ -397,21 +397,6 @@ div.rating {
 .orange {
     color: orange;
 }
-
-
-
-/*
-.rating {
-    float: left;
-}
-.word {
-    float: left;
-}
-
-.translation {
-    float: right;
-}
-*/
 
 
 /* ==|== non-semantic helper classes ========================================

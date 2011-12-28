@@ -29,6 +29,7 @@ function($,  _, Backbone, detailResultView, addWordDialog, i18n){
             e.preventDefault();
             e.stopPropagation();
             addWordDialog.setCollection(this.collection);
+            addWordDialog.setDialogType('addTranslation');
             addWordDialog.show();
         },
 

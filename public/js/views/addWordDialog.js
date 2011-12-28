@@ -16,17 +16,18 @@ define(['jquery',
              *
              * @param bool showLanguages
              */
-            applyTemplate: function(showLanguages) {
+            applyTemplate: function() {
                 var word = $('#searchInput').val();
                 var addWordModel = {linkText: i18n.addTranslationFor + ' ' + word,
                     word: i18n.word, example: i18n.example, add: i18n.add,
                     sentence: i18n.sentence};
                 var template = _.template(html);
                 this.addWordHtml = $(template(addWordModel));
-                if (true === showLanguages) {
+                if ('addWord' === this.dialogType) {
                     var targetLang = $("#targetLanguage").clone();
                     targetLang.attr('id', 'sourceLanguage');
                     $('#example',this.addWordHtml).after(targetLang);
+                    $('#word', this.addWordHtml).val(word);
                 }
             },
 
@@ -34,14 +35,18 @@ define(['jquery',
                 $('nav').append(this.addWordHtml);
             },
 
+            setDialogType: function(type) {
+                this.dialogType = type;
+            },
+
             /**
              *
              * @param bool showLanguages
              */
-            show: function(showLanguages) {
+            show: function() {
 
 
-                this.applyTemplate(showLanguages);
+                this.applyTemplate();
                 this.appendDiv();
 
                 //Fade in the Popup
@@ -62,7 +67,10 @@ define(['jquery',
             },
 
             //callback on successful save
-            saveSuccess: function() {
+            saveSuccess: function(result) {
+                if ('addWord' === this.dialogType) {
+                    AppRouter.navigate('words/'+ result.id, true);
+                }
                 this.hide();
             },
 
@@ -93,13 +101,17 @@ define(['jquery',
             //submit form
             submitForm: function() {
 
+                var newWord = {word:        $('#word', this.addWordHtml).val(),
+                               example:     $('#example', this.addWordHtml).val(),
+                               language_id: this.getLanguageId()};
+                var options = {success: _.bind(this.saveSuccess, this),
+                               error:   _.bind(this.saveFailed, this)};
 
-                var newWord = {word: $('#word', this.addWordHtml).val(),
-                               example: $('#example', this.addWordHtml).val(),
-                    language_id: this.getLanguageId()};
-                this.collection.create(newWord, {success: _.bind(this.saveSuccess, this),
-                                                 error: _.bind(this.saveFailed, this)});
-                $('#addWord-box').fadeOut(300);
+                if ('addWord' === this.dialogType) {
+                    options.silent = true;
+                }
+
+                this.collection.addOrUpdate(newWord, options);
             }
         }
         return addWordDialog;
