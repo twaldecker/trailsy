@@ -34,12 +34,11 @@ class TranslationsController < ApplicationController
       @user        = current_user
       @connection  = Connection.find(connection_id)
       if user_voted != @translation['user_voted']
+        @user.clear_votes @connection
         if user_voted == 1
           @user.vote_for @connection
         elsif user_voted == -1
           @user.vote_against @connection
-        else
-          @user.clear_votes @connection
         end
         @translation['user_voted'] = user_voted
         @translation['rating'] = @connection.votes_for - @connection.votes_against
