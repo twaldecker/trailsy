@@ -7,6 +7,9 @@ class WordsController < ApplicationController
   # This action responds with a list of all words
   def index
     @words = Word.all
+    @words.each do |word|
+      self.addConnectionDetailsTo word
+    end
     respond_with @words, :include => [:language, :translations]
   end
 
@@ -14,13 +17,34 @@ class WordsController < ApplicationController
   # This action returns the json data for a specific word
   def show
     @word = Word.find(params[:id])
+    self.addConnectionDetailsTo @word
     respond_with @word, :include => [:language, :translations]
+  end
+
+  def addConnectionDetailsTo(word)
+    word.translations.each do |translation|
+      @connection = Connection.find_by_lang2_id translation.id
+      translation['rating'] = @connection.votes_for - @connection.votes_against
+      @user = current_user
+      if @user
+        if @user.voted_for? @connection
+          translation['user_voted'] = 1
+        elsif @user.voted_against? @connection
+          translation['user_voted'] = -1
+        else
+          translation['user_voted'] = 0
+        end
+      end
+    end
   end
 
   # GET /words/search?word=ab&lang=2
   # This action returns a json array with words starting with a parameter
   def search
     @words = Word.find_starting_with params[:word], params[:lang]
+    @words.each do |word|
+      self.addConnectionDetailsTo word
+    end
 
     respond_to do |format|
       format.html {render :html => @words, :include => [:language, :translations], :template => 'home/index'}
@@ -31,8 +55,7 @@ class WordsController < ApplicationController
   # PUT /words/1.json
   def update
     @word = Word.find(params[:id])
-    params.delete(:action)
-    params.delete(:controller)
+    filter_params(params)
     respond_to do |format|
       if @word.updateWord(params)
         format.json { head :ok }
@@ -60,8 +83,7 @@ class WordsController < ApplicationController
 
   # POST /words.json
   def create
-    params.delete(:action)
-    params.delete(:controller)
+    filter_params(params)
     @oldWord = Word.where(:word => params[:word]).where(:language_id => params[:language_id]).first
     if @oldWord
       if @oldWord.update_attributes(params)

@@ -21,11 +21,8 @@ class TranslationsController < ApplicationController
   end
 
   def update
-    params.delete(:translation)
-    params.delete(:word_id)
     @translation = Word.find(params[:id])
-    params.delete(:action)
-    params.delete(:controller)
+    filter_params(params)
     if @translation.update_attributes(params)
       render :json => @translation
     else
@@ -35,10 +32,7 @@ class TranslationsController < ApplicationController
 
   def create
     @word = Word.find(params[:word_id])
-    params.delete(:action)
-    params.delete(:controller)
-    params.delete(:word_id)
-    params.delete(:translation)
+    filter_params(params)
     @translation = @word.addOrUpdateTranslation(params)
 
     if @translation.nil?
