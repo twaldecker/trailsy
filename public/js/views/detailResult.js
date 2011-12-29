@@ -37,9 +37,8 @@ function($,Backbone,_,detailResultTemplate){
         },
 
         saveWord: function() {
-            this.model.set({word: $('.detailWord', this.model.el).text()});
-            this.model.set({example: $('.detailExample', this.model.el).text()});
-            this.model.save();
+            this.model.save({word:    $('.detailWord', this.model.el).text(),
+                             example: $('.detailExample', this.model.el).text()});
         },
 
         unrender: function() {
