@@ -43,6 +43,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         checkLoginState: function() {
             if (false === this.getLoginState()) {
                 this.navigate('login', true);
+                return false;
             } else {
                 return true;
             }

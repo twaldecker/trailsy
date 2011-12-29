@@ -51,7 +51,7 @@ class Word < ActiveRecord::Base
     logger.debug "params: #{YAML.dump(params)}"
     Word.transaction do
       begin
-        if !params[:translations].empty?
+        if params[:translations] && !params[:translations].empty?
           params[:translations].each_index do |key|
             translation = params[:translations][key]
             self.addOrUpdateTranslation(translation)

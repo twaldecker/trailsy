@@ -24,7 +24,7 @@ function($,Backbone,_,detailResultTemplate){
         },
 
         onClickRating: function(direction) {
-            AppRouter.checkLoginState();
+            if (false === AppRouter.checkLoginState()) return;
             var currentVote = this.model.get('user_voted');
 
             if (parseInt(currentVote, 10) === direction) {

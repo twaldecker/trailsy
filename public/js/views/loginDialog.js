@@ -52,8 +52,10 @@ function($, _, html) {
         hide: function() {
             $('#mask , #login-box').fadeOut(300 , _.bind(function() {
                 $('#login-error', this.loginHtml).hide();
+                $('a.closeButton, #mask').unbind();
                 $('#mask').remove();
             }, this));
+            $('#login-box form').unbind();
             AppRouter.navigate('home', true);
         },
 

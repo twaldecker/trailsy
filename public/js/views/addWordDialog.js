@@ -88,6 +88,8 @@ define(['jquery',
                 $('#addWord-box').fadeOut(300 , _.bind(function() {
                     this.addWordHtml.remove();
                 }, this));
+                $('#addWord-box .closeButton').unbind();
+                $('#addWord-box form').unbind();
             },
 
             getLanguageId: function() {

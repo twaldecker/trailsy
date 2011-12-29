@@ -48,8 +48,10 @@ function($, _, html) {
         hide: function() {
             $('#mask , #signup-box').fadeOut(300 , _.bind(function() {
                 $('#signup-box div.error', this.loginHtml).hide();
+                $('a.closeButton. #mask').unbind();
                 $('#mask').remove();
             }, this));
+            $('#signup-box form').unbind();
             AppRouter.navigate('home', true);
         },
 
