@@ -2,6 +2,7 @@ class TranslationsController < ApplicationController
   before_filter :logged_in?, :only => [:update, :create]
   def index
     @word = Word.find(params[:word_id])
+    self.addConnectionDetailsTo @word
     if @word
       render :json => @word.translations
     else
@@ -13,6 +14,7 @@ class TranslationsController < ApplicationController
   def show
     @word = Word.find(params[:word_id])
     @translation = @word.translations.find(params[:id])
+    self.addConnectionDetailsTo @translation
     if @translation
       render :json => @translation
     else
