@@ -25,6 +25,7 @@ class WordsController < ApplicationController
     word.translations.each do |translation|
       @connection = Connection.find_by_lang2_id translation.id
       translation['rating'] = @connection.votes_for - @connection.votes_against
+      translation['connection_id'] = @connection.id
       @user = current_user
       if @user
         if @user.voted_for? @connection
