@@ -284,6 +284,8 @@ input {
 
 .rating {
     margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 
@@ -352,8 +354,7 @@ div.rating {
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-
-    border-bottom: 10px solid black;
+    border-bottom: 10px solid grey;
     cursor: pointer;
 }
 
@@ -362,9 +363,15 @@ div.rating {
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-
-    border-top: 10px solid #f00;
+    border-top: 10px solid grey;
     cursor: pointer;
+}
+
+.arrowUp.voted {
+    border-bottom: 10px solid orange;
+}
+.arrowDown.voted {
+    border-top: 10px solid orange;
 }
 
 .editIcon, .saveIcon {

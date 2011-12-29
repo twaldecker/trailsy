@@ -61,8 +61,18 @@ function($,Backbone,_,detailResultTemplate){
         render: function() {
             var model = this.model;
             var el = $(this.el);
+
+
             el.html(this.template(model.toJSON()));
-            var that = this;
+
+            var userVoting = parseInt(model.get('user_voted'), 10);
+            if (true === AppRouter.getLoginState() && userVoting !== 0) {
+                if (userVoting === 1) {
+                    $('.rateUp', el).addClass('voted');
+                } else if (userVoting === -1) {
+                    $('.rateDown', el).addClass('voted');
+                }
+            }
             $('.rateUp', el).on('click', _.bind(this.onClickRating, this, 1));
             $('.rateDown', el).on('click',  _.bind(this.onClickRating, this, -1));
             $('.editIcon', el).on('click', _.bind(this.editWord, this));
