@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :logged_in?
   helper_method :filter_params
-  
+
   private
 
   def logged_in?
@@ -21,9 +21,12 @@ class ApplicationController < ActionController::Base
   def filter_params(params)
     params.delete(:translation)
     params.delete(:word_id)
+    params.delete(:connection_id)
     params.delete(:action)
     params.delete(:controller)
     params.delete(:rating)
     params.delete(:user_voted)
   end
+
+
 end

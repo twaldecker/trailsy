@@ -22,11 +22,31 @@ class TranslationsController < ApplicationController
 
   def update
     @translation = Word.find(params[:id])
+    connection_id = params[:connection_id]
+    user_voted   = params[:user_voted]
     filter_params(params)
-    if @translation.update_attributes(params)
-      render :json => @translation
-    else
-      render :json => {:message => 'errorUpdating'}, :status => :not_acceptable
+    @translation.update_attributes(params)
+    self.addConnectionDetailsTo @translation
+
+    if connection_id
+      @user        = current_user
+      @connection  = Connection.find(connection_id)
+      if user_voted != @translation['user_voted']
+        if user_voted == 1
+          @user.vote_for @connection
+        elsif user_voted == -1
+          @user.vote_against @connection
+        else
+          @user.clear_votes @connection
+        end
+        @translation['user_voted'] = user_voted
+        @translation['rating'] = @connection.votes_for - @connection.votes_against
+      end
+      if @translation
+        render :json => @translation
+      else
+        render :json => {:message => 'errorUpdating'}, :status => :not_acceptable
+      end
     end
   end
 
@@ -41,5 +61,21 @@ class TranslationsController < ApplicationController
       render :json => @translation, :status => :created
     end
 
+  end
+
+  def addConnectionDetailsTo(translation)
+    @connection = Connection.find_by_lang2_id translation.id
+    translation['rating'] = @connection.votes_for - @connection.votes_against
+    translation['connection_id'] = @connection.id
+    @user = current_user
+    if @user
+      if @user.voted_for? @connection
+        translation['user_voted'] = 1
+      elsif @user.voted_against? @connection
+        translation['user_voted'] = -1
+      else
+        translation['user_voted'] = 0
+      end
+    end
   end
 end

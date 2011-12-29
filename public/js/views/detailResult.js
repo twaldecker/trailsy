@@ -16,11 +16,23 @@ function($,Backbone,_,detailResultTemplate){
         template: null,
 
         initialize: function() {
-            _.bindAll(this, 'render', 'unrender', 'editWord', 'saveWord');
+            _.bindAll(this, 'render', 'unrender', 'editWord', 'saveWord', 'onClickRating');
             this.model = this.options.model;
             this.model.bind('change', this.render);
             this.model.view = this;
             this.template = _.template(detailResultTemplate);
+        },
+
+        onClickRating: function(direction) {
+            AppRouter.checkLoginState();
+            var currentVote = this.model.get('user_voted');
+
+            if (parseInt(currentVote, 10) === direction) {
+                this.model.save({'user_voted': 0});
+                return;
+            }
+            this.model.save({'user_voted': direction});
+            return;
         },
 
         editWord: function() {
@@ -51,12 +63,8 @@ function($,Backbone,_,detailResultTemplate){
             var el = $(this.el);
             el.html(this.template(model.toJSON()));
             var that = this;
-            $('.rateUp', el).on('click', function(){
-                console.log('clicked rate up');
-            });
-            $('.rateDown', el).on('click', function(){
-                console.log('clicked rate down');
-            });
+            $('.rateUp', el).on('click', _.bind(this.onClickRating, this, 1));
+            $('.rateDown', el).on('click',  _.bind(this.onClickRating, this, -1));
             $('.editIcon', el).on('click', _.bind(this.editWord, this));
             $('.editIcon', el).removeClass('hidden');
             this.model.el = el;

@@ -40,6 +40,14 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             return this.loginState;
         },
 
+        checkLoginState: function() {
+            if (false === this.getLoginState()) {
+                this.navigate('login', true);
+            } else {
+                return true;
+            }
+        },
+
         words: function(id, targetLang) {
             words.getOrFetch(id,_.bind(function() {
                 var model = words.get(id);

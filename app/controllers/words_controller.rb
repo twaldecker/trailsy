@@ -21,23 +21,7 @@ class WordsController < ApplicationController
     respond_with @word, :include => [:language, :translations]
   end
 
-  def addConnectionDetailsTo(word)
-    word.translations.each do |translation|
-      @connection = Connection.find_by_lang2_id translation.id
-      translation['rating'] = @connection.votes_for - @connection.votes_against
-      translation['connection_id'] = @connection.id
-      @user = current_user
-      if @user
-        if @user.voted_for? @connection
-          translation['user_voted'] = 1
-        elsif @user.voted_against? @connection
-          translation['user_voted'] = -1
-        else
-          translation['user_voted'] = 0
-        end
-      end
-    end
-  end
+
 
   # GET /words/search?word=ab&lang=2
   # This action returns a json array with words starting with a parameter
@@ -104,6 +88,24 @@ class WordsController < ApplicationController
     end
   end
 
+
+  def addConnectionDetailsTo(word)
+    word.translations.each do |translation|
+      @connection = Connection.find_by_lang2_id translation.id
+      translation['rating'] = @connection.votes_for - @connection.votes_against
+      translation['connection_id'] = @connection.id
+      @user = current_user
+      if @user
+        if @user.voted_for? @connection
+          translation['user_voted'] = 1
+        elsif @user.voted_against? @connection
+          translation['user_voted'] = -1
+        else
+          translation['user_voted'] = 0
+        end
+      end
+    end
+  end
 
 
   # DELETE /words/1.json
