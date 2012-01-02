@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
   
   acts_as_voter
 
+  def get_verification_url
+    'http://localhost:3000/#validation/'+self.id.to_s+'/code/'+self.verification_code
+  end
+
   def verification_init
     # TODO: check the generation of the verification code
     self.verification_code = Digest::hexencode(Digest::SHA2.digest(self.email + self.password + rand.to_s + Time.current.to_s + 'reallybadsecret'))

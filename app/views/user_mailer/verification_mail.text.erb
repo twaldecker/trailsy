@@ -2,6 +2,6 @@ Welcome to transi.dev!
 
 Please verify your email address by clicking on the link below:
 
-<%= 'http://localhost:3000/#validation/'+@user.id.to_s+'/code/'+@user.verification_code %>
+<%= @user.get_verification_url %>
 
 Thanks for joining and have a great day!
