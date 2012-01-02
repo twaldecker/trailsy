@@ -1,3 +1,5 @@
+@import url('login.css');
+@import url('addWord.css');
 /*
  * HTML5 ✰ Boilerplate
  *
@@ -218,6 +220,9 @@ header {
     background-color: black;
     color: #d3d3d3;
     height: 34px;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
 }
 
 nav {
@@ -447,12 +452,25 @@ div.rating {
     }
     #heading {
         display: none;
-        font-size: 30px;
     }
+
+    #searchResults {
+        position: relative;
+        top: 40px;
+    }
+
+
+
+
     #searchInput {
         width: 90%;
         font-size: 16px;
     }
+
+    #translations {
+        margin-top: 50px;
+    }
+
     ul {
         width: 100%;
         padding: 0px;
@@ -464,11 +482,10 @@ div.rating {
         zoom: 2.0;
     }
 
-    li {
-
-    }
-    li.detailResult {
-
+    li.searchResult .word,
+    li.searchResult .lang
+    {
+        zoom: 2.0;
     }
 }
 
@@ -481,6 +498,8 @@ div.rating {
     #heading {
         font-size: 100px;
         margin: 0;
+        position: relative;
+        top: 40px;
     }
 
     #searchInput {

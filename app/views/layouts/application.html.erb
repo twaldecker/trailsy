@@ -27,20 +27,16 @@
 
   <!-- CSS: implied media=all -->
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/login.css">
-  <link rel="stylesheet" href="/css/addWord.css">
+  <link rel="stylesheet" href="<%= APP_CONFIG['asset_path'] %>/css/style.css">
   <!-- end CSS-->
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
 
-  <script data-main="/js/main" src="/js/vendor/require-jquery.js"></script>
+  <script data-main="<%= APP_CONFIG['asset_path'] %>/js/main" src="<%= APP_CONFIG['asset_path'] %>/js/vendor/require-jquery.js"></script>
 </head>
 
 <body>
-
-
 
 
 <% flash.each do |name, msg| %>

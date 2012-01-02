@@ -1,0 +1,12 @@
+defaults: &defaults
+  asset_path: '/build'
+
+development:
+  <<: *defaults
+  asset_path: ''
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

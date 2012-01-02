@@ -1092,6 +1092,10 @@
             params.processData = false;
         }
 
+        if (method == 'read') {
+            return jQuery.retrieveJSON(_.extend(params, options));
+        }
+
         // Make the request, allowing the user to override any Ajax options.
         return $.ajax(_.extend(params, options));
     };

@@ -1,0 +1,137 @@
+define(['jquery',
+        'underscore',
+        'backbone',
+        'views/detailResultList',
+        'views/searchResultList',
+        'views/loginDialog',
+        'views/signupDialog',
+        'collections/words',
+        'collections/detailWords'],
+function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, words, detailWords){
+    var appRouter = Backbone.Router.extend({
+        loginState: false,
+
+        routes: {
+            '': 'home',
+            'login': 'login',
+            'logout': 'logout',
+            'signup': 'signup',
+            'search/:query/targetLang/:lang': 'search',
+            'words/:word/targetLang/:lang':  'words',
+            'validation/:id/code/:code': 'validation'
+        },
+
+        initialize: function() {
+            //if loginLink is hidden we are logged in
+            this.setLoginState( $('#loginLink').hasClass('hidden') );
+        },
+
+        'home': function(){
+        },
+
+        /**
+         *
+         * @param bool loggedIn
+         */
+        setLoginState: function(loggedIn) {
+            this.loginState = loggedIn;
+        },
+
+        getLoginState: function() {
+            return this.loginState;
+        },
+
+        checkLoginState: function() {
+            if (false === this.getLoginState()) {
+                this.navigate('login', true);
+                return false;
+            } else {
+                return true;
+            }
+        },
+
+        words: function(id, targetLang) {
+            words.getOrFetch(id,_.bind(function() {
+                var model = words.get(id);
+                this.setSearchText(model.get('word'));
+                var tmpWords = new detailWords(model.get('translations') );
+                tmpWords.url = 'words/'+id+'/translations';
+                detailResultListView.setCollection(tmpWords);
+                detailResultListView.render(targetLang);
+            }, this));
+            this.setTargetLangValue(targetLang);
+        },
+
+        setTargetLangValue: function(targetLang) {
+            var options = $("#targetLanguage");
+            options.val(targetLang);
+            searchResultListView.setTargetLang(targetLang);
+        },
+
+        setSearchText: function(text) {
+            var input = $('#searchInput');
+            input.val(text);
+        },
+
+        search: function(query, targetLang) {
+            $("#searchInput").addClass('loading');
+            words.fetch({data: jQuery.param({word: query, lang: targetLang}),
+                         url:'words/search',
+                         success: function(){
+                             searchResultListView.render();
+                             $("#searchInput").removeClass('loading');
+                            },
+                         error: function() {$("#searchInput").removeClass('loading');}});
+            this.setSearchText(query);
+            this.setTargetLangValue(targetLang);
+        },
+
+        login: function() {
+            loginDialog.show();
+        },
+
+        logout: function() {
+            $.ajax({url:'/log_out',
+                type:'GET',
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function( xhr ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                success: _.bind(function(){
+                    $('#logoutLink').addClass('hidden');
+                    $('#loginLink').removeClass('hidden');
+                    $('#signupLink').removeClass('hidden');
+                    this.setLoginState(false);
+                }, this),
+                error: _.bind(console.log, this)
+            });
+        },
+        
+        signup: function() {
+            console.log('show signup dialog');
+            signupDialog.show();
+        },
+
+        validation: function(id, code) {
+            $.ajax({url: '/user/'+id+'/validate/'+code,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                beforeSend: function( xhr ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                success: _.bind(console.log, "success"),
+                error: _.bind(console.log, "failure")
+            })
+        }
+    });
+
+    var init = function(){
+        window.AppRouter = new appRouter;
+        Backbone.history.start({pushStack:true});
+    };
+    return {
+        init: init
+    };
+});
