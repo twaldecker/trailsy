@@ -235,37 +235,29 @@ td { vertical-align: top; }
 @import "screen.css.scss";
 
 body {
-}
-
-header { 
+    font-family: arial, helvetica, sans-serif;
 }
 
 nav {
     background-color: black;
     color: #d3d3d3;
-    height: 34px;
-    overflow:hidden;
-    text-shadow: none;
+    overflow:auto;
     
     a, 
     a:visited {
         float:right;
-        font-size: 18px;   
+        font-size: 1.2em;   
         text-decoration: none;
         margin: 5px 5px 5px 0px;
         color: #d3d3d3;
     }
 }
 
-#container {
+#main{
     text-align: center;
     text-shadow: 2px 2px 2px lightGrey;
     color: grey;
 }
-
-#searchBox {
-}
-
 
 input {
     text-shadow: 2px 2px 2px lightGrey;
@@ -279,28 +271,29 @@ input {
     background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
     background-color:#ededed;
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
-    border-radius:6px;
     border:1px solid #dcdcdc;
     display:inline-block;
     color:#777777;
-    font-family:arial;
-    font-size:15px;
     font-weight:bold;
     padding:2px 8px;
     text-decoration:none;
     text-shadow:1px 1px 0px #ffffff;
-}.greyButton:hover {
-     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
-     background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
-     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
-     background-color:#dfdfdf;
- }.greyButton:active {
-      position:relative;
-      top:1px;
-}.greyButton:visited {
-    color:#777;
+    
+    @include round-corners(6px);
+    
+    &:hover {
+        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+        background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+        background-color:#dfdfdf;
+    }
+    &:active {
+        position:relative;
+        top:1px;
+    }
+    &:visited {
+        color:#777;
+    }
 }
 
 
