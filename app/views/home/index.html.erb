@@ -20,7 +20,7 @@
     <span class="orange">s</span>
     <span class="blue">i</span>
   </h1>
-	<section id="searchResults">
+	<section id="search">
       <form action="words/search" method="get" onsubmit="return false;">
         <label for="targetLang">To Language</label>
         <select name="targetLang" id="targetLanguage">
@@ -29,9 +29,9 @@
             <% end %>
         </select>
         <br />
-        <input  name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
+        <input  name="word" id="word" type="search" placeholder="Search" autocomplete="off" />
       </form>
-        <ul id="searchResultList" class="hidden">
+        <ul id="result" class="hidden">
           <% if !@words.nil? %>
               <% @words.each do |word| %>
                     <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>

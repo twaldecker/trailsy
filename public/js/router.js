@@ -10,6 +10,7 @@ define(['jquery',
 function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, words, detailWords){
     var appRouter = Backbone.Router.extend({
         loginState: false,
+        input: $("input#word"),
 
         routes: {
             '': 'home',
@@ -69,19 +70,18 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         },
 
         setSearchText: function(text) {
-            var input = $('#searchInput');
-            input.val(text);
+            this.input.val(text);
         },
 
         search: function(query, targetLang) {
-            $("#searchInput").addClass('loading');
+            this.input.addClass('loading');
             words.fetch({data: jQuery.param({word: query, lang: targetLang}),
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();
-                             $("#searchInput").removeClass('loading');
+                             $("input#word").removeClass('loading');
                             },
-                         error: function() {$("#searchInput").removeClass('loading');}});
+                         error: function() {$("input#word").removeClass('loading');}});
             this.setSearchText(query);
             this.setTargetLangValue(targetLang);
         },

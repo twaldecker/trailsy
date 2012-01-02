@@ -10,6 +10,7 @@ function($,  _, Backbone, detailResultView, addWordDialog, i18n){
      */
     var detailResultListView = Backbone.View.extend({
         el: $("#translations"),
+        input: $("input#word"),
         collection: null,
 
         events : {
@@ -34,7 +35,7 @@ function($,  _, Backbone, detailResultView, addWordDialog, i18n){
         },
 
         appendAddWordLink: function() {
-            var word = $('#searchInput').val();
+            var word = this.input.val();
             this.items_element.append('<li class="detailResult">' +
                 '<a href="#" id="addWord">' + i18n.addTranslationFor + ' '+ word +'</a></li>');
         },

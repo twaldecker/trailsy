@@ -253,16 +253,6 @@ nav {
     }
 }
 
-#main{
-    text-align: center;
-    text-shadow: 2px 2px 2px lightGrey;
-    color: grey;
-}
-
-input {
-    text-shadow: 2px 2px 2px lightGrey;
-    color: grey;
-}
 .greyButton {
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -296,13 +286,16 @@ input {
     }
 }
 
-
-.rating {
-    margin-left: 5px;
-    font-size: 20px;
-    font-weight: bold;
+#main{
+    text-align: center;
+    text-shadow: 2px 2px 2px lightGrey;
+    color: grey;
 }
 
+input#search {
+    text-shadow: 2px 2px 2px lightGrey;
+    color: grey;
+}
 
 .loading {
     background-image: url("/images/ajax-loader.gif");
@@ -310,7 +303,18 @@ input {
     background-position: 90%;
 }
 
-#searchResults {
+
+
+
+
+
+.rating {
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+section#searchResults {
     position: relative;
     top: 15px;
     height: 57px;
