@@ -1,0 +1,74 @@
+@mixin shadow {
+  box-shadow: 0px 0px 20px #999; /* CSS3 */
+  -moz-box-shadow: 0px 0px 20px #999; /* Firefox */
+  -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
+}
+
+@mixin round-corners($radius) {
+  border-radius:$radius $radius $radius $radius;
+  -moz-border-radius: $radius; /* Firefox */
+  -webkit-border-radius: $radius; /* Safari, Chrome */
+}
+
+.popup{
+    text-align: left;
+    display:none;
+    background: #333;
+    padding: 10px;
+    border: 2px solid #ddd;
+    width: 214px;
+    float: left;
+    position: fixed;
+    top: 50%; left: 50%;
+    z-index: 2;
+    text-shadow: none;
+
+    @include shadow;
+    @include round-corners(3px);
+
+    .closeButton {
+        -moz-box-shadow:0px 0px 20px #999;
+        -webkit-box-shadow:0px 0px 20px #999;
+        box-shadow:0px 0px 20px #999;
+        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+        background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+        background-color:#ededed;
+        -moz-border-radius:42px;
+        -webkit-border-radius:42px;
+        border-radius:42px;
+        border:2px solid #dcdcdc;
+        display:inline-block;
+        color:#777777;
+        font-family:arial;
+        font-size:15px;
+        font-weight:bold;
+        padding:0px 4px;
+        text-decoration:none;
+        text-shadow:1px 1px 0px #ffffff;
+        float: right;
+        position: relative;
+        top: -22px;
+        right: -18px;
+
+        &:hover {
+             background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+             background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+             filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+             background-color:#dfdfdf;
+        }
+        &:active {
+             top:-21px;
+        }
+        &:visited {
+             color:#777;
+        }
+    }
+
+
+     h1 {
+        font-size: 1.1em;
+        margin: 0 0 10px;
+    }
+}
+
