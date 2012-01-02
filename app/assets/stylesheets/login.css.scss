@@ -1,14 +1,6 @@
 #login-box.popup,
 #signup-box.popup{
 
-    fieldset {
-        border:none;
-    }
-
-    form label {
-        display:block;
-    }
-
     form p,
     form label {
         color:#999;
@@ -25,13 +17,12 @@
         border-top:1px solid #000;
         display:block;
         color:#fff;
-        border-radius: 3px 3px 3px 3px;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
         font:13px Arial, Helvetica, sans-serif;
         padding:6px 6px 4px;
         margin-bottom: 6px;
         width:200px;
+
+        @include round-corners(3px);
 
         &:-moz-placeholder {
             color:#bbb;
