@@ -17,7 +17,8 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             'logout': 'logout',
             'signup': 'signup',
             'search/:query/targetLang/:lang': 'search',
-            'words/:word/targetLang/:lang':  'words'
+            'words/:word/targetLang/:lang':  'words',
+            'validation/:id/code/:code': 'validation'
         },
 
         initialize: function() {
@@ -110,6 +111,19 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         signup: function() {
             console.log('show signup dialog');
             signupDialog.show();
+        },
+
+        validation: function(id, code) {
+            $.ajax({url: '/user/'+id+'/validate/'+code,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                beforeSend: function( xhr ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                success: _.bind(console.log, "success"),
+                error: _.bind(console.log, "failure")
+            })
         }
     });
 

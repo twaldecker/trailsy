@@ -13,13 +13,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # Requesting a email validation with the appropriate code
   def validate_email
-    @user = User.find(params[:user])
+    @user = User.find(params[:id])
     if @user.check_verification(params[:code])
       render :json => {:message => :validation_success}
       #redirect_to('root_url');
     else
-      render :json => {:message => :validation_failed}
+      render :json => {:message => :validation_failed}, :status => :unprocessable_entity
     end
   end
 end
