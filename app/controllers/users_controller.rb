@@ -6,9 +6,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      #UserMailer.verification_mail(@user).deliver
+      UserMailer.verification_mail(@user).deliver
       render :json => {:message => :signed_up}
-      #TODO: email send here
     else
       render :json => {:message => :error}
     end
