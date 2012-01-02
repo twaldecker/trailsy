@@ -18,7 +18,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.check_verification(params[:code])
       render :json => {:message => :validation_success}
-      #redirect_to('root_url');
     else
       render :json => {:message => :validation_failed}, :status => :unprocessable_entity
     end

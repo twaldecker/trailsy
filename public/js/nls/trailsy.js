@@ -8,7 +8,8 @@ define({
         'email': 'Email',
         'password': 'Password',
         'signup': 'Sign up',
-        'add': 'Add'
+        'add': 'Add',
+        'forgotPassword': 'Forgot your Password?'
     },
     'de-de': true
 })
