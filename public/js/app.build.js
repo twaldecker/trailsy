@@ -3,15 +3,19 @@
     baseUrl: "js",
     dir: "../build",
     paths: {
-        "jquery": "vendor/require-jquery"
+        "jquery": "vendor/require-jquery",
+        "underscore": "vendor/underscore",
+        "backbone": "vendor/backbone",
+        "jqueryoffline": "vendor/jquery.offline"
     },
 
     optimize: "uglify",
-    optimizeCss: "standard",
+    optimizeCss: "standard.keepLines",
 
     modules: [
         {
-            name: "main"
+            name: "main",
+            exclude: ["jquery"]
         }
     ]
 })

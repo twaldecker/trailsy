@@ -1,12 +1,8 @@
 
 js/main.js
 ----------------
-js/vendor/require-jquery.js
-js/order.js
-js/vendor/underscore-min.js
-order!vendor/underscore-min
+js/vendor/underscore.js
 js/vendor/backbone.js
-order!vendor/backbone
 js/text.js
 text!templates/detailResult.html
 js/views/detailResult.js
@@ -28,8 +24,6 @@ js/views/searchResultList.js
 js/collections/detailWords.js
 js/router.js
 js/app.js
-order!app
-js/vendor/jquery.offline.js
-order!vendor/jquery.offline
 js/domReady.js
+js/vendor/jquery.offline.js
 js/main.js

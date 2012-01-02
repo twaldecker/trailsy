@@ -1,1 +1,0 @@
-define(["backbone","underscore"],function(a,b){var c=a.Model.extend({initialize:function(a,b){b||(b={}),this.bind("error",this.defaultErrorHandler),this.init&&this.init(a,b)},defaultErrorHandler:function(a,b){(b.status==401||b.status==403)&&AppRouter.navigate("login",!0)}});return c})
