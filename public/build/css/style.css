@@ -408,9 +408,8 @@ div.rating {
   
     #heading {
         font-size: 100px;
-        margin: 0;
-        position: relative;
-        top: 40px;
+        margin: 0px;
+        padding-top: 40px;
     }
     #searchInput {
         margin: 10px 10px 0px 10px;

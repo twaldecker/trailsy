@@ -56,9 +56,11 @@ class TranslationsController < ApplicationController
     filter_params(params)
     @translation = @word.addOrUpdateTranslation(params)
 
+
     if @translation.nil?
       render :json => {:message => 'errorCreating'}, :status => :not_acceptable
     else
+      self.addConnectionDetailsTo @translation
       render :json => @translation, :status => :created
     end
 

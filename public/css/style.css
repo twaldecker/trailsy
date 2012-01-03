@@ -497,7 +497,8 @@ div.rating {
   /* Style adjustments for viewports 480px and over go here */
     #heading {
         font-size: 100px;
-        margin: 40px 0px 0px 0px;
+        margin: 0px;
+        padding-top: 40px;
     }
 
     #searchInput {
