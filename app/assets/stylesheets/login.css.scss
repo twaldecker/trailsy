@@ -1,12 +1,7 @@
-#login-box.popup,
-#signup-box.popup{
-
-    form p,
+.popup
+{
     form label {
-        color:#999;
         font-size:11px;
-        line-height:18px;
-        width: 200px;
     }
 
     form input {
@@ -19,7 +14,7 @@
         color:#fff;
         font:13px Arial, Helvetica, sans-serif;
         padding:6px 6px 4px;
-        margin-bottom: 6px;
+        margin: 3px 0px 6px 0px;
         width:200px;
 
         @include round-corners(3px);

@@ -22,7 +22,7 @@ $background: #333;
     left: 50%;
     z-index: 2;
     text-shadow: none;
-    text-align: left;
+    color:#999;
 
     @include shadow;
     @include round-corners(3px);
@@ -67,9 +67,12 @@ $background: #333;
     }
 
 
-     h1 {
-        font-size: 1.1em;
+    h1 {
+        font-size: 1.4em;
         margin: 0 0 10px;
+    }
+    a {
+        color: inherit;
     }
     
     p {

@@ -243,8 +243,8 @@ nav {
     color: #d3d3d3;
     overflow:auto;
     
-    a, 
-    a:visited {
+    > a, 
+    > a:visited {
         float:right;
         font-size: 1.2em;   
         text-decoration: none;
@@ -315,7 +315,6 @@ section#searchResults {
 
 $border-type: 1px solid #789;
 
-/* TODO Anfang */
 ul {
     margin-left:auto;
     margin-right:auto;
@@ -334,17 +333,18 @@ li {
     border-top: $border-type;
 }
 
-li.searchResult .lang {
-    background-color: #d3d3d3;
-    padding: 1px 3px;
-    margin-right: 10px;
+ul#result{
+    margin:0px;
+    text-align: left;
+    li {
+        .lang {
+            background-color: #d3d3d3;
+            padding: 1px 3px;
+            margin-right: 10px;
+        }
+    }
 }
 
-li.searchResult span {
-    float: left;
-}
-
-/* TODO Ende */
 ul#translationList {
     text-align:left;
     li {
@@ -524,7 +524,7 @@ $arrow-hover: 10px solid blue;
         padding: 5px 0px 5px 5px;
     }
 
-    #searchResultList {
+    ul#result {
         margin: auto;
         width: 268px;
     }
