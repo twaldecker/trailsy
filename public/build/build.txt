@@ -26,5 +26,4 @@ js/collections/detailWords.js
 js/router.js
 js/app.js
 js/domReady.js
-js/vendor/jquery.offline.js
 js/main.js

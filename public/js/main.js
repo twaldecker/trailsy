@@ -1,6 +1,5 @@
 require.config({
     paths: {
-        jqueryoffline: 'vendor/jquery.offline',
         underscore: 'vendor/underscore',
         backbone: 'vendor/backbone'
     }
@@ -8,8 +7,8 @@ require.config({
 
 require(['jquery',
          'underscore',
-         'backbone','app','domReady', 'jqueryoffline'],
-    function($,_,Backbone,app, domReady, jqueryoffline){
+         'backbone','app','domReady'],
+    function($,_,Backbone,app, domReady){
         domReady(function() {
             app.init();
         });

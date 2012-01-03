@@ -5,8 +5,7 @@
     paths: {
         "jquery": "vendor/require-jquery",
         "underscore": "vendor/underscore",
-        "backbone": "vendor/backbone",
-        "jqueryoffline": "vendor/jquery.offline"
+        "backbone": "vendor/backbone"
     },
 
     optimize: "uglify",
