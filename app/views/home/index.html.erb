@@ -1,54 +1,56 @@
-<header>
-  <nav>
-    <% if current_user %>
-        <a href="#login" id="loginLink" class="greyButton hidden">Log in</a>
-        <a href="#logout" id="logoutLink" class="greyButton">Log out</a>
-        <a href="#signup" id="signupLink" class="greyButton hidden">Sign up</a>
-    <% else %>
-        <a href="#login" id="loginLink" class="greyButton">Log in</a>
-        <a href="#logout" id="logoutLink" class="greyButton hidden">Log out</a>
-        <a href="#signup" id="signupLink" class="greyButton">Sign up</a>
-    <% end %>
-  </nav>
-</header>
-<div id="main" role="main">
-  <h1 id="heading">
-    <span class="green">T</span>
-    <span class="yellow">r</span>
-    <span class="red">a</span>
-    <span class="blue">n</span>
-    <span class="orange">s</span>
-    <span class="blue">i</span>
-  </h1>
-	<section id="search">
-      <form action="words/search" method="get" onsubmit="return false;">
-        <label for="targetLang">To Language</label>
-        <select name="targetLang" id="targetLanguage">
-            <% @languages.each do |language| %>
-              <option value="<%= language.id %>"><%= language.code.upcase %></option>
-            <% end %>
-        </select>
-        <br />
-        <input  name="word" id="word" type="search" placeholder="Search" autocomplete="off" />
-      </form>
-        <ul id="result" class="hidden">
-          <% if !@words.nil? %>
-              <% @words.each do |word| %>
-                    <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
+<div id="container">
+    <header>
+      <nav>
+        <% if current_user %>
+            <a href="#login" id="loginLink" class="greyButton hidden">Log in</a>
+            <a href="#logout" id="logoutLink" class="greyButton">Log out</a>
+            <a href="#signup" id="signupLink" class="greyButton hidden">Sign up</a>
+        <% else %>
+            <a href="#login" id="loginLink" class="greyButton">Log in</a>
+            <a href="#logout" id="logoutLink" class="greyButton hidden">Log out</a>
+            <a href="#signup" id="signupLink" class="greyButton">Sign up</a>
+        <% end %>
+      </nav>
+    </header>
+    <div id="main" role="main">
+      <h1 id="heading">
+        <span class="green">T</span>
+        <span class="yellow">r</span>
+        <span class="red">a</span>
+        <span class="blue">n</span>
+        <span class="orange">s</span>
+        <span class="blue">i</span>
+      </h1>
+		<section id="searchResults">
+          <form action="words/search" method="get" onsubmit="return false;">
+            <label for="targetLang">To Language</label>
+            <select name="targetLang" id="targetLanguage">
+                <% @languages.each do |language| %>
+                  <option value="<%= language.id %>"><%= language.code.upcase %></option>
+                <% end %>
+            </select>
+            <br />
+            <input  name="word" id="searchInput" type='search' placeholder='Search' autocomplete="off" />
+          </form>
+            <ul id="searchResultList" class="hidden">
+              <% if !@words.nil? %>
+                  <% @words.each do |word| %>
+                        <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
+                  <% end %>
               <% end %>
-          <% end %>
-        </ul>
-	</section>
-    <section id="translations">
-        <ul id="translationList" class="hidden">
-            
-        </ul>
-        <!--
-            <input id="newTranslationText" type="text" placeholder="Enter new translation" />
-            <a href="#" id="addTranslation">Add</a>
-            -->
-	</section>
-</div>
-<footer>
+            </ul>
+		</section>
+        <section id="translations">
+            <ul id="translationList" class="hidden">
+                
+            </ul>
+            <!--
+                <input id="newTranslationText" type="text" placeholder="Enter new translation" />
+                <a href="#" id="addTranslation">Add</a>
+                -->
+		</section>
+    </div>
+    <footer>
 
-</footer>
+    </footer>
+  </div>

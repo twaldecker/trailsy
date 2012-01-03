@@ -1,15 +1,14 @@
-/*
- *= require_self
- */
+@import url('login.css');
+@import url('addWord.css');
 /*
  * HTML5 ✰ Boilerplate
  *
- * What follows is the result of much research on cross-browser styling.
+ * What follows is the result of much research on cross-browser styling. 
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  *
  * Detailed information about this CSS: h5bp.com/css
- *
+ * 
  * ==|== normalize ==========================================================
  */
 
@@ -39,16 +38,14 @@ body { margin: 0; font-size: 13px; line-height: 1.231; }
 
 body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 
-/*
+/* 
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection declarations have to be separate
  * Also: hot pink! (or customize the background color to match your design)
  */
 
-$selection-color: #00f;
-
-::-moz-selection { background: $selection-color; color: #fff; text-shadow: none; }
-::selection { background: $selection-color; color: #fff; text-shadow: none; }
+::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
 
 /* =============================================================================
@@ -114,13 +111,13 @@ nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0
 
 /*
  * 1. Improve image quality when scaled in IE7: h5bp.com/d
- * 2. Remove the gap between images and borders on image containers: h5bp.com/e
+ * 2. Remove the gap between images and borders on image containers: h5bp.com/e 
  */
 
 img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
 
 /*
- * Correct overflow not hidden in IE9
+ * Correct overflow not hidden in IE9 
  */
 
 svg:not(:root) { overflow: hidden; }
@@ -143,9 +140,9 @@ fieldset { border: 0; margin: 0; padding: 0; }
 /* Indicate that 'label' will shift focus to the associated form element */
 label { cursor: pointer; }
 
-/*
- * 1. Correct color not inheriting in IE6/7/8/9
- * 2. Correct alignment displayed oddly in IE6/7
+/* 
+ * 1. Correct color not inheriting in IE6/7/8/9 
+ * 2. Correct alignment displayed oddly in IE6/7 
  */
 
 legend { border: 0; *margin-left: -7px; padding: 0; }
@@ -186,14 +183,14 @@ input[type="checkbox"], input[type="radio"] { box-sizing: border-box; }
 input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
 input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
 
-/*
- * Remove inner padding and border in FF3/4: h5bp.com/l
+/* 
+ * Remove inner padding and border in FF3/4: h5bp.com/l 
  */
 
 button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
 
-/*
- * 1. Remove default vertical scrollbar in IE6/7/8/9
+/* 
+ * 1. Remove default vertical scrollbar in IE6/7/8/9 
  * 2. Allow only vertical resizing
  */
 
@@ -213,35 +210,115 @@ td { vertical-align: top; }
 
 
 /* ==|== primary styles =====================================================
-   Author:
+   Author: 
    ========================================================================== */
 
-@mixin shadow {
-  box-shadow: 0px 0px 20px #999; /* CSS3 */
-  -moz-box-shadow: 0px 0px 20px #999; /* Firefox */
-  -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
-}
-
-@mixin round-corners($radius) {
-  border-radius:$radius $radius $radius $radius;
-  -moz-border-radius: $radius; /* Firefox */
-  -webkit-border-radius: $radius; /* Safari, Chrome */
-}
-
-$border-type: 1px solid #789;
-
 body {
-    font-family: arial, helvetica, sans-serif;
 }
+
+header {
+    background-color: black;
+    color: #d3d3d3;
+    height: 34px;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+nav {
+    font-size: 18px;
+    padding: 5px;
+    float: right;
+    text-shadow: none;
+}
+
+nav a, nav a:visited {
+    text-decoration: none;
+    color: #d3d3d3;
+}
+
+#container {
+    text-align: center;
+    text-shadow: 2px 2px 2px lightGrey;
+    color: grey;
+}
+#main {
+    clear:right;
+}
+
+#searchBox {
+}
+
+
+input {
+    text-shadow: 2px 2px 2px lightGrey;
+    color: grey;
+}
+.greyButton {
+    -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+    background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+    background-color:#ededed;
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#777777;
+    font-family:arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:2px 8px;
+    text-decoration:none;
+    text-shadow:1px 1px 0px #ffffff;
+}.greyButton:hover {
+     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+     background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+     background-color:#dfdfdf;
+ }.greyButton:active {
+      position:relative;
+      top:1px;
+}.greyButton:visited {
+    color:#777;
+}
+
+
+.rating {
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.loading {
+    background-image: url("/images/ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-position: 90%;
+}
+
+#searchResults {
+    position: relative;
+    top: 15px;
+    height: 57px;
+}
+
+#translations {
+    margin-top: 40px;
+}
+
 
 ul {
     margin-left:auto;
     margin-right:auto;
     list-style: none;
     padding: 0px;
-    border-bottom: $border-type;
-    border-right: $border-type;
-    border-left: $border-type;
+    border-bottom: 1px solid #778899;
+    border-right: 1px solid #778899;
+    border-left: 1px solid #778899;
 }
 
 li {
@@ -249,21 +326,89 @@ li {
     margin-right:auto;
     padding: 5px 15px;
     overflow-x: hidden;
-    border-top: $border-type;
+    border-top: 1px solid #778899;
 }
 
-#main{
-    text-align: center;
-    text-shadow: 2px 2px 2px lightGrey;
-    color: grey;
+li.detailResult {
+    text-align: left;
 }
 
-@import "navigation.css.scss";
-@import "search.css.scss";
-@import "detail.css.scss";
-@import "popup.css.scss";
-@import "popupform.css.scss";
-@import "addWord.css.scss";
+li.searchResult .lang {
+    background-color: #d3d3d3;
+    padding: 1px 3px;
+    margin-right: 10px;
+}
+
+li.searchResult span {
+    float: left;
+}
+
+span.detailWord, span.detailExample {
+    padding: 3px;
+}
+span.detailWord {
+    margin-left: 15px;
+}
+
+div.rating {
+    padding-left: 5px;
+}
+
+.arrowUp {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid grey;
+    cursor: pointer;
+}
+
+.arrowDown {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid grey;
+    cursor: pointer;
+}
+
+.arrowUp.voted {
+    border-bottom: 10px solid orange;
+}
+.arrowDown.voted {
+    border-top: 10px solid orange;
+}
+
+.editIcon, .saveIcon {
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    color: blue;
+}
+
+[contentEditable="true"] {
+    border: 1px solid #add8e6;
+}
+
+.green {
+    color: green;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.orange {
+    color: orange;
+}
 
 
 /* ==|== non-semantic helper classes ========================================
@@ -286,17 +431,10 @@ li {
 /* Hide visually and from screenreaders, but maintain layout */
 .invisible { visibility: hidden; }
 
-/* Contain floats: h5bp.com/q */
+/* Contain floats: h5bp.com/q */ 
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
-
-/* Color classes */
-.green { color: green; }
-.yellow { color: yellow; }
-.blue { color: blue; }
-.red { color: red; }
-.orange { color: orange; }
 
 
 
@@ -308,15 +446,25 @@ li {
 
 /* für alle devices in landscape mode */
 @media all and (max-width: 480px) {
-    body {
-        font-size:16px;
+    #container {
+        width: 100%;
+        font-size: 16px;
     }
     #heading {
         display: none;
     }
 
-    input#word {
+    #searchResults {
+        position: relative;
+        top: 40px;
+    }
+
+
+
+
+    #searchInput {
         width: 90%;
+        font-size: 16px;
     }
 
     #translations {
@@ -352,13 +500,13 @@ li {
         margin: 40px 0px 0px 0px;
     }
 
-    input#word {
+    #searchInput {
         margin: 10px 10px 0px 10px;
         width: 258px;
         padding: 5px 0px 5px 5px;
     }
 
-    ul#result {
+    #searchResultList {
         margin: auto;
         width: 268px;
     }
@@ -374,6 +522,13 @@ li {
     #translationList {
         width: 480px;
     }
+
+
+    .rateUp:hover,
+    .rateDown:hover {
+        background-color: LightBlue;
+    }
+
 
     li.selected {
         background-color: #add8e6;
@@ -392,7 +547,7 @@ li {
    Print styles.
    Inlined to avoid required HTTP connection: h5bp.com/r
    ========================================================================== */
-
+ 
 @media print {
   * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:visited { text-decoration: underline; }
@@ -407,3 +562,4 @@ li {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+

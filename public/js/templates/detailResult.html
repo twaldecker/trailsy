@@ -1,11 +1,9 @@
-<div class="rating">
-    <div class="rateUp arrow up"> </div>
-    <div class="count"><%= rating %></div>
-    <div class="rateDown arrow down"></div>
+<div class="rateUp arrowUp"> </div>
+<div>
+    <span class="rating"><%= rating %></span>
+    <span class="detailWord"><%= word %></span>
+    <span class="detailExample"><%= example %></span>
+    <span class="editIcon">&#009998; </span>
+    <span class="saveIcon hidden">&#010003;</span>
 </div>
-<div class="word">
-<h2><%= word %></h2>
-<p><%= example %></p>
-</div>
-<span class="edit icon">&#009998; </span>
-<span class="save icon hidden">&#010003;</span>
+<div class="rateDown arrowDown"></div>

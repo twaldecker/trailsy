@@ -17,7 +17,7 @@ define(['jquery',
              * @param bool showLanguages
              */
             applyTemplate: function() {
-                var word = $('input#word').val();
+                var word = $('#searchInput').val();
                 var addWordModel = {linkText: i18n.addTranslationFor + ' ' + word,
                     word: i18n.word, example: i18n.example, add: i18n.add,
                     sentence: i18n.sentence};
