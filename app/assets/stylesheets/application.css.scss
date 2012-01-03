@@ -229,9 +229,7 @@ td { vertical-align: top; }
   -webkit-border-radius: $radius; /* Safari, Chrome */
 }
 
-@import "popup.css.scss";
-@import "popupform.css.scss";
-@import "addWord.css.scss";
+$border-type: 1px solid #789;
 
 body {
     font-family: arial, helvetica, sans-serif;
@@ -255,150 +253,18 @@ li {
     border-top: $border-type;
 }
 
-@import "navigation.css.scss";
-
-
-
 #main{
     text-align: center;
     text-shadow: 2px 2px 2px lightGrey;
     color: grey;
 }
 
-input#search {
-    text-shadow: 2px 2px 2px lightGrey;
-    color: grey;
-}
-
-.loading {
-    background-image: url("/images/ajax-loader.gif");
-    background-repeat: no-repeat;
-    background-position: 90%;
-}
-
-section#searchResults {
-    position: relative;
-    top: 15px;
-    height: 57px;
-}
-
-#translations {
-    margin-top: 40px;
-}
-
-$border-type: 1px solid #789;
-
-
-
-ul#result{
-    margin:0px;
-    text-align: left;
-    li {
-        .lang {
-            background-color: #d3d3d3;
-            padding: 1px 3px;
-            margin-right: 10px;
-        }
-    }
-}
-
-ul#translationList {
-    text-align:left;
-    li {
-        .word {
-            float:left;
-            margin-left:10px;
-        }
-        
-        p {
-            margin: 0px;
-        }
-        h2{
-            font-size: 1.2em;
-            margin-bottom: 0px;
-        }
-        .icon {
-            float:right;
-            margin-top:20px;
-        }
-    }
-}
-div.rating {
-    float:left;
-    font-size: 20px;
-    font-weight: bold;
-}
-div.count {
-    text-align: center;
-}
-
-.arrow {
-    width: 0;
-    height: 0;
-    cursor: pointer;
-}
-
-$arrow-helper: 10px solid transparent;
-$arrow: 10px solid grey;
-$arrow-voted: 10px solid orange;
-$arrow-hover: 10px solid blue;
-
-
-.arrow.up {
-    border-left: $arrow-helper;
-    border-right: $arrow-helper;
-    border-bottom: $arrow;
-    &:hover {
-        border-bottom: $arrow-hover;
-    }
-}
-
-.arrow.down {
-    border-left: $arrow-helper;
-    border-right: $arrow-helper;
-    border-top: $arrow;
-    &:hover {
-        border-top: $arrow-hover;
-    }
-}
-
-.arrow.up.voted {
-    border-bottom: $arrow-voted;
-}
-.arrow.down.voted {
-    border-top: $arrow-voted;
-}
-
-.icon {
-    cursor: pointer;
-    float: right;
-    font-size: 20px;
-    color: blue;
-}
-
-[contentEditable="true"] {
-    border: 1px solid #add8e6;
-}
-
-.green {
-    color: green;
-}
-
-.yellow {
-    color: yellow;
-}
-
-.blue {
-    color: blue;
-}
-
-.red {
-    color: red;
-}
-
-.orange {
-    color: orange;
-}
+@import "navigation.css.scss";
+@import "search.css.scss";
+@import "detail.css.scss";
+@import "popup.css.scss";
+@import "popupform.css.scss";
+@import "addWord.css.scss";
 
 
 /* ==|== non-semantic helper classes ========================================
@@ -425,6 +291,13 @@ $arrow-hover: 10px solid blue;
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+
+/* Color classes */
+.green { color: green; }
+.yellow { color: yellow; }
+.blue { color: blue; }
+.red { color: red; }
+.orange { color: orange; }
 
 
 

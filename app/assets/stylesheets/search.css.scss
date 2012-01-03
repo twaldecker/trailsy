@@ -1,0 +1,32 @@
+input#search {
+    text-shadow: 2px 2px 2px lightGrey;
+    color: grey;
+}
+
+.loading {
+    background-image: url("/images/ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-position: 90%;
+}
+
+section#searchResults {
+    position: relative;
+    top: 15px;
+    height: 57px;
+}
+
+#translations {
+    margin-top: 40px;
+}
+
+ul#result{
+    margin:0px;
+    text-align: left;
+    li {
+        .lang {
+            background-color: #d3d3d3;
+            padding: 1px 3px;
+            margin-right: 10px;
+        }
+    }
+}
