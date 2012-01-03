@@ -5,7 +5,7 @@ function($,_,Backbone, searchResultTemplate){
      */
     var searchResultView = Backbone.View.extend({
         tagName: "li",
-        className: "searchResult",
+        /*className: "searchResult",*/
 
         initialize: function() {
             _.bindAll(this, 'render', 'unrender');

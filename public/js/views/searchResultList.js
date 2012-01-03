@@ -11,24 +11,25 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
      * view for search result list
      */
     var searchResultListView = Backbone.View.extend({
-        el: $("#searchResults"),
+        el: $("#search"),
+        input: $("input#word"),
 
         collection: null,
         targetLang: '1',
         searchTimeout: null,
 
         events : {
-            "keydown #searchInput":   "keyDown",
-            "keyup #searchInput":     "keyUp",
-            "search #searchInput":    "search",
-            "blur #searchInput":      "blur",
-            "focus #searchInput":     "focus",
+            "keydown input#word":   "keyDown",
+            "keyup input#word":     "keyUp",
+            "search input#word":    "search",
+            "blur input#word":      "blur",
+            "focus input#word":     "focus",
             "change #targetLanguage": "changeLang",
             "mousedown #addWord":     "onClickAdd"
         },
 
         initialize: function() {
-            this.items_element = $("#searchResultList");
+            this.items_element = $("ul#result");
             _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
                             'appendItem', 'focus', 'blur','keyDown', 'keyUp',
                             'delayedSearch', 'setTargetLang', 'onClickAdd');
@@ -85,8 +86,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
             if (this.searchTimeout) {
                 clearTimeout(this.searchTimeout);
             }
-            var input = $("#searchInput");
-            var searchText = input.val();
+            var searchText = this.input.val();
             if (searchText.length < 3) {
                 this.blur();
                 AppRouter.navigate('home', true);
@@ -110,7 +110,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
                 if (em.length) {
                     var model_id = em.attr('data-id');
                     AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10)+'/targetLang/'+this.targetLang, true);
-                    $("#searchInput").blur();
+                    this.input.blur();
                     return false;
                 }
                 this.search();
@@ -150,7 +150,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         },
 
         appendAddWordLink: function() {
-            var word = $('#searchInput').val();
+            var word = this.input.val();
             this.el.append('<a href="#" id="addWord">' + i18n.add +' '+ i18n.word +' '+ word +'</a>');
         },
 
@@ -161,8 +161,8 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         },
 
         appendItem: function(item) {
-            var view = new searchResultView({model: item}),
-                el = view.render().el;
+            var view = new searchResultView({model: item});
+            el = view.render().el;
             var that = this;
             $(el).on('mousedown', function(){
                 AppRouter.navigate(that.collection.url+'/'+item.get('id')+'/targetLang/'+that.targetLang, true);
@@ -173,7 +173,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         render: function () {
             this.unrender();
             this.items_element.removeClass('hidden');
-            $("#searchInput").focus();
+            this.input.focus();
             if (0 === this.collection.length) {
                 this.appendAddWordLink();
             }
