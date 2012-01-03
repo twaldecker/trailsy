@@ -19,6 +19,7 @@ js/views/loginDialog.js
 text!templates/signup.html
 js/views/signupDialog.js
 js/models/word.js
+js/collections/abstractWords.js
 js/collections/words.js
 js/views/searchResultList.js
 js/collections/detailWords.js
