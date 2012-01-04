@@ -110,8 +110,8 @@ define(['jquery',
             //submit form
             submitForm: function() {
 
-                var newWord = {word:        $('#word', this.addWordHtml).val(),
-                               example:     $('#example', this.addWordHtml).val(),
+                var newWord = {word:        $('#addword_word', this.addWordHtml).val(),
+                               example:     $('#addword_example', this.addWordHtml).val(),
                                language_id: this.getLanguageId()};
                 var options = {success: _.bind(this.saveSuccess, this),
                                error:   _.bind(this.saveFailed, this)};

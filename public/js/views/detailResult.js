@@ -37,20 +37,20 @@ function($,Backbone,_,detailResultTemplate){
 
         editWord: function() {
             if (true === AppRouter.getLoginState()) {
-                $('.detailWord', this.model.el).attr('contentEditable', true);
-                $('.detailWord', this.model.el).focus();
-                $('.detailExample', this.model.el).attr('contentEditable', true);
-                $('.editIcon', this.model.el).addClass('hidden');
-                $('.saveIcon', this.model.el).removeClass('hidden');
-                $('.saveIcon', this.model.el).on('click', _.bind(this.saveWord, this));
+                $('.word h2', this.model.el).attr('contentEditable', true);
+                $('.word h2', this.model.el).focus();
+                $('.word p', this.model.el).attr('contentEditable', true);
+                $('.edit.icon', this.model.el).addClass('hidden');
+                $('.save.icon', this.model.el).removeClass('hidden');
+                $('.save.icon', this.model.el).on('click', _.bind(this.saveWord, this));
             } else  {
                 AppRouter.navigate('login', true);
             }
         },
 
         saveWord: function() {
-            this.model.save({word:    $('.detailWord', this.model.el).text(),
-                             example: $('.detailExample', this.model.el).text()});
+            this.model.save({word:    $('.word h2', this.model.el).text(),
+                             example: $('.word p', this.model.el).text()});
         },
 
         unrender: function() {
@@ -75,8 +75,8 @@ function($,Backbone,_,detailResultTemplate){
             }
             $('.rateUp', el).on('click', _.bind(this.onClickRating, this, 1));
             $('.rateDown', el).on('click',  _.bind(this.onClickRating, this, -1));
-            $('.editIcon', el).on('click', _.bind(this.editWord, this));
-            $('.editIcon', el).removeClass('hidden');
+            $('.edit.icon', el).on('click', _.bind(this.editWord, this));
+            $('.edit.icon', el).removeClass('hidden');
             this.model.el = el;
             return this;
         }
