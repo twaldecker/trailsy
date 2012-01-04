@@ -18,9 +18,16 @@ define(['jquery',
              */
             applyTemplate: function() {
                 var word = $('input#word').val();
-                var addWordModel = {linkText: i18n.addTranslationFor + ' ' + word,
-                    word: i18n.word, example: i18n.example, add: i18n.add,
-                    sentence: i18n.sentence};
+                var addWordModel = {
+                    addWordHeading: i18n.addTranslationFor + ' ' + word,
+                    word: i18n.word, 
+                    example: i18n.example, 
+                    add: i18n.add,
+                    sentence: i18n.sentence    
+                };
+                if('addWord' === this.dialogType) {
+                    addWordModel.addWordHeading = i18n.addWord;
+                }
                 var template = _.template(html);
                 this.addWordHtml = $(template(addWordModel));
                 if ('addWord' === this.dialogType) {

@@ -3,6 +3,7 @@ define({
         'login': 'Log in',
         'word' : 'Word',
         'addTranslationFor': 'Add a Translation for',
+        'addWord': 'Add a Word',
         'example': 'Example',
         'sentence': 'Sentence',
         'email': 'Email',
