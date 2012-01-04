@@ -67,8 +67,12 @@ define(['jquery',
                     'margin-top' : -popMargTop,
                     'margin-left' : -popMargLeft
                 });
-
-
+                //Set the focus in a form element. if the user adds a word, the word is already set through the search input and so the focus goes to the example sentence.
+                if('addWord' === this.dialogType) {
+                    $('#addword_example', this.addWordHtml).focus();
+                } else {
+                    $('#addword_word', this.addWordHtml).focus();
+                }
                 $('#addWord-box .closeButton').on('click', _.bind(this.hide, this));
                 $('#addWord-box form').on('submit', _.bind(this.submitForm, this));
             },
