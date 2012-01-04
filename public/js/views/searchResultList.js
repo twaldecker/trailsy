@@ -86,8 +86,8 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
                 AppRouter.navigate('home', true);
                 return true;
             }
-            AppRouter.navigate('search/'+searchText+'/fromLang/'+
-                                $('#sourceLanguage').val()+'/targetLang/'+
+            AppRouter.navigate('search/'+searchText+'/from/'+
+                                $('#sourceLanguage').val()+'/to/'+
                                 $('#targetLanguage').val(), true);
         },
 

@@ -16,7 +16,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             'login': 'login',
             'logout': 'logout',
             'signup': 'signup',
-            'search/:query/fromLang/:fromLang/targetLang/:toLang': 'search',
+            'search/:query/from/:fromLang/to/:toLang': 'search',
             'words/:word/targetLang/:lang':  'words',
             'validation/:id/code/:code': 'validation'
         },
