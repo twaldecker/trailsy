@@ -26,8 +26,8 @@ define(['jquery',
                 if ('addWord' === this.dialogType) {
                     var targetLang = $("#targetLanguage").clone();
                     targetLang.attr('id', 'sourceLanguage');
-                    $('#example',this.addWordHtml).after(targetLang);
-                    $('#word', this.addWordHtml).val(word);
+                    $('#addword_example',this.addWordHtml).after(targetLang);
+                    $('#addword_word', this.addWordHtml).val(word);
                 }
             },
 
