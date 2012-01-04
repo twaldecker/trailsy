@@ -171,14 +171,16 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
 
         render: function () {
             this.unrender();
-            this.items_element.removeClass('hidden');
+
             $("#searchInput").focus();
             if (0 === this.collection.length) {
                 this.appendAddWordLink();
+                return;
             }
             this.collection.each(function(item){ // in case collection is not empty
                 this.appendItem(item);
             }, this);
+            this.items_element.removeClass('hidden');
 
         }
     });
