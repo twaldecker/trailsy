@@ -464,11 +464,9 @@ div.rating {
         top: 40px;
     }
 
-
-
-
     #searchInput {
         width: 90%;
+        margin-top: 10px;
         font-size: 16px;
     }
 
