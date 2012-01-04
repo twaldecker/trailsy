@@ -16,7 +16,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             'login': 'login',
             'logout': 'logout',
             'signup': 'signup',
-            'search/:query/targetLang/:lang': 'search',
+            'search/:query/fromLang/:fromLang/targetLang/:toLang': 'search',
             'words/:word/targetLang/:lang':  'words',
             'validation/:id/code/:code': 'validation'
         },
@@ -73,9 +73,9 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             input.val(text);
         },
 
-        search: function(query, targetLang) {
+        search: function(query, fromLang, toLang) {
             $("#searchInput").addClass('loading');
-            words.fetch({data: jQuery.param({word: query, lang: targetLang}),
+            words.fetch({data: jQuery.param({word: query, fromLang: fromLang, toLang: toLang}),
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();
@@ -83,7 +83,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                             },
                          error: function() {$("#searchInput").removeClass('loading');}});
             this.setSearchText(query);
-            this.setTargetLangValue(targetLang);
+            this.setTargetLangValue(toLang);
         },
 
         login: function() {

@@ -52,7 +52,6 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         changeLang: function() {
             this.targetLang = $("#targetLanguage").val();
             this.search();
-            console.log('selected lang: ' + this.targetLang);
         },
 
         focus: function() {
@@ -92,7 +91,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
                 AppRouter.navigate('home', true);
                 return true;
             }
-            AppRouter.navigate('search/'+searchText+'/targetLang/'+this.targetLang, true);
+            AppRouter.navigate('search/'+searchText+'/fromLang/'+$("#sourceLanguage").val()+'/targetLang/'+this.targetLang, true);
         },
 
         keyDown: function(e) {
