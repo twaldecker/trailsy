@@ -23,13 +23,13 @@
       </h1>
 		<section id="searchResults">
           <form action="words/search" method="get" onsubmit="return false;">
-            <label for="sourceLang">From:</label>
+
             <select name="sourceLang" id="sourceLanguage">
               <% @languages.each do |language| %>
                   <option value="<%= language.id %>"><%= language.language %></option>
               <% end %>
             </select>
-            <label for="targetLang">To</label>
+            &#8658;
             <select name="targetLang" id="targetLanguage">
                 <% @languages.each do |language| %>
                   <option value="<%= language.id %>"><%= language.language %></option>
@@ -48,12 +48,7 @@
 		</section>
         <section id="translations">
             <ul id="translationList" class="hidden">
-                
             </ul>
-            <!--
-                <input id="newTranslationText" type="text" placeholder="Enter new translation" />
-                <a href="#" id="addTranslation">Add</a>
-                -->
 		</section>
     </div>
     <footer>
