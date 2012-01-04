@@ -62,10 +62,14 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             this.setTargetLangValue(targetLang);
         },
 
+
+        setFromLangValue: function(fromLang) {
+            $("#sourceLanguage").val(fromLang);
+        },
+
         setTargetLangValue: function(targetLang) {
             var options = $("#targetLanguage");
             options.val(targetLang);
-            searchResultListView.setTargetLang(targetLang);
         },
 
         setSearchText: function(text) {
@@ -81,8 +85,10 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                              searchResultListView.render();
                              $("#searchInput").removeClass('loading');
                             },
-                         error: function() {$("#searchInput").removeClass('loading');}});
+                         error: function() {$("#searchInput").removeClass('loading');}
+            });
             this.setSearchText(query);
+            this.setFromLangValue(fromLang);
             this.setTargetLangValue(toLang);
         },
 

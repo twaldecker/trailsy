@@ -14,7 +14,6 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         el: $("#searchResults"),
 
         collection: null,
-        targetLang: '1',
         searchTimeout: null,
 
         events : {
@@ -23,7 +22,7 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
             "search #searchInput":    "search",
             "blur #searchInput":      "blur",
             "focus #searchInput":     "focus",
-            "change #targetLanguage": "changeLang",
+            "change #sourceLanguage, #targetLanguage": "changeLang",
             "mousedown #addWord":     "onClickAdd"
         },
 
@@ -31,15 +30,12 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
             this.items_element = $("#searchResultList");
             _.bindAll(this, 'unrender', 'render', 'search', 'changeLang',
                             'appendItem', 'focus', 'blur','keyDown', 'keyUp',
-                            'delayedSearch', 'setTargetLang', 'onClickAdd');
+                            'delayedSearch', 'onClickAdd');
             this.collection = words;
             this.collection.bind('refresh', this.render);
             this.collection.bind('add', this.render);
         },
 
-        setTargetLang: function(targetLang) {
-            this.targetLang = targetLang;
-        },
 
         onClickAdd: function(e) {
             e.preventDefault();
@@ -50,7 +46,6 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         },
 
         changeLang: function() {
-            this.targetLang = $("#targetLanguage").val();
             this.search();
         },
 
@@ -84,14 +79,16 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
             if (this.searchTimeout) {
                 clearTimeout(this.searchTimeout);
             }
-            var input = $("#searchInput");
+            var input = $('#searchInput');
             var searchText = input.val();
             if (searchText.length < 3) {
                 this.blur();
                 AppRouter.navigate('home', true);
                 return true;
             }
-            AppRouter.navigate('search/'+searchText+'/fromLang/'+$("#sourceLanguage").val()+'/targetLang/'+this.targetLang, true);
+            AppRouter.navigate('search/'+searchText+'/fromLang/'+
+                                $('#sourceLanguage').val()+'/targetLang/'+
+                                $('#targetLanguage').val(), true);
         },
 
         keyDown: function(e) {
@@ -108,7 +105,8 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
                 var em = this.items_element.children('li.selected');
                 if (em.length) {
                     var model_id = em.attr('data-id');
-                    AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10)+'/targetLang/'+this.targetLang, true);
+                    AppRouter.navigate(this.collection.url+'/'+parseInt(model_id,10)+'/targetLang/'+
+                                       $('#targetLanguage').val(), true);
                     $("#searchInput").blur();
                     return false;
                 }
@@ -164,7 +162,8 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
                 el = view.render().el;
             var that = this;
             $(el).on('mousedown', function(){
-                AppRouter.navigate(that.collection.url+'/'+item.get('id')+'/targetLang/'+that.targetLang, true);
+                AppRouter.navigate(that.collection.url+'/'+item.get('id')+'/targetLang/'+
+                                   $('#targetLanguage').val(), true);
             });
             this.items_element.append(el);
         },
