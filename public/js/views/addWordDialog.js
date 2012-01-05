@@ -120,7 +120,7 @@ define(['jquery',
 
                 var newWord = {word:        $('#addword_word', this.addWordHtml).val(),
                                example:     $('#addword_example', this.addWordHtml).val(),
-                               language_id: this.getLanguageId()};
+                               language_id: $('#addword_language', this.addWordHtml).val()};
                 var options = {success: _.bind(this.saveSuccess, this),
                                error:   _.bind(this.saveFailed, this)};
 
