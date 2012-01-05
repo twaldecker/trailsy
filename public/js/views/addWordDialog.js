@@ -51,8 +51,6 @@ define(['jquery',
              * @param bool showLanguages
              */
             show: function() {
-
-
                 this.applyTemplate();
                 this.appendDiv();
 

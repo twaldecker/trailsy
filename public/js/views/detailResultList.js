@@ -15,7 +15,6 @@ function($,  _, Backbone, detailResultView, addWordDialog, i18n){
 
         events : {
             "click #addWord": "onClickAdd"
-
         },
 
         initialize: function() {
