@@ -1,5 +1,9 @@
 #search {
   margin: 20px 0px;
+  a#addWord {
+      position: relative;
+      top: 10px;
+  }
 }
 
 input#word {

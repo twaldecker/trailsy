@@ -11,7 +11,11 @@ define({
         'password': 'Password',
         'signup': 'Sign up',
         'add': 'Add',
-        'forgotPassword': 'Forgot your Password?'
+        'forgotPassword': 'Forgot your Password ?',
+        'notMember': 'Not a Member ? Create Account now!',
+        'confirmPassword': 'Confirm your Password',
+        'passwordConfirmation': 'Password confirmation',
+        'createAccount': 'Create a new Account'
     },
     'de-de': true
 })

@@ -1,10 +1,14 @@
-define(['jquery', 'underscore', 'text!templates/signup.html'],
-function($, _, html) {
+define(['jquery',
+        'underscore',
+        'text!templates/signup.html',
+        'i18n!nls/trailsy'],
+function($, _, html, i18n) {
     var signupDialog = {
         signupHtml: null,
 
         appendDiv: function() {
-            this.signupHtml = $(html);
+            var template = _.template(html);
+            this.signupHtml = $(template(i18n));
             $('nav').append(this.signupHtml);
         },
 
