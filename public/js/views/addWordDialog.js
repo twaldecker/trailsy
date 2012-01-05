@@ -35,6 +35,7 @@ define(['jquery',
                     var label = $('<label for="sourceLanguage">'+i18n.lang+'</label>');
                     $('#addword_example',this.addWordHtml).after(label);
                     var langSelect = $("#sourceLanguage").clone();
+                    $('[value="1"]', langSelect).remove();
                     langSelect.attr('id', 'addword_language');
                     label.after(langSelect);
                     
