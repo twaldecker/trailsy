@@ -13,8 +13,7 @@ define(['jquery',
 
 
             /**
-             *
-             * @param bool showLanguages
+             * This function handles the rendering of the template.
              */
             applyTemplate: function() {
                 var word = $('input#word').val();
@@ -31,9 +30,16 @@ define(['jquery',
                 var template = _.template(html);
                 this.addWordHtml = $(template(addWordModel));
                 if ('addWord' === this.dialogType) {
-                    var targetLang = $("#targetLanguage").clone();
-                    targetLang.attr('id', 'sourceLanguage');
-                    $('#addword_example',this.addWordHtml).after(targetLang);
+                    /* If dialog type is addWord, then: */
+                    /* add a language selectbox and a label */
+                    var label = $('<label for="sourceLanguage">'+i18n.lang+'</label>');
+                    $('#addword_example',this.addWordHtml).after(label);
+                    var langSelect = $("#sourceLanguage").clone();
+                    langSelect.attr('id', 'addword_language');
+                    label.after(langSelect);
+                    
+                    /*copy the source language and the word from the main form */
+                    langSelect.val($("#sourceLanguage").val());
                     $('#addword_word', this.addWordHtml).val(word);
                 }
             },

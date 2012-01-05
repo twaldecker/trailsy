@@ -6,6 +6,7 @@ define({
         'addWord': 'Add a Word',
         'example': 'Example',
         'sentence': 'Sentence',
+        'lang': 'Language',
         'email': 'Email',
         'password': 'Password',
         'signup': 'Sign up',
