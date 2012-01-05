@@ -21,34 +21,34 @@
     <span class="blue">i</span>
   </h1>
 	<section id="search">
-      <form action="words/search" method="get" onsubmit="return false;">
-        <label for="targetLang">To Language</label>
-        <select name="targetLang" id="targetLanguage">
-            <% @languages.each do |language| %>
-              <option value="<%= language.id %>"><%= language.code.upcase %></option>
-            <% end %>
-        </select>
-        <br />
-        <input  name="word" id="word" type="search" placeholder="Search" autocomplete="off" />
-      </form>
-        <ul id="result" class="hidden">
-          <% if !@words.nil? %>
-              <% @words.each do |word| %>
-                    <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
-              <% end %>
-          <% end %>
-        </ul>
+    <form action="words/search" method="get" onsubmit="return false;">
+      <select name="sourceLang" id="sourceLanguage">
+        <% @languages.each do |language| %>
+          <option value="<%= language.id %>"><%= language.language %></option>
+        <% end %>
+      </select>
+      &#8658;        
+      
+      <select name="targetLang" id="targetLanguage">
+        <% @languages.each do |language| %>
+          <option value="<%= language.id %>"><%= language.language %></option>
+        <% end %>
+      </select>
+      <br />
+      <input  name="word" id="word" type="search" placeholder="Search" autocomplete="off" />
+    </form>
+    <ul id="result" class="hidden">
+      <% if !@words.nil? %>
+        <% @words.each do |word| %>
+          <li class="searchResult"><%= word.word %> - <%= word.example%> <%= link_to 'Show', word %></li>
+        <% end %>
+      <% end %>
+    </ul>
 	</section>
-    <section id="translations">
-        <ul id="translationList" class="hidden">
-            
-        </ul>
-        <!--
-            <input id="newTranslationText" type="text" placeholder="Enter new translation" />
-            <a href="#" id="addTranslation">Add</a>
-            -->
+  <section id="translations">
+    <ul id="translationList" class="hidden">
+    </ul>
 	</section>
 </div>
 <footer>
-
 </footer>

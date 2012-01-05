@@ -25,5 +25,5 @@ screen.updateWord({:translations => [
                          :language_id => 4},
                        { :word        => 'Bildschirm',
                          :example     => 'Der Bildschirm hat eine gute Auflösung',
-                         :language_id => 23}
+                         :language_id => 3}
                       ]})

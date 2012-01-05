@@ -180,7 +180,6 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
                 this.appendItem(item);
             }, this);
             this.items_element.removeClass('hidden');
-
         }
     });
     return new searchResultListView;
