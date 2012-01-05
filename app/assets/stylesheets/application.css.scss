@@ -319,8 +319,8 @@ li {
         width: 90%;
     }
 
-    #translations {
-        margin-top: 50px;
+    ul#result {
+      margin-top: 10px;
     }
 
     ul {
@@ -330,14 +330,14 @@ li {
 
     .arrowUp,
     .arrowDown,
-    .rating {
+    .rating,
+    li.searchResult .word,
+    li.searchResult .lang {
         zoom: 2.0;
     }
 
-    li.searchResult .word,
-    li.searchResult .lang
-    {
-        zoom: 2.0;
+    li.detailResult .word {
+      width: 75%;
     }
 }
 
@@ -352,11 +352,7 @@ li {
         margin: 40px 0px 0px 0px;
     }
 
-    input#word {
-        margin: 10px 10px 0px 10px;
-        width: 258px;
-        padding: 5px 0px 5px 5px;
-    }
+
 
     ul#result {
         margin: auto;
