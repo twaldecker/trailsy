@@ -24,7 +24,7 @@ $background: #333;
     text-shadow: none;
     color:#999;
 
-    @include shadow;
+    @include shadow(#999);
     @include round-corners(3px);
 
     .closeButton {
@@ -33,7 +33,7 @@ $background: #333;
         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
         background-color:#ededed;
         
-        @include shadow;
+        @include shadow(#999);
         @include round-corners(42px);
         
         border:2px solid #dcdcdc;

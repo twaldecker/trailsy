@@ -216,16 +216,22 @@ td { vertical-align: top; }
    Author:
    ========================================================================== */
 
-@mixin shadow {
-  box-shadow: 0px 0px 20px #999; /* CSS3 */
-  -moz-box-shadow: 0px 0px 20px #999; /* Firefox */
-  -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
+@mixin shadow($color) {
+  box-shadow: 0px 0px 20px $color; /* CSS3 */
+  -moz-box-shadow: 0px 0px 20px $color; /* Firefox */
+  -webkit-box-shadow: 0px 0px 20px $color; /* Safari, Chrome */
 }
 
 @mixin round-corners($radius) {
   border-radius:$radius $radius $radius $radius;
   -moz-border-radius: $radius; /* Firefox */
   -webkit-border-radius: $radius; /* Safari, Chrome */
+}
+
+@mixin reflection {
+  -webkit-box-reflect:below -50px
+  -webkit-gradient(linear, left top, left bottom, from(transparent),
+                              color-stop(0.5, transparent), to(white));
 }
 
 $border-type: 1px solid #789;
@@ -349,7 +355,10 @@ li {
   /* Style adjustments for viewports 480px and over go here */
     #heading {
         font-size: 100px;
-        margin: 40px 0px 0px 0px;
+        margin: 0;
+        -webkit-text-stroke-color: grey;
+        -webkit-text-stroke-width: 2px;
+        @include reflection;
     }
 
 
