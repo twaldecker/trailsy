@@ -17,7 +17,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             'login': 'login',
             'logout': 'logout',
             'signup': 'signup',
-            'search/:query/targetLang/:lang': 'search',
+            'search/:query/from/:fromLang/to/:toLang': 'search',
             'words/:word/targetLang/:lang':  'words',
             'validation/:id/code/:code': 'validation'
         },
@@ -63,27 +63,33 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             this.setTargetLangValue(targetLang);
         },
 
+
+        setFromLangValue: function(fromLang) {
+            $("#sourceLanguage").val(fromLang);
+        },
+
         setTargetLangValue: function(targetLang) {
             var options = $("#targetLanguage");
             options.val(targetLang);
-            searchResultListView.setTargetLang(targetLang);
         },
 
         setSearchText: function(text) {
             this.input.val(text);
         },
 
-        search: function(query, targetLang) {
+        search: function(query, fromLang, toLang) {
             this.input.addClass('loading');
-            words.fetch({data: jQuery.param({word: query, lang: targetLang}),
+            words.fetch({data: jQuery.param({word: query, fromLang: fromLang,
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();
                              $("input#word").removeClass('loading');
                             },
-                         error: function() {$("input#word").removeClass('loading');}});
+                         error: function() {$("input#word").removeClass('loading');}
+            });
             this.setSearchText(query);
-            this.setTargetLangValue(targetLang);
+            this.setFromLangValue(fromLang)
+            this.setTargetLangValue(toLang);
         },
 
         login: function() {

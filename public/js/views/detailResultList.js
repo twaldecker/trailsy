@@ -65,7 +65,7 @@ function($,  _, Backbone, detailResultView, addWordDialog, i18n){
             this.items_element.removeClass('hidden');
 
             this.collection.each(function(item){ // in case collection is not empty
-                if (item.get('language_id') == this.targetLang)
+                if (item.get('language_id') == this.targetLang || this.targetLang == 1)
                     this.appendItem(item);
             }, this);
 

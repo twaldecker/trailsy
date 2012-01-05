@@ -8,21 +8,22 @@
 
 #please run rake db:reset
 #rake db:seed will duplicate the words
-langs   = Language.create([{:code => 'en', :language => 'English'},
+langs   = Language.create([{:code => 'all', :language => 'All'},
+                           {:code => 'en', :language => 'English'},
                            {:code => 'de', :language => 'Deutsch'},
                            {:code => 'mk', :language => 'Makedonski'}])
 
 screen = Word.create({   :word        => 'Screen',
                          :example     => 'The screen is nice',
-                         :language_id => 1})
+                         :language_id => 2})
 screen.updateWord({:translations => [
                       {  :word        => 'Monitor',
                          :example     => 'Der Monitor hat eine gute Auflösung',
-                         :language_id => 2},
+                         :language_id => 3},
                        { :word        => 'Ekran',
                          :example     => 'Ekranot e mnogu dobar',
-                         :language_id => 3},
+                         :language_id => 4},
                        { :word        => 'Bildschirm',
                          :example     => 'Der Bildschirm hat eine gute Auflösung',
-                         :language_id => 2}
+                         :language_id => 23}
                       ]})
