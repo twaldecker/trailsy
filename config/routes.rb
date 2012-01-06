@@ -7,7 +7,8 @@ Trailsy::Application.routes.draw do
 
   resources :users
   resources :sessions
-  
+
+  match 'languages'     => 'languages#index'
   match '/words/search' => 'words#search'
   resources :words do
     resources :translations

@@ -1,8 +1,9 @@
 define(['jquery',
         'backbone',
         'underscore',
-        'text!templates/detailResult.html'],
-function($,Backbone,_,detailResultTemplate){
+        'text!templates/detailResult.html',
+        'collections/languages'],
+function($,Backbone,_,detailResultTemplate, languages){
     /**
      * view for single detail result
      */
@@ -63,7 +64,11 @@ function($,Backbone,_,detailResultTemplate){
             var el = $(this.el);
 
 
-            el.html(this.template(model.toJSON()));
+            var resultModel = model.toJSON();
+            if (parseInt($('#targetLanguage').val(),10) === 1) {
+                resultModel.lang  = languages.get(this.model.get('language_id')).get('code').toUpperCase();
+            }
+            el.html(this.template(resultModel));
 
             var userVoting = parseInt(model.get('user_voted'), 10);
             if (true === AppRouter.getLoginState() && userVoting !== 0) {
@@ -74,11 +79,6 @@ function($,Backbone,_,detailResultTemplate){
                 }
             }
 
-            if (parseInt($('#targetLanguage'),10) === 1) {
-                var lang = $('.lang', el);
-                lang.text(this.model.get('language'));
-                lang.removeClass('hidden');
-            }
             $('.rateUp', el).on('click', _.bind(this.onClickRating, this, 1));
             $('.rateDown', el).on('click',  _.bind(this.onClickRating, this, -1));
             $('.edit.icon', el).on('click', _.bind(this.editWord, this));
