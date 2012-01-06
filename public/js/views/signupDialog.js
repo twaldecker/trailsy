@@ -1,8 +1,9 @@
 define(['jquery',
         'underscore',
         'text!templates/signup.html',
+        'views/flashMessage',
         'i18n!nls/trailsy'],
-function($, _, html, i18n) {
+function($, _, html, flash, i18n) {
     var signupDialog = {
         signupHtml: null,
 

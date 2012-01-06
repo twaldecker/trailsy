@@ -17,6 +17,9 @@ function($, _, html, i18n) {
             if (null === this.loginHtml) {
                 this.appendDiv();
             }
+            
+            $('#login-box .error').addClass('hidden');
+            
             //Fade in the Popup
             this.loginHtml.fadeIn(300);
 
@@ -39,7 +42,7 @@ function($, _, html, i18n) {
         //callback on successful login
         loginSuccess: function(formData) {
             console.log(formData);
-            $('#login-error', this.loginHtml).hide();
+            $('#login-box .error', this.loginHtml).addClass('hidden');
             this.hide();
             $('#loginLink').addClass('hidden');
             $('#logoutLink').removeClass('hidden');
@@ -49,13 +52,13 @@ function($, _, html, i18n) {
 
         loginFailed: function() {
             $('#login-box .error').text('Wrong Username or Password');
-            $('#login-box .error').show();
+            $('#login-box .error').removeClass('hidden');
         },
 
         //hide popup and mask
         hide: function() {
             $('#mask , #login-box').fadeOut(300 , _.bind(function() {
-                $('#login-error', this.loginHtml).hide();
+                $('#login-box .error', this.loginHtml).addClass('hidden');
                 $('a.closeButton, #mask').unbind();
                 $('#mask').remove();
             }, this));
