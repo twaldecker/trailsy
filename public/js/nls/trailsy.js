@@ -1,6 +1,8 @@
 define({
     'root': {
         'login': 'Log in',
+        'login_success': 'You have been successfully logged on!',
+        'logout_success': 'You have been successfully logged out!',
         'word' : 'Word',
         'addTranslationFor': 'Add a Translation for',
         'addWord': 'Add a Word',

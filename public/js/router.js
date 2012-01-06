@@ -5,9 +5,11 @@ define(['jquery',
         'views/searchResultList',
         'views/loginDialog',
         'views/signupDialog',
+        'views/flashMessage',
         'collections/words',
-        'collections/detailWords'],
-function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, words, detailWords){
+        'collections/detailWords',
+        'i18n!nls/trailsy'],
+function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, flash, words, detailWords, i18n){
     var appRouter = Backbone.Router.extend({
         loginState: false,
         input: $("input#word"),
@@ -109,6 +111,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                     $('#loginLink').removeClass('hidden');
                     $('#signupLink').removeClass('hidden');
                     this.setLoginState(false);
+                    flash.showMessage('info', i18n.logout_success);
                 }, this),
                 error: _.bind(console.log, this)
             });

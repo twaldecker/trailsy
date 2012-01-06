@@ -354,7 +354,7 @@ li {
   /* Style adjustments for viewports 480px and over go here */
     #heading {
         font-size: 100px;
-        margin: 0;
+        margin: 50px 0 0 0;
         -webkit-text-stroke-color: grey;
         -webkit-text-stroke-width: 2px;
         @include reflection;

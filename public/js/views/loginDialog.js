@@ -48,7 +48,7 @@ function($, _, html, flashMessage, i18n) {
             $('#loginLink').addClass('hidden');
             $('#logoutLink').removeClass('hidden');
             $('#signupLink').addClass('hidden');
-            flashMessage.showMessage('info', 'You have been successfully logged on');
+            flashMessage.showMessage('info', i18n.login_success);
             AppRouter.setLoginState(true);
         },
 
