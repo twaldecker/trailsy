@@ -1,5 +1,4 @@
 #flashMessage {
-  display:none;
 }
 
 .info, .success, .warning, .error {
@@ -8,6 +7,7 @@
     padding:15px 10px 15px 50px;
     background-repeat: no-repeat;
     background-position: 10px center;
+    display:none;
 }
 .info {
     color: #00529B;
