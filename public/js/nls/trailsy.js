@@ -1,8 +1,9 @@
 define({
     'root': {
         'login': 'Log in',
-        'login_success': 'You have been successfully logged on!',
+        'login_success': 'You have been successfully logged in!',
         'logout_success': 'You have been successfully logged out!',
+        'signup_aftersubmit': 'Before logging in you have to confirm your Email address. Watch your inbox for next instructions.',
         'word' : 'Word',
         'addTranslationFor': 'Add a Translation for',
         'addWord': 'Add a Word',

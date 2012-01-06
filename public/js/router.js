@@ -11,7 +11,9 @@ define(['jquery',
         'i18n!nls/trailsy'],
 function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, flash, words, detailWords, i18n){
     var appRouter = Backbone.Router.extend({
+        
         loginState: false,
+        
         input: $("input#word"),
 
         routes: {
