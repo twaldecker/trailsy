@@ -60,10 +60,13 @@ function($, _, html, flash, i18n) {
                 $.ajax({url:'/users',
                     data: this.form.serialize(),
                     type:'POST',
-                    beforeSend: function( xhr ) {
+                    beforeSend: _.bind(function( xhr ) {
                         var token = $('meta[name="csrf-token"]').attr('content');
                         if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-                    },
+                        this.errorDiv.empty();
+                        this.errorDiv.hide();
+                        }, this
+                    ),
                     success: _.bind(this.signupSuccess, this),
                     error: _.bind(this.signupError, this)
                 });
@@ -91,7 +94,7 @@ function($, _, html, flash, i18n) {
                 ele.text(field);        // set the name
                 errorHtml.append(ele); //  and append it to the ul
                 _.each(errors, function(message) {
-                    var a = $('<p>').text(message);
+                    var a = $('<p>').text(i18n[message]);
                     ele.append(a);
                 });
             });

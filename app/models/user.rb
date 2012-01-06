@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
   before_save :verification_init
 
   validates_confirmation_of :password, :message => 'password_notMatch'
-  validates :password, :length => { :minimum => 6 }
+  validates :password, :length => { :minimum => 6, :message => 'password_tooShort' }
   validates_presence_of :password, :on => :create
   validates_presence_of :email
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :message => 'email_notUnique'
   
   acts_as_voter
 

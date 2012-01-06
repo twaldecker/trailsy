@@ -11,6 +11,7 @@ define({
         'sentence': 'Sentence',
         'lang': 'Language',
         'email': 'Email',
+        'email_notUnique': 'Your Email Address is already registered.',
         'password': 'Password',
         'signup': 'Sign up',
         'add': 'Add',
@@ -18,6 +19,7 @@ define({
         'notMember': 'Not a Member ? Create Account now!',
         'confirmPassword': 'Confirm your Password',
         'password_notMatch': 'Your confirmation doesnt match the supplied Password',
+        'password_tooShort': 'Your Password is too short',
         'passwordConfirmation': 'Password confirmation',
         'createAccount': 'Create a new Account'
     },
