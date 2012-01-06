@@ -1,3 +1,17 @@
+#search {
+  margin: 20px 0px;
+  a#addWord {
+      position: relative;
+      top: 10px;
+  }
+}
+
+input#word {
+    margin: 10px 10px 0px 10px;
+    width: 258px;
+    padding: 5px 0px 5px 5px;
+}
+
 input#search {
     text-shadow: 2px 2px 2px lightGrey;
     color: grey;
@@ -15,9 +29,6 @@ section#searchResults {
     height: 57px;
 }
 
-#translations {
-    margin-top: 40px;
-}
 
 ul#result{
     margin:0px;

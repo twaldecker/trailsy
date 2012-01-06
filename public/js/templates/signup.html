@@ -1,21 +1,22 @@
 <div id="signup-box" class="signup popup">
     <a href="#" class="closeButton">x</a>
     
-    <h1>Create a new account</h1>
+    <h1><%= createAccount %></h1>
     
     <form action="#" method="post" onsubmit="return false;">
         <fieldset>
 
-            <label for="user[email]">Email</label>
-            <input id="user[email]" name="user[email]" size="30" type="email" autocomplete="on" placeholder="Email" />
+            <label for="user[email]"><%= email %></label>
+            <input id="user[email]" name="user[email]" size="30" type="email" autocomplete="on" placeholder="<%= email %>" />
 
-            <label for="user[password]">Password:</label>
-            <input id="user[password]" name="user[password]" size="30" type="password" placeholder="use a strong Password" />
+            <label for="user[password]"><%= password %></label>
+            <input id="user[password]" name="user[password]" size="30" type="password" placeholder="<%= password %>" />
             
-            <label for="user[password_confirmation]">Password confirmation:</label>
-            <input id="user[password_confirmation]" name="user[password_confirmation]" size="30" type="password" placeholder="confirm your Password"/>
+            <label for="user[password_confirmation]"><%= passwordConfirmation %></label>
+            <input id="user[password_confirmation]" name="user[password_confirmation]" size="30" type="password"
+                   placeholder="<%= confirmPassword %>"/>
 
-            <button class="submit button" type="submit">Sign up</button>
+            <button class="submit button" type="submit"><%= signup %></button>
 
         </fieldset>
     </form>

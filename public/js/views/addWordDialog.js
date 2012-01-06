@@ -35,6 +35,7 @@ define(['jquery',
                     var label = $('<label for="sourceLanguage">'+i18n.lang+'</label>');
                     $('#addword_example',this.addWordHtml).after(label);
                     var langSelect = $("#sourceLanguage").clone();
+                    $('[value="1"]', langSelect).remove();
                     langSelect.attr('id', 'addword_language');
                     label.after(langSelect);
                     
@@ -71,7 +72,8 @@ define(['jquery',
                     'margin-top' : -popMargTop,
                     'margin-left' : -popMargLeft
                 });
-                //Set the focus in a form element. if the user adds a word, the word is already set through the search input and so the focus goes to the example sentence.
+                //Set the focus in a form element. if the user adds a word, the word is already set through the
+                // search input and so the focus goes to the example sentence.
                 if('addWord' === this.dialogType) {
                     $('#addword_example', this.addWordHtml).focus();
                 } else {
@@ -108,11 +110,11 @@ define(['jquery',
             },
 
             getLanguageId: function() {
-                var addWordLang = $('#sourceLanguage', this.addWordHtml).val();
+                var addWordLang = $('#addword_language', this.addWordHtml).val();
                 if (undefined != addWordLang) {
                     return addWordLang;
                 }
-                return $("#targetLanguage").val()
+                return $("#targetLanguage").val();
             },
 
             //submit form
@@ -120,7 +122,7 @@ define(['jquery',
 
                 var newWord = {word:        $('#addword_word', this.addWordHtml).val(),
                                example:     $('#addword_example', this.addWordHtml).val(),
-                               language_id: $('#addword_language', this.addWordHtml).val()};
+                               language_id: this.getLanguageId()};
                 var options = {success: _.bind(this.saveSuccess, this),
                                error:   _.bind(this.saveFailed, this)};
 

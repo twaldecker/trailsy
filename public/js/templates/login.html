@@ -1,20 +1,20 @@
 <div id="login-box" class="login popup">
     <a href="#" class="closeButton">x</a>
     
-    <h1>Log in</h1>
+    <h1><%= login %></h1>
     
     <form method="post" action="#" onsubmit="return false;">
         <fieldset>
             
-            <label for="username">Email</label>
+            <label for="username"><%= email %></label>
             <input id="username" name="email" value="" type="email" autocomplete="on" placeholder="Email" />
             
-            <label for="password">Password</label>
+            <label for="password"><%= password %></label>
             <input id="password" name="password" value="" type="password" placeholder="Password" />
             
-            <button class="submit button" type="submit">Log in</button>
+            <button class="submit button" type="submit"><%= login %></button>
 
-            <p><a class="forgot" href="#">Forgot your password?</a></p>
+            <p><a class="notMember" href="#signup"><%= notMember %></a></p>
 
         </fieldset>
     </form>
