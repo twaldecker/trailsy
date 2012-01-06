@@ -30,8 +30,6 @@ function($, _, html, flash, i18n) {
                 'margin-left' : -popMargLeft
             });
 
-            // Add the mask to body
-            $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
             $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
             $('#signup-box form').on('submit', _.bind(this.submitForm, this));
@@ -54,7 +52,6 @@ function($, _, html, flash, i18n) {
             $('#mask , #signup-box').fadeOut(300 , _.bind(function() {
                 $('#signup-box div.error', this.loginHtml).hide();
                 $('a.closeButton. #mask').unbind();
-                $('#mask').remove();
             }, this));
             $('#signup-box form').unbind();
             AppRouter.navigate('home', true);

@@ -33,10 +33,8 @@ function($, _, html, flashMessage, i18n) {
                 'margin-left' : -popMargLeft
             });
 
-            // Add the mask to body
-            $('body').append('<div id="mask"></div>');
             $('#mask').fadeIn(300);
-            $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
+            $('#login-box a, #mask').on('click', _.bind(this.hide, this));
             $('#login-box form').on('submit', _.bind(this.submitForm, this));
         },
 
@@ -61,10 +59,11 @@ function($, _, html, flashMessage, i18n) {
         hide: function() {
             $('#mask , #login-box').fadeOut(300 , _.bind(function() {
                 $('#login-box .error', this.loginHtml).addClass('hidden');
-                $('a.closeButton, #mask').unbind();
-                $('#mask').remove();
+                $('#login-box form input').val(''); /*clear all input values*/
+                $('#login-box a.closeButton, #mask').unbind();
+                $('#login-box form').unbind();
             }, this));
-            $('#login-box form').unbind();
+            
             AppRouter.navigate('home', true);
         },
 
