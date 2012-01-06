@@ -1,8 +1,9 @@
 define(['jquery',
         'underscore',
         'text!templates/login.html',
+        'views/flashMessage',
         'i18n!nls/trailsy'],
-function($, _, html, i18n) {
+function($, _, html, flashMessage, i18n) {
     var loginDialog = {
         loginHtml: null,
 
@@ -47,6 +48,7 @@ function($, _, html, i18n) {
             $('#loginLink').addClass('hidden');
             $('#logoutLink').removeClass('hidden');
             $('#signupLink').addClass('hidden');
+            flashMessage.showMessage('info', 'You have been successfully logged on');
             AppRouter.setLoginState(true);
         },
 
