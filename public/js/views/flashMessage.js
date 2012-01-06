@@ -10,7 +10,7 @@ function($, _, Backbone, html, i18n){
       var template = _.template(html);
       this.flashHtml = $(template({type: vtype, message: vmessage}));
       $('#flashMessage').append(this.flashHtml);
-      this.flashHtml.fadeIn(1000).delay(4000).fadeOut(1000);
+      this.flashHtml.fadeIn(1000).delay(4000).fadeOut(1000).queue(function(){$(this).remove()});
     }
   }
   return flashMessage;
