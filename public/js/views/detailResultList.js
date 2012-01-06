@@ -59,12 +59,12 @@ function($,  _, Backbone, detailResultView, addWordDialog, i18n){
 
         render: function (targetLang) {
             if ('string' === typeof targetLang)
-                this.targetLang = targetLang;
+                this.targetLang = parseInt(targetLang, 10);
             this.unrender();
             this.items_element.removeClass('hidden');
 
             this.collection.each(function(item){ // in case collection is not empty
-                if (item.get('language_id') == this.targetLang || this.targetLang == 1)
+                if (parseInt(item.get('language_id'), 10) === this.targetLang || this.targetLang === 1)
                     this.appendItem(item);
             }, this);
 

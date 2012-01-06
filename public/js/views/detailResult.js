@@ -73,6 +73,12 @@ function($,Backbone,_,detailResultTemplate){
                     $('.rateDown', el).addClass('voted');
                 }
             }
+
+            if (parseInt($('#targetLanguage'),10) === 1) {
+                var lang = $('.lang', el);
+                lang.text(this.model.get('language'));
+                lang.removeClass('hidden');
+            }
             $('.rateUp', el).on('click', _.bind(this.onClickRating, this, 1));
             $('.rateDown', el).on('click',  _.bind(this.onClickRating, this, -1));
             $('.edit.icon', el).on('click', _.bind(this.editWord, this));
