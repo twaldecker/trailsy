@@ -17,6 +17,7 @@ define({
         'forgotPassword': 'Forgot your Password ?',
         'notMember': 'Not a Member ? Create Account now!',
         'confirmPassword': 'Confirm your Password',
+        'password_notMatch': 'Your confirmation doesnt match the supplied Password',
         'passwordConfirmation': 'Password confirmation',
         'createAccount': 'Create a new Account'
     },

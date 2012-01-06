@@ -240,28 +240,28 @@ body {
     font-family: arial, helvetica, sans-serif;
 }
 
-ul {
-    margin-left:auto;
-    margin-right:auto;
-    list-style: none;
-    padding: 0px;
-    border-bottom: $border-type;
-    border-right: $border-type;
-    border-left: $border-type;
-}
-
-li {
-    margin-left:auto;
-    margin-right:auto;
-    padding: 5px 15px;
-    overflow-x: hidden;
-    border-top: $border-type;
-}
-
 #main{
     text-align: center;
     text-shadow: 2px 2px 2px lightGrey;
     color: grey;
+    
+    ul {
+        margin-left:auto;
+        margin-right:auto;
+        list-style: none;
+        padding: 0px;
+        border-bottom: $border-type;
+        border-right: $border-type;
+        border-left: $border-type;
+    }
+
+    li {
+        margin-left:auto;
+        margin-right:auto;
+        padding: 5px 15px;
+        overflow-x: hidden;
+        border-top: $border-type;
+    }
 }
 
 @import "navigation.css.scss";

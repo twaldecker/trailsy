@@ -74,7 +74,7 @@ function($, _, html, flash, i18n) {
          * This is the callback function after a successful signup process.
          * It triggers the hide function and displays a flash message.
          */
-        signupSuccess: function(formData) {
+        signupSuccess: function() {
             flash.showMessage('info', i18n.signup_aftersubmit);
             this.hide();
         },
@@ -83,8 +83,19 @@ function($, _, html, flash, i18n) {
          * This is the callback function after getting an error message back from the server.
          * It is responsible for showing the error message.
          */
-        signupError: function() {
-            this.errorDiv.text('Wrong Username or Password');
+        signupError: function(jqXHR, textStatus, errorThrown) {
+            var response = $.parseJSON(jqXHR.responseText);
+            var errorHtml = $('<ul></ul>');
+            _.each(response, function (errors, field) { //go through error fields
+                var ele = $('<li>');     //create for each field a li
+                ele.text(field);        // set the name
+                errorHtml.append(ele); //  and append it to the ul
+                _.each(errors, function(message) {
+                    var a = $('<p>').text(message);
+                    ele.append(a);
+                });
+            });
+            this.errorDiv.append(errorHtml);
             this.errorDiv.show();
         }
     }
