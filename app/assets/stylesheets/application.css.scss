@@ -264,13 +264,19 @@ li {
     color: grey;
 }
 
+ul#flash {
+    border: none;
+    margin: 10px;
+}
+
+
 @import "navigation.css.scss";
 @import "search.css.scss";
 @import "detail.css.scss";
 @import "popup.css.scss";
 @import "popupform.css.scss";
 @import "addWord.css.scss";
-
+@import "flash.css.scss";
 
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.
@@ -303,7 +309,6 @@ li {
 .blue { color: blue; }
 .red { color: red; }
 .orange { color: orange; }
-
 
 
 /* ==|== media queries ======================================================
