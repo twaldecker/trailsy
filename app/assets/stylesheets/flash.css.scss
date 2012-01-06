@@ -1,42 +1,27 @@
-p.notice,
-p.warning,
-p.error {
-  font-size: 18px;
-  padding: 15px 10px;
-  margin-bottom: 10px;
+.info, .success, .warning, .error, .validation {
+border: 1px solid;
+margin: 10px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
 }
-
-p.notice span,
-p.warning span,
-p.error span {
-  float: left;
-  width: 42px;
-  height: 32px;
-  margin-top: -5px;
+.info {
+color: #00529B;
+background-color: #BDE5F8;
+background-image: url('info.png');
 }
-
-p.notice {
-  background: url(images/flash/flash-notice-bg.jpg) repeat-x left top;
-  color: #41612f;
+.success {
+color: #4F8A10;
+background-color: #DFF2BF;
+background-image:url(/images/flash/flash-check.png);
 }
-p.notice span {
-  background: url(../images/flash-check.png) no-repeat left top;
+.warning {
+color: #9F6000;
+background-color: #FEEFB3;
+background-image: url('/images/flash/flash-warning.png');
 }
-
-p.warning {
-  background: url(../images/flash-warning-bg.jpg) repeat-x left -10px;
-  color: #a26a1a;
-}
-p.warning span {
-  margin-top: -6px;
-  background: url(../images/flash-warning.png) no-repeat left top;
-}
-
-p.error {
-  background: url(../images/flash-error-bg.jpg) repeat-x left -10px;
-  color: #af0100;
-}
-p.error span {
-  margin-top: -6px;
-  background: url(../images/flash-error.png) no-repeat left top;
+.error {
+color: #D8000C;
+background-color: #FFBABA;
+background-image: url('/images/flash/flash-error.png');
 }
