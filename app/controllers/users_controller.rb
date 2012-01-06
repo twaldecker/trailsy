@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       UserMailer.verification_mail(@user).deliver
       render :json => {:message => :signed_up}
     else
-      render :json => {:message => :error}
+      render :json => @user.errors, :status => :unprocessable_entity
     end
   end
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     if @user.check_verification(params[:code])
       render :json => {:message => :validation_success}
     else
-      render :json => {:message => :validation_failed}, :status => :unprocessable_entity
+      render :json => {:message => :validation_failed}, :status => 404
     end
   end
 end

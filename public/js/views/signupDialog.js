@@ -5,74 +5,87 @@ define(['jquery',
         'i18n!nls/trailsy'],
 function($, _, html, flash, i18n) {
     var signupDialog = {
+        
         signupHtml: null,
-
-        appendDiv: function() {
-            var template = _.template(html);
-            this.signupHtml = $(template(i18n));
-            $('nav').append(this.signupHtml);
-        },
-
+        mask: $('#mask'),
+        errorDiv: null,
+        form: null,
+        
+        /**
+         * This method shows up the form and registers the events
+         */
         show: function() {
 
-            if (null === this.signupHtml) {
-                this.appendDiv();
+            if (null === this.signupHtml) { //Add html if it doesn't exist
+                var template = _.template(html);
+                this.signupHtml = $(template(i18n));
+                $('nav').append(this.signupHtml);
+                this.errorDiv = $('#signup-box .error');
+                this.form = $('#signup-box form');
             }
-            //Fade in the Popup
-            this.signupHtml.fadeIn(300);
-
+            
             //Set the center alignment padding + border see css style
-            var popMargTop = (this.signupHtml.height() + 24) / 2;
-            var popMargLeft = (this.signupHtml.width() + 24) / 2;
-
             this.signupHtml.css({
-                'margin-top' : -popMargTop,
-                'margin-left' : -popMargLeft
+                'margin-top' : (this.signupHtml.height() + 24) / -2,
+                'margin-left' : (this.signupHtml.width() + 24) / -2
             });
 
-            $('#mask').fadeIn(300);
-            $('a.closeButton, #mask').on('click', _.bind(this.hide, this));
-            $('#signup-box form').on('submit', _.bind(this.submitForm, this));
+            this.signupHtml.fadeIn(300);
+            this.mask.fadeIn(300);
+            
+            //bind the events
+            $('#signup-box a, #mask').on('click', _.bind(this.hide, this));
+            this.form.on('submit', _.bind(this.submitForm, this));
         },
+        
+        /**
+         * This method hides the popup and unregisters the events.
+         */
+        hide: function() {
+            $('#mask , #signup-box').fadeOut(300 , _.bind( function() {
+                this.mask.unbind();
+                this.form.unbind();
+                $('#signup-box form input').val(''); //clean values and
+                this.errorDiv.hide();               // error div
+            }, this));
+            AppRouter.navigate('home', true);
+        },
+        
+        /**
+         * This is the submit handler. it does the request and binds 
+         * the success and error handlers to the request.
+         */
+        submitForm: function() {
+            if (this.form.length) {
+                $.ajax({url:'/users',
+                    data: this.form.serialize(),
+                    type:'POST',
+                    beforeSend: function( xhr ) {
+                        var token = $('meta[name="csrf-token"]').attr('content');
+                        if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                    },
+                    success: _.bind(this.signupSuccess, this),
+                    error: _.bind(this.signupError, this)
+                });
+            }
+        },        
 
-        //callback on successful login
+        /**
+         * This is the callback function after a successful signup process.
+         * It triggers the hide function and displays a flash message.
+         */
         signupSuccess: function(formData) {
-            console.log(formData);
-            $('#signup-box div.error', this.loginHtml).hide();
+            flash.showMessage('info', i18n.signup_aftersubmit);
             this.hide();
         },
 
+        /**
+         * This is the callback function after getting an error message back from the server.
+         * It is responsible for showing the error message.
+         */
         signupError: function() {
-            $('#signup-box div.error', this.loginHtml).text('Wrong Username or Password');
-            $('#signup-box div.error', this.loginHtml).show();
-        },
-
-        //hide popup and mask
-        hide: function() {
-            $('#mask , #signup-box').fadeOut(300 , _.bind(function() {
-                $('#signup-box div.error', this.loginHtml).hide();
-                $('a.closeButton. #mask').unbind();
-            }, this));
-            $('#signup-box form').unbind();
-            AppRouter.navigate('home', true);
-        },
-
-        //submit form
-        submitForm: function() {
-            var form = $('#signup-box form', this.loginHtml);
-            if (form.length) {
-                var formData = form.serialize();
-                $.ajax({url:'/users',
-                        data: formData,
-                        type:'POST',
-                        beforeSend: function( xhr ) {
-                            var token = $('meta[name="csrf-token"]').attr('content');
-                            if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-                            },
-                        success: _.bind(this.signupSuccess, this, formData),
-                        error: _.bind(this.signupError, this)
-                });
-            }
+            this.errorDiv.text('Wrong Username or Password');
+            this.errorDiv.show();
         }
     }
     return signupDialog;
