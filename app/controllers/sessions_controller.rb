@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       render :json => {:message => :logged_in}
     else
-      render :json => {:message => :not_logged_in}, :status => :unauthorized
+      render :json => {:status => :unauthorized}
     end
   end
   

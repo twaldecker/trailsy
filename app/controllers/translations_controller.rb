@@ -6,7 +6,7 @@ class TranslationsController < ApplicationController
     if @word
       render :json => @word.translations
     else
-      render :json => {:message => 'wordNotFound'}, :status => :not_found
+      render :json => { :status => :not_found }
     end
 
   end
@@ -18,7 +18,7 @@ class TranslationsController < ApplicationController
     if @translation
       render :json => @translation
     else
-      render :json => {:message => 'wordNotFound'}, :status => :not_found
+      render :json => {:status => :not_found }
     end
   end
 
@@ -46,7 +46,7 @@ class TranslationsController < ApplicationController
       if @translation
         render :json => @translation
       else
-        render :json => {:message => 'errorUpdating'}, :status => :not_acceptable
+        render :json => { :status => :not_acceptable }
       end
     end
   end
@@ -57,7 +57,7 @@ class TranslationsController < ApplicationController
     @translation = @word.addOrUpdateTranslation(params)
 
     if @translation.nil?
-      render :json => {:message => 'errorCreating'}, :status => :not_acceptable
+      render :json => {:status => :not_acceptable }
     else
       self.addConnectionDetailsTo @translation
       render :json => @translation, :status => :created
