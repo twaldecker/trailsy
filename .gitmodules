@@ -4,3 +4,6 @@
 [submodule "public/js/vendor/underscore"]
 	path = public/js/vendor/underscore
 	url = git://github.com/documentcloud/underscore.git
+[submodule "vagrant/modules/postgres"]
+	path = vagrant/modules/postgres
+	url = git://github.com/KrisBuytaert/puppet-postgres.git
