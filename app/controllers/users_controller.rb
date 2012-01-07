@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if @user.check_verification(params[:code])
       render :json => {:message => :validation_success }
     else
-      render :json => {:message => :validation_failed }, :status => :unprocessable_entity
+      render :json => {:message => :validation_failed, :status => :unprocessable_entity}
     end
   end
 end

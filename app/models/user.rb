@@ -3,11 +3,11 @@ require 'digest'
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   attr_accessor :password
-  before_save :encrypt_password
-  before_save :verification_init
+  before_create :encrypt_password
+  before_create :verification_init
 
-  validates_confirmation_of :password, :message => 'password_notMatch'
-  validates :password, :length => { :minimum => 6, :message => 'password_tooShort' }
+  validates_confirmation_of :password, :message => 'password_notMatch', :on => :create
+  validates :password, :length => { :minimum => 6, :message => 'password_tooShort' }, :on => :create
   validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_uniqueness_of :email, :message => 'email_notUnique'
@@ -22,12 +22,13 @@ class User < ActiveRecord::Base
   def verification_init
     # TODO: check the generation of the verification code
     self.verification_code = Digest::hexencode(Digest::SHA2.digest(self.email + self.password + rand.to_s + Time.current.to_s + 'reallybadsecret'))
-    self.active = 0;
+    self.active = 0
   end
 
   def check_verification(code)
     if code == self.verification_code
-      self.active = 1;
+      self.active = 1
+      self.save
     end
   end
 
