@@ -20,6 +20,7 @@ test:
 
 production:
   adapter: postgresql
+  host: localhost
   database: trailsy
   username: trailsy
   password: trailsy
