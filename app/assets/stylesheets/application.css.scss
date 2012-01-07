@@ -234,6 +234,14 @@ td { vertical-align: top; }
                               color-stop(0.5, transparent), to(white));
 }
 
+@mixin transition($time) {
+  -webkit-transition:all $time ease-in-out;
+  -moz-transition:all $time ease-in-out;
+  -o-transition:all $time ease-in-out;
+  -ms-transition:all $time ease-in-out;
+  transition:all $time ease-in-out;
+}
+
 $border-type: 1px solid #789;
 
 body {
@@ -318,6 +326,9 @@ body {
     }
     #heading {
         display: none;
+    }
+    #search {
+      @include transition(1s);
     }
 
     input#word {
