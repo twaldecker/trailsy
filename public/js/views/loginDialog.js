@@ -36,6 +36,8 @@ function($, _, html, flash, i18n) {
             
             $('#login-box a, #mask').on('click', _.bind(this.hide, this));
             this.form.on('submit', _.bind(this.submitForm, this));
+            
+            $('#login-box #email').focus();
         },
         
         /**

@@ -36,6 +36,8 @@ function($, _, html, flash, i18n) {
             //bind the events
             $('#signup-box a, #mask').on('click', _.bind(this.hide, this));
             this.form.on('submit', _.bind(this.submitForm, this));
+            
+            $('#signup-box #user_email').focus();
         },
         
         /**
@@ -127,11 +129,11 @@ function($, _, html, flash, i18n) {
         },
         
         validationSuccess: function() {
-            flash.showMessage('success', 'test');
+            flash.showMessage('success', i18n.validation_success);
         },
         
         validationError: function() {
-            flash.showMessage('error', 'error');
+            flash.showMessage('error', i18n.validation_error);
         }
     }
     return signupDialog;
