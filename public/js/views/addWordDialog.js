@@ -45,15 +45,16 @@ define(['jquery',
 
                     /*copy the targetLang language from the main form */
                     langSelect.val(targetLang);
+                    //set Word and language if addWord
+                    if ('addWord' === this.dialogType) {
+                        langSelect.val(sourceLangElement.val());
+                        $('#addword_word', this.addWordHtml).val(word);
+                    } else if (1 !== parseInt(sourceLangElement.val(),10)) {
+                        //remove sourceLang from Options if in addTranslation dialog Type
+                        $('[value="'+parseInt(sourceLangElement.val(),10) +'"]', langSelect).remove();
+                    }
                 }
-                //set Word and language if addWord
-                if ('addWord' === this.dialogType) {
-                    langSelect.val(sourceLangElement.val());
-                    $('#addword_word', this.addWordHtml).val(word);
-                } else if (1 !== parseInt(sourceLangElement.val(),10)) {
-                    //remove sourceLang from Options if in addTranslation dialog Type
-                    $('[value="'+parseInt(sourceLangElement.val(),10) +'"]', langSelect).remove();
-                }
+
             },
 
             appendDiv: function() {
