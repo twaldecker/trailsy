@@ -1,0 +1,1 @@
+define(["underscore","backbone","models/language"],function(a,b,c){var d=b.Collection.extend({model:c,url:"languages",initialize:function(a,b){b||(b={}),this.init&&this.init(a,b),this.fetch()}});return new d})

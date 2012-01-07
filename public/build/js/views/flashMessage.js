@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone","text!templates/flashMessage.html"],function(a,b,c,d,e){var f={flashHtml:null,showMessage:function(c,e){var f=b.template(d);this.flashHtml=a(f({type:c,message:e})),a("#flashMessage").append(this.flashHtml),this.flashHtml.fadeIn(1e3).delay(4e3).fadeOut(1e3).queue(function(){a(this).remove()})}};return f})
