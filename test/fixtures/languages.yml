@@ -1,9 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  language: MyString
-  code: MyString
-
-two:
-  language: MyString
-  code: MyString

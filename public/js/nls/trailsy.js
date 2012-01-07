@@ -16,6 +16,7 @@ define({
         'lang': 'Language',
         'email': 'Email',
         'email_notUnique': 'Your Email Address is already registered.',
+        'email_malformed': 'Your supplied Email Address is not valid. Please supply a valid Email address, as you need to verify it later.',
         'password': 'Password',
         'signup': 'Sign up',
         'add': 'Add',

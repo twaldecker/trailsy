@@ -128,10 +128,15 @@ function($, _, html, flash, i18n) {
             })
         },
         
+        /**
+         * This is the handler which displays the successful validation process.
+         */
         validationSuccess: function() {
             flash.showMessage('success', i18n.validation_success);
         },
-        
+        /**
+         * This is the handler which displays a error message at validation
+         */
         validationError: function() {
             flash.showMessage('error', i18n.validation_error);
         }
