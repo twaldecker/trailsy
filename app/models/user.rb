@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   attr_accessor :password
   before_save :encrypt_password
-  before_save :verification_init
+  before_create :verification_init
 
   validates_confirmation_of :password, :message => 'password_notMatch'
   validates :password, :length => { :minimum => 6, :message => 'password_tooShort' }
@@ -20,23 +20,19 @@ class User < ActiveRecord::Base
   end
 
   def verification_init
-    # TODO: check the generation of the verification code
     self.verification_code = Digest::hexencode(Digest::SHA2.digest(self.email + self.password + rand.to_s + Time.current.to_s + 'reallybadsecret'))
     self.active = 0;
   end
 
-  def check_verification(code)
-    if code == self.verification_code
-      self.active = 1;
-    end
+  def get_verification()
+    self.verification_code
   end
 
-  def self.authenticate(email, password)
-    @user = find_by_email(email)
-    if ( @user && (@user.password_hash == BCrypt::Engine.hash_secret(password, @user.password_salt)) && @user.active )
-      @user
-    else
-      nil
+  def check_verification code
+    if (code == self.verification_code)
+      self.active = 1;
+      self.save
+      return true
     end
   end
 
@@ -44,6 +40,15 @@ class User < ActiveRecord::Base
     if password.present?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+    end
+  end
+  
+  def self.authenticate(email, password)
+    @user = find_by_email(email)
+    if ( @user && (@user.password_hash == BCrypt::Engine.hash_secret(password, @user.password_salt)) )
+      return @user
+    else
+      return nil
     end
   end
 end

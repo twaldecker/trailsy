@@ -54,6 +54,7 @@ class UserTest < ActiveSupport::TestCase
     @user = User.find_by_email(@email)
     @code = @user.verification_code  
     assert (@code.length == 64)
+    print @code
     assert @user.check_verification(@code);
     assert @user.active
   end
@@ -91,8 +92,6 @@ class UserTest < ActiveSupport::TestCase
     @code = @user.verification_code  
     assert @user.check_verification(@code)
     assert @user.active
-    assert (@user.password_hash == BCrypt::Engine.hash_secret(@pass, @user.password_salt))
     assert User.authenticate(@email, @pass)
   end
-  
 end
