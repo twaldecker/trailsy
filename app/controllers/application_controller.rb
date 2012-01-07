@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if session[:user_id]
       true
     else
-      render:json =>  {:status => :unauthorized}
+      render :json =>  {:status => :unauthorized}
     end
   end
 
