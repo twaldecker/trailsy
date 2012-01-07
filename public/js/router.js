@@ -96,46 +96,11 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             this.setTargetLangValue(toLang);
         },
 
-        login: function() {
-            loginDialog.show();
-        },
-
-        logout: function() {
-            $.ajax({url:'/log_out',
-                type:'GET',
-                contentType: "application/json; charset=utf-8",
-                beforeSend: function( xhr ) {
-                    var token = $('meta[name="csrf-token"]').attr('content');
-                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-                },
-                success: _.bind(function(){
-                    $('#logoutLink').addClass('hidden');
-                    $('#loginLink').removeClass('hidden');
-                    $('#signupLink').removeClass('hidden');
-                    this.setLoginState(false);
-                    flash.showMessage('info', i18n.logout_success);
-                }, this),
-                error: _.bind(console.log, this)
-            });
-        },
+        login: function() { loginDialog.show(); },
+        logout: function() { loginDialog.logout(); },
         
-        signup: function() {
-            console.log('show signup dialog');
-            signupDialog.show();
-        },
-
-        validation: function(id, code) {
-            $.ajax({url: '/user/'+id+'/validate/'+code,
-                type: 'GET',
-                contentType: 'application/json; charset=utf-8',
-                beforeSend: function( xhr ) {
-                    var token = $('meta[name="csrf-token"]').attr('content');
-                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-                },
-                success: _.bind(console.log, "success"),
-                error: _.bind(console.log, "failure")
-            })
-        }
+        signup: function() { signupDialog.show(); },
+        validation: function(id, code) { signupDialog.validation(id, code); },
     });
 
     var init = function(){

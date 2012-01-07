@@ -43,12 +43,20 @@ function($, _, html, flash, i18n) {
          */
         hide: function() {
             $('#mask , #signup-box').fadeOut(300 , _.bind( function() {
-                this.mask.unbind();
+                $('#signup-box a, #mask').unbind();
                 this.form.unbind();
                 $('#signup-box form input').val(''); //clean values and
-                this.errorDiv.hide();               // error div
+                this.clearErrors();                 // error div
             }, this));
             AppRouter.navigate('home', true);
+        },
+        
+        /**
+         * This method empties the error div and hides it.
+         */
+        clearErrors: function() {
+            this.errorDiv.hide();
+            this.errorDiv.empty();
         },
         
         /**
@@ -63,8 +71,7 @@ function($, _, html, flash, i18n) {
                     beforeSend: _.bind(function( xhr ) {
                         var token = $('meta[name="csrf-token"]').attr('content');
                         if (token) xhr.setRequestHeader('X-CSRF-Token', token);
-                        this.errorDiv.empty();
-                        this.errorDiv.hide();
+                        this.clearErrors();
                         }, this
                     ),
                     success: _.bind(this.signupSuccess, this),
@@ -100,7 +107,32 @@ function($, _, html, flash, i18n) {
             });
             this.errorDiv.append(errorHtml);
             this.errorDiv.show();
+        },
+        
+        /**
+         * This method handles the process of the validation of an email address.
+         * It binds the methods validationSuccess and validationError.
+         */
+        validation: function(id, code) {
+            $.ajax({url: '/user/'+id+'/validate/'+code,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                beforeSend: function( xhr ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+                },
+                success: _.bind(this.validationSuccess, this),
+                error: _.bind(this.validationError, this)
+            })
+        },
+        
+        validationSuccess: function() {
+            flash.showMessage('success', 'test');
+        },
+        
+        validationError: function() {
+            flash.showMessage('error', 'error');
         }
     }
     return signupDialog;
-})
+});

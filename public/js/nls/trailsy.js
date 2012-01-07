@@ -2,7 +2,9 @@ define({
     'root': {
         'login': 'Log in',
         'login_success': 'You have been successfully logged in!',
+        'login_error': 'You supplied a wrong Username or Password.',
         'logout_success': 'You have been successfully logged out!',
+        'logout_error': 'There was an error at logging you out. Please verify that you are correctly logged out.',
         'signup_aftersubmit': 'Before logging in you have to confirm your Email address. Watch your inbox for next instructions.',
         'word' : 'Word',
         'addTranslationFor': 'Add a Translation for',
