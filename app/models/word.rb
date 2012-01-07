@@ -12,7 +12,7 @@ class Word < ActiveRecord::Base
   def Word.find_with params
     from = params[:fromLang].to_i
     to   = params[:toLang].to_i
-    word = params[:word]
+    word = params[:word].to_s.downcase
 
     result = select('distinct words.*').
               joins('inner join connections on (words.id = connections.lang1_id)').
