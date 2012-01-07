@@ -4,7 +4,7 @@
     <div class="rateDown arrow down"></div>
 </div>
 <div class="word">
-<h2><%- word %> <% if ('undefined' !== typeof lang) { print(' - ' + lang); } %> </h2>
+<h2><%- word %> </h2><% if ('undefined' !== typeof lang) { print('<span>' + lang+'</span>'); } %>
 <p><%- example %></p>
 
 </div>

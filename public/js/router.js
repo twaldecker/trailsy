@@ -59,6 +59,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             words.getOrFetch(id,_.bind(function() {
                 var model = words.get(id);
                 this.setSearchText(model.get('word'));
+                this.setFromLangValue(model.get('language_id'));
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
                 detailResultListView.setCollection(tmpWords);
@@ -100,7 +101,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         logout: function() { loginDialog.logout(); },
         
         signup: function() { signupDialog.show(); },
-        validation: function(id, code) { signupDialog.validation(id, code); },
+        validation: function(id, code) { signupDialog.validation(id, code); }
     });
 
     var init = function(){
