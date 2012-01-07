@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   acts_as_voter
 
   def get_verification_url
-    'http://localhost:3000/#validation/'+self.id.to_s+'/code/'+self.verification_code
+    '/#validation/'+self.id.to_s+'/code/'+self.verification_code
   end
 
   def verification_init
