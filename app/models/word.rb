@@ -15,8 +15,8 @@ class Word < ActiveRecord::Base
     word = params[:word].to_s.downcase
 
     result = select('distinct words.*').
-              joins('inner join connections on (words.id = connections.lang1_id)').
-              joins('inner join words as w2 on (w2.id = connections.lang2_id)').
+              joins('left join connections on (words.id = connections.lang1_id)').
+              joins('left join words as w2 on (w2.id = connections.lang2_id)').
               where('lower(words.word) like ?', word + '%')
 
     if from != 1
