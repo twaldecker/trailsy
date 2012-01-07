@@ -31,13 +31,15 @@ define(['jquery',
                 var template = _.template(html);
                 this.addWordHtml = $(template(addWordModel));
                 var targetLang = parseInt($("#targetLanguage").val(), 10);
-                if ('addWord' === this.dialogType ||
-                    1 === targetLang) {
+                var sourceLangElement = $("#sourceLanguage");
+                var sourceLang = parseInt(sourceLangElement.val(),10);
+                if (('addWord' === this.dialogType && 1 === sourceLang)||
+                    ('addTranslation' === this.dialogType && 1 === targetLang)) {
                     /* If dialog type is addWord or targetLang All, then:
                     add a language selectbox and a label */
                     var label = $('<label for="sourceLanguage">'+i18n.lang+'</label>');
                     $('#addword_example',this.addWordHtml).after(label);
-                    var sourceLangElement = $("#sourceLanguage");
+
                     var langSelect = sourceLangElement.clone();
                     $('[value="1"]', langSelect).remove();
                     langSelect.attr('id', 'addword_language');
@@ -49,9 +51,9 @@ define(['jquery',
                     if ('addWord' === this.dialogType) {
                         langSelect.val(sourceLangElement.val());
                         $('#addword_word', this.addWordHtml).val(word);
-                    } else if (1 !== parseInt(sourceLangElement.val(),10)) {
+                    } else if (1 !== sourceLang) {
                         //remove sourceLang from Options if in addTranslation dialog Type
-                        $('[value="'+parseInt(sourceLangElement.val(),10) +'"]', langSelect).remove();
+                        $('[value="'+sourceLang +'"]', langSelect).remove();
                     }
                 }
 
