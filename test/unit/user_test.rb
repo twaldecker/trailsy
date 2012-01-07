@@ -65,8 +65,34 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(:email => @email, :password => @pass)
     assert @user.save
     assert !@user.active
-    assert !@user.check_verification('wrongcode');
+    assert !@user.check_verification('wrongcode')
     assert !@user.active
+  end
+  
+  test "authenticate a user which is not active" do
+    @r = rand(200).to_s
+    @email = 'cgfdtisdfe'+@r+'@address.de'
+    @pass = 'geheim'
+    @user = User.new(:email => @email, :password => @pass)
+    assert @user.save
+    assert !@user.active
+    assert !User.authenticate(@email, @pass)
+  end 
+  
+  test "authenticate a user which is active" do
+    @r = rand(200).to_s
+    @email = 'dasfsf'+@r+'@address.de'
+    @pass = 'geheim'
+    @user = User.new(:email => @email, :password => @pass)
+    assert @user.save
+    assert !@user.active
+    assert !User.authenticate(@email, @pass)
+    @user = User.find_by_email(@email)
+    @code = @user.verification_code  
+    assert @user.check_verification(@code)
+    assert @user.active
+    assert (@user.password_hash == BCrypt::Engine.hash_secret(@pass, @user.password_salt))
+    assert User.authenticate(@email, @pass)
   end
   
 end
