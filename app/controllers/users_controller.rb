@@ -17,9 +17,9 @@ class UsersController < ApplicationController
   def validate_email
     @user = User.find(params[:id])
     if @user.check_verification(params[:code])
-      render :json => {:message => :validation_success}
+      render :json => {:message => :validation_success }
     else
-      render :json => {:message => :validation_failed, :status => 404}
+      render :json => {:message => :validation_failed }, :status => :unprocessable_entity
     end
   end
 end
