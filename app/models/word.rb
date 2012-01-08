@@ -8,6 +8,15 @@ class Word < ActiveRecord::Base
   
   validates :word, :presence => true
   
+  def self.find_starting_with chunk
+    Word.where('word like ?', chunk + '%')
+  end
+  
+  def self.and_language_id id
+    Word.where('language_id = ?', id)
+  end
+  
+  
   # this method returns words starting with the parameter word.
   def Word.find_with params
     from = params[:fromLang].to_i
