@@ -33,30 +33,45 @@ define(['jquery',
                 var targetLang = parseInt($("#targetLanguage").val(), 10);
                 var sourceLangElement = $("#sourceLanguage");
                 var sourceLang = parseInt(sourceLangElement.val(),10);
-                if (('addWord' === this.dialogType && 1 === sourceLang)||
-                    ('addTranslation' === this.dialogType && 1 === targetLang)) {
-                    /* If dialog type is addWord or targetLang All, then:
-                    add a language selectbox and a label */
-                    var label = $('<label for="sourceLanguage">'+i18n.lang+'</label>');
-                    $('#addword_example',this.addWordHtml).after(label);
+                
+                if ('addWord' === this.dialogType) {
+                    //copy the value of the searchbox in the word box.
+                    $('#addword_word', this.addWordHtml).val(word);
 
-                    var langSelect = sourceLangElement.clone();
-                    $('[value="1"]', langSelect).remove();
-                    langSelect.attr('id', 'addword_language');
-                    label.after(langSelect);
-
-                    /*copy the targetLang language from the main form */
-                    langSelect.val(targetLang);
-                    //set Word and language if addWord
-                    if ('addWord' === this.dialogType) {
-                        langSelect.val(sourceLangElement.val());
-                        $('#addword_word', this.addWordHtml).val(word);
-                    } else if (1 !== sourceLang) {
+                    if(1 === sourceLang) {
+                        //insert a select box with the language
+                        this.addLangField(sourceLang);
+                    } else {
+                        //insert a hidden lang field
+                        lang = $('<input type="hidden" value="'+sourceLang+'" id="addword_language">');
+                        $('#addword_example', this.addWordHtml).after(lang);
+                    }
+                }
+                
+                if ('addTranslation' === this.dialogType && 1 === targetLang) {
+                    //if the target lang field is all, then add a lang field in the form.
+                    this.addLangField(2);
+                    
+                    if (1 !== sourceLang) {
                         //remove sourceLang from Options if in addTranslation dialog Type
                         $('[value="'+sourceLang +'"]', langSelect).remove();
                     }
                 }
+            },
+            
+            /**
+             * This method adds a langauge select box and a label after the example sentence.
+             * The selected field can be set with the selected parameter.
+             */
+            addLangField: function(selected) {
+                var label = $('<label for="addword_language">'+i18n.lang+'</label>');
+                $('#addword_example',this.addWordHtml).after(label);
 
+                var langSelect = $('#sourceLanguage').clone();
+                $('[value="1"]', langSelect).remove();
+                langSelect.attr('id', 'addword_language');
+                label.after(langSelect);
+                langSelect.val(selected);
             },
 
             appendDiv: function() {
