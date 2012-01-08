@@ -335,7 +335,7 @@ body {
     #heading {
         display: none;
     }
-    #search, #user, #translations {
+    #search, #user, #translations, .back {
       @include transition(0.5s);
     }
 

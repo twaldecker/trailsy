@@ -89,10 +89,11 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         onClickBack: function(e) {
             e.preventDefault();
             e.stopPropagation();
-            $('.back').remove();
 
-            $('#translations').css("-webkit-transform","translate(450px, 0px)");
+
+            $('#translations, .back').css("-webkit-transform","translate(450px, 0px)");
             setTimeout(function(){
+                $('.back').remove();
                 $('#search, #user').removeClass('hidden');
                 $('#search, #user').css("-webkit-transform","translate(0px, 0px)");
                 window.history.back();
