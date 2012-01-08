@@ -54,7 +54,9 @@ function($, _, Backbone, searchResultView, detailResultListView, addWordDialog, 
         },
 
         blur: function() {
-            this.items_element.addClass('hidden');
+            if (false === $.browser.mobile) {
+                this.items_element.addClass('hidden');
+            }
             var em = this.items_element.children('li.selected');
             if (em.length) {
                 em.removeClass('selected');

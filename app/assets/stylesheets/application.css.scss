@@ -242,6 +242,14 @@ td { vertical-align: top; }
   transition:all $time ease-in-out;
 }
 
+@mixin slide($x, $y) {
+  transform:translate($x, $y);
+  -ms-transform:translate($x, $y);; /* IE 9 */
+  -moz-transform:translate($x, $y); /* Firefox */
+  -webkit-transform:translate($x, $y); /* Safari and Chrome */
+  -o-transform:translate($x, $y); /* Opera */
+}
+
 $border-type: 1px solid #789;
 
 body {
@@ -327,8 +335,8 @@ body {
     #heading {
         display: none;
     }
-    #search {
-      @include transition(1s);
+    #search, #user {
+      @include transition(0.5s);
     }
 
     input#word {

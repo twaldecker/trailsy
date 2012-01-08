@@ -62,10 +62,37 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 this.setFromLangValue(model.get('language_id'));
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
-                detailResultListView.setCollection(tmpWords);
-                detailResultListView.render(targetLang);
+                if (true === $.browser.mobile) {
+                    $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
+                    var self = this;
+                    setTimeout(function(){
+                        var nav = $('nav').append('<a href="#"  class="greyButton back"><</a>');
+                        $('.back', nav).on('click', _.bind(self.onClickBack, self));
+                        $('#search, #user').addClass('hidden');
+                        detailResultListView.setCollection(tmpWords);
+                        detailResultListView.render(targetLang);
+                    }, 500);
+                } else {
+                    detailResultListView.setCollection(tmpWords);
+                    detailResultListView.render(targetLang);
+                }
+
             }, this));
             this.setTargetLangValue(targetLang);
+        },
+
+        /**
+         * handler when clicking back on mobile phone
+         * @param jquery event e
+         */
+        onClickBack: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('.back').remove();
+            $('#search, #user').removeClass('hidden');
+            $('#search, #user').css("-webkit-transform","translate(0px, 0px)");
+            window.history.back();
+
         },
 
 

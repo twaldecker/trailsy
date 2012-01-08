@@ -1,5 +1,6 @@
 <header>
   <nav>
+    <section id="user">
     <% if current_user %>
         <a href="#login" id="loginLink" class="greyButton hidden"><%=t :login %></a>
         <a href="#logout" id="logoutLink" class="greyButton"><%=t :logout %></a>
@@ -9,6 +10,7 @@
         <a href="#logout" id="logoutLink" class="greyButton hidden"><%=t :logout %></a>
         <a href="#signup" id="signupLink" class="greyButton"><%=t :signup %></a>
     <% end %>
+    </section>
   </nav>
 </header>
 <div id="flashMessage"></div>
