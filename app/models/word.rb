@@ -9,11 +9,15 @@ class Word < ActiveRecord::Base
   validates :word, :presence => true
   
   def self.find_starting_with chunk
-    Word.where('word like ?', chunk + '%')
+    self.where('word like ?', chunk + '%')
   end
   
   def self.and_language_id id
-    Word.where('language_id = ?', id)
+    self.where('language_id = ?', id)
+  end
+  
+  def self.add_translations_to id
+    Word.joins('translations').where('connections.lang1_id = ?', id)
   end
   
   

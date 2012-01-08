@@ -21,12 +21,19 @@ class WordsController < ApplicationController
     respond_with @word, :include => [:language, :translations]
   end
 
-
-
   # GET /words/search?word=ab&lang=2
   # This action returns a json array with words starting with a parameter
   def search
-    @words = Word.find_starting_with(params[:word]).and_language_id(params[:fromLang])
+    
+    @words = Word.find_starting_with(params[:word]) #.and_language_id(params[:fromLang])
+    
+    if(params[:fromLang] != 1)
+      @words.and_language_id params[:fromLang]
+    end
+    
+    #if(params[:toLang] != 1)
+    #  @words.add_translations_to params[:toLang]
+    #end
 
     if @words
       render :json => @words, :include => [:language, :translations]
