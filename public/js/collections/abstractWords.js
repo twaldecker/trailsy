@@ -27,6 +27,10 @@ function(_,Backbone, wordModel) {
             }
         },
 
+        findByWord: function(string) {
+            return this.find(function(word){return word.get('word') == string;});
+        },
+
         addOrUpdate: function(attributes, options) {
             var oldWord = this.find(function(word){
                 return word.get('word') == attributes.word

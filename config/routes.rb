@@ -5,6 +5,18 @@ Trailsy::Application.routes.draw do
 
   match '/user/:id/validate/:code' => 'users#validate_email'
 
+  offline = Rack::Offline.configure do
+    cache "images/ajax-loader.gif"
+    cache "images/flash/error.png"
+    cache "images/flash/info.png"
+    cache "images/flash/warning.png"
+    cache "images/flash/success.png"
+    cache "assets/application.css"
+    cache "build/js/require-jquery.js"
+    cache "build/js/main.js"
+    network "/"
+  end
+  match "/application.manifest" => offline
   resources :users
   resources :sessions
 

@@ -59,12 +59,46 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             words.getOrFetch(id,_.bind(function() {
                 var model = words.get(id);
                 this.setSearchText(model.get('word'));
+                this.setFromLangValue(model.get('language_id'));
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
-                detailResultListView.setCollection(tmpWords);
-                detailResultListView.render(targetLang);
+                if (true === $.browser.mobile) {
+                    $('#translations').css("-webkit-transform","translate(0px, 0px)");
+                    $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
+                    var self = this;
+                    setTimeout(function(){
+                        var nav = $('nav').append('<a href="#"  class="back">&#x2B05;</a>');
+                        $('.back', nav).on('click', _.bind(self.onClickBack, self));
+                        $('#search, #user').addClass('hidden');
+                        detailResultListView.setCollection(tmpWords);
+                        detailResultListView.render(targetLang);
+                    }, 500);
+                } else {
+                    detailResultListView.setCollection(tmpWords);
+                    detailResultListView.render(targetLang);
+                }
+
             }, this));
             this.setTargetLangValue(targetLang);
+        },
+
+        /**
+         * handler when clicking back on mobile phone
+         * @param jquery event e
+         */
+        onClickBack: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('.back').remove();
+
+            $('#translations').css("-webkit-transform","translate(450px, 0px)");
+            setTimeout(function(){
+                $('#search, #user').removeClass('hidden');
+                $('#search, #user').css("-webkit-transform","translate(0px, 0px)");
+                window.history.back();
+            }, 500);
+
+
         },
 
 
@@ -100,7 +134,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         logout: function() { loginDialog.logout(); },
         
         signup: function() { signupDialog.show(); },
-        validation: function(id, code) { signupDialog.validation(id, code); },
+        validation: function(id, code) { signupDialog.validation(id, code); }
     });
 
     var init = function(){

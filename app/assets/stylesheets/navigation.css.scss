@@ -3,14 +3,18 @@ nav {
     color: #d3d3d3;
     overflow:auto;
     
-    > a, 
-    > a:visited {
+     a,
+     a:visited {
         float:right;
         font-size: 1.2em;   
         text-decoration: none;
         margin: 5px 5px 5px 0px;
         color: #d3d3d3;
     }
+}
+
+nav .back {
+  float: left;
 }
 
 .greyButton {

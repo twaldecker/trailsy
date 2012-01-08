@@ -17,6 +17,7 @@ define(['jquery',
              */
             applyTemplate: function() {
                 var word = $('input#word').val();
+
                 var addWordModel = {
                     addWordHeading: i18n.addTranslationFor + ' ' + word,
                     word: i18n.word, 
@@ -29,20 +30,33 @@ define(['jquery',
                 }
                 var template = _.template(html);
                 this.addWordHtml = $(template(addWordModel));
-                if ('addWord' === this.dialogType) {
-                    /* If dialog type is addWord, then: */
-                    /* add a language selectbox and a label */
+                var targetLang = parseInt($("#targetLanguage").val(), 10);
+                var sourceLangElement = $("#sourceLanguage");
+                var sourceLang = parseInt(sourceLangElement.val(),10);
+                if (('addWord' === this.dialogType && 1 === sourceLang)||
+                    ('addTranslation' === this.dialogType && 1 === targetLang)) {
+                    /* If dialog type is addWord or targetLang All, then:
+                    add a language selectbox and a label */
                     var label = $('<label for="sourceLanguage">'+i18n.lang+'</label>');
                     $('#addword_example',this.addWordHtml).after(label);
-                    var langSelect = $("#sourceLanguage").clone();
+
+                    var langSelect = sourceLangElement.clone();
                     $('[value="1"]', langSelect).remove();
                     langSelect.attr('id', 'addword_language');
                     label.after(langSelect);
-                    
-                    /*copy the source language and the word from the main form */
-                    langSelect.val($("#sourceLanguage").val());
-                    $('#addword_word', this.addWordHtml).val(word);
+
+                    /*copy the targetLang language from the main form */
+                    langSelect.val(targetLang);
+                    //set Word and language if addWord
+                    if ('addWord' === this.dialogType) {
+                        langSelect.val(sourceLangElement.val());
+                        $('#addword_word', this.addWordHtml).val(word);
+                    } else if (1 !== sourceLang) {
+                        //remove sourceLang from Options if in addTranslation dialog Type
+                        $('[value="'+sourceLang +'"]', langSelect).remove();
+                    }
                 }
+
             },
 
             appendDiv: function() {

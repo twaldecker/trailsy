@@ -1,6 +1,0 @@
-[submodule "public/js/vendor/jquery"]
-	path = public/js/vendor/jquery
-	url = git://github.com/jquery/jquery.git
-[submodule "public/js/vendor/underscore"]
-	path = public/js/vendor/underscore
-	url = git://github.com/documentcloud/underscore.git

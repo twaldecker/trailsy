@@ -12,12 +12,12 @@ class Word < ActiveRecord::Base
   def Word.find_with params
     from = params[:fromLang].to_i
     to   = params[:toLang].to_i
-    word = params[:word]
+    word = params[:word].to_s.downcase
 
     result = select('distinct words.*').
-              joins('join connections on words.id = connections.lang1_id').
-              joins('join words as w2 on w2.id = connections.lang2_id').
-              where('words.word like ?', word + '%')
+              joins('left join connections on (words.id = connections.lang1_id)').
+              joins('left join words as w2 on (w2.id = connections.lang2_id)').
+              where('lower(words.word) like ?', word + '%')
 
     if from != 1
       result = result.where(:language_id => from)
@@ -26,7 +26,7 @@ class Word < ActiveRecord::Base
     if to != 1
       result = result.where('w2.language_id' => to)
     end
-
+    logger.info result.to_sql
     return result
   end
   

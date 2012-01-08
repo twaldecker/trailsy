@@ -44,5 +44,6 @@ module Trailsy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    ENV["RAILS_ASSET_ID"] = ""
   end
 end
