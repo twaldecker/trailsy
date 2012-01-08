@@ -62,7 +62,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 this.setFromLangValue(model.get('language_id'));
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
-                if (false === $.browser.mobile) {
+                if (true === $.browser.mobile) {
                     $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
                     var self = this;
                     setTimeout(function(){
