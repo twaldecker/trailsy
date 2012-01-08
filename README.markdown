@@ -10,8 +10,7 @@ Its documentation says:
 
 1.  `gem install mailcatcher`
 2.  `mailcatcher`
-3.  Goto: (http://localhost:1080)[http://localhost:1080]
-
+3.  Goto: [http://localhost:1080](http://localhost:1080)
 
 For Production Environment define your own smtp server
 
