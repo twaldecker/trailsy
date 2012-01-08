@@ -6,3 +6,4 @@ en:
   logout: "Log out"
   signup: "Sign up"
   search: "Search"
+  verificationEmailSubject: "Email verification"

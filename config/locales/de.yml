@@ -6,3 +6,4 @@ de:
   logout: "Abmelden"
   signup: "Registrieren"
   search: "Suche"
+  verificationEmailSubject: "E-Mail Verifikation"
