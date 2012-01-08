@@ -62,11 +62,11 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 this.setFromLangValue(model.get('language_id'));
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
-                if (true === $.browser.mobile) {
+                if (false === $.browser.mobile) {
                     $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
                     var self = this;
                     setTimeout(function(){
-                        var nav = $('nav').append('<a href="#"  class="greyButton back"><</a>');
+                        var nav = $('nav').append('<a href="#"  class="back">&#x2B05;</a>');
                         $('.back', nav).on('click', _.bind(self.onClickBack, self));
                         $('#search, #user').addClass('hidden');
                         detailResultListView.setCollection(tmpWords);
