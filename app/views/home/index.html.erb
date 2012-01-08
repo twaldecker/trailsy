@@ -40,7 +40,7 @@
         <% end %>
       </select>
       <br />
-      <input  name="word" id="word" type="search" placeholder="Search" autocomplete="off" />
+      <input  name="word" id="word" type="search" placeholder="<%=t :search %>" autocomplete="off" />
     </form>
     <ul id="result" class="hidden">
       <% if !@words.nil? %>
