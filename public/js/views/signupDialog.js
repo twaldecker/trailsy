@@ -100,7 +100,7 @@ function($, _, html, flash, i18n) {
             var errorHtml = $('<ul></ul>');
             _.each(response, function (errors, field) { //go through error fields
                 var ele = $('<li>');     //create for each field a li
-                ele.text(field);        // set the name
+                //ele.text(field);      // set the name
                 errorHtml.append(ele); //  and append it to the ul
                 _.each(errors, function(message) {
                     var a = $('<p>').text(i18n[message]);
