@@ -335,13 +335,14 @@ body {
     #heading {
         display: none;
     }
-    #search, #user {
+    #search, #user, #translations {
       @include transition(0.5s);
     }
 
     input#word {
         width: 90%;
     }
+
 
     ul#result {
       margin-top: 10px;

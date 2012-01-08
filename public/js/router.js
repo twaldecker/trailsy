@@ -63,6 +63,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 var tmpWords = new detailWords(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
                 if (true === $.browser.mobile) {
+                    $('#translations').css("-webkit-transform","translate(0px, 0px)");
                     $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
                     var self = this;
                     setTimeout(function(){
@@ -89,9 +90,14 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             e.preventDefault();
             e.stopPropagation();
             $('.back').remove();
-            $('#search, #user').removeClass('hidden');
-            $('#search, #user').css("-webkit-transform","translate(0px, 0px)");
-            window.history.back();
+
+            $('#translations').css("-webkit-transform","translate(450px, 0px)");
+            setTimeout(function(){
+                $('#search, #user').removeClass('hidden');
+                $('#search, #user').css("-webkit-transform","translate(0px, 0px)");
+                window.history.back();
+            }, 500);
+
 
         },
 
