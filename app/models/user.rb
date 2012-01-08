@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   before_create :verification_init
 
   validates_confirmation_of :password, :message => 'password_notMatch'
-  validates :password, :length => { :minimum => 6, :message => 'password_tooShort' }
+  validates :password, :length => { :minimum => 6, :message => 'password_tooShort' }, :on => :create
   validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_uniqueness_of :email, :message => 'email_notUnique'
@@ -15,10 +15,12 @@ class User < ActiveRecord::Base
   
   acts_as_voter
 
+  # This method returns the url for the verification process
   def get_verification_url
     'http://localhost:3000/#validation/'+self.id.to_s+'/code/'+self.verification_code
   end
 
+  # This method generates a verification code and sets the user to inactive
   def verification_init
     self.verification_code = Digest::hexencode(Digest::SHA2.digest(self.email + self.password + rand.to_s + Time.current.to_s + 'reallybadsecret'))
     self.active = 0;
@@ -28,11 +30,11 @@ class User < ActiveRecord::Base
     self.verification_code
   end
 
+  # This method checks if the provided code matches the verification code and sets the user active
   def check_verification code
     if (code == self.verification_code)
       self.active = 1;
       self.save
-      return true
     end
   end
 
@@ -45,7 +47,7 @@ class User < ActiveRecord::Base
   
   def self.authenticate(email, password)
     @user = find_by_email(email)
-    if ( @user && (@user.password_hash == BCrypt::Engine.hash_secret(password, @user.password_salt)) )
+    if @user and @user.active and @user.password_hash == BCrypt::Engine.hash_secret(password, @user.password_salt)
       return @user
     else
       return nil
