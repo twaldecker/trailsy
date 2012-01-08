@@ -54,7 +54,7 @@ define(['jquery',
                     
                     if (1 !== sourceLang) {
                         //remove sourceLang from Options if in addTranslation dialog Type
-                        $('[value="'+sourceLang +'"]', langSelect).remove();
+                        $('[value="'+sourceLang +'"]', this.addWordHtml).remove();
                     }
                 }
             },
