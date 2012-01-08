@@ -30,4 +30,5 @@ js/views/signupDialog.js
 js/router.js
 js/app.js
 js/domReady.js
+js/vendor/detectmobilebrowser.js
 js/main.js
