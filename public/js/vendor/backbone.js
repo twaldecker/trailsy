@@ -1092,29 +1092,6 @@
             params.processData = false;
         }
 
-        if ('read' == method) {
-            /*var data = {};
-            if (params.data) {
-                data = params.data;
-            } else if (options.data) {
-                data = options.data;
-            }
-            var url = '';
-            if (params.url) {
-                url = params.url;
-            } else if (options.url) {
-                url = options.url;
-            }
-            return $.retrieveJSON(url, data, options.success);
-            */
-            var url = '';
-            if (params.url) {
-                url = params.url;
-            } else if (options.url) {
-                url = options.url;
-            }
-            return JSONCache.getCachedJSON(url, _.extend(params, options));
-        }
         // Make the request, allowing the user to override any Ajax options.
         return $.ajax(_.extend(params, options));
     };
