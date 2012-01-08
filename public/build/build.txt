@@ -31,6 +31,4 @@ js/router.js
 js/app.js
 js/domReady.js
 js/vendor/detectmobilebrowser.js
-js/vendor/jsoncache.js
-js/vendor/json2.js
 js/main.js
