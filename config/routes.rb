@@ -12,7 +12,7 @@ Trailsy::Application.routes.draw do
     cache "images/flash/warning.png"
     cache "images/flash/success.png"
     cache "assets/application.css"
-    cache "build/js/require-jquery.js"
+    cache "build/js/vendor/require-jquery.js"
     cache "build/js/main.js"
     network "/"
   end
