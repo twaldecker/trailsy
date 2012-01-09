@@ -4,7 +4,7 @@ class LanguagesController < ApplicationController
     if @languages
       render :json => @languages
     else
-      render :json  => {:status => :not_found}
+      render :json  => {}, :status => :not_found
     end
   end
 end
