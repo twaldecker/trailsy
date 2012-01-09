@@ -38,7 +38,7 @@ Trailsy::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
-
+  config.static_cache_control = "public, max-age=3600"
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
