@@ -118,7 +118,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
 
         search: function(query, fromLang, toLang) {
             this.input.addClass('loading');
-            words.fetch({data: jQuery.param({word: query, fromLang: fromLang, toLang: toLang }),
+            words.fetch({data: jQuery.param({word: query, fromLang: fromLang }),
                          url:'words/search',
                          success: function(){
                              searchResultListView.render();
