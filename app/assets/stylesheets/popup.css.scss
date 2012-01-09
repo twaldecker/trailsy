@@ -10,6 +10,13 @@ $background: #333;
     z-index: 1;
 }
 
+#login-box {
+  z-index: 3;
+}
+#signup-box {
+  z-index: 4;
+}
+
 .popup{
     display:none;
     border: 2px solid #ddd;
