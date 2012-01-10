@@ -26,7 +26,8 @@ define({
         'password_notMatch': 'Your confirmation doesnt match the supplied Password.',
         'password_tooShort': 'Your Password is too short (min 6 characters).',
         'passwordConfirmation': 'Password confirmation',
-        'createAccount': 'Create a new Account'
+        'createAccount': 'Create a new Account',
+        'back': 'Back'
     },
     'de-de': true
 })

@@ -25,5 +25,6 @@ define({
     'password_notMatch': 'Die bestätigung stimmt nicht mit dem Passwort überein.',
     'password_tooShort': 'Dein Passwort ist zu kurz (minimum 6 Zeichen).',
     'passwordConfirmation': 'Passwortbestätigung',
-    'createAccount': 'Legen Sie ein neues Benutzerkonto an'
+    'createAccount': 'Legen Sie ein neues Benutzerkonto an',
+    'back': 'Züruck'
 })

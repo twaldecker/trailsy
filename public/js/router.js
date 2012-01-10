@@ -8,8 +8,10 @@ define(['jquery',
         'views/flashMessage',
         'collections/words',
         'collections/detailWords',
-        'i18n!nls/trailsy'],
-function($, _, Backbone, detailResultListView, searchResultListView, loginDialog, signupDialog, flash, words, detailWords, i18n){
+        'i18n!nls/trailsy',
+        'text!templates/backButton.html'],
+function($, _, Backbone, detailResultListView, searchResultListView, loginDialog,
+         signupDialog, flash, words, detailWords, i18n, backButtonHtml){
     var appRouter = Backbone.Router.extend({
         
         loginState: false,
@@ -67,7 +69,8 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                     $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
                     var self = this;
                     setTimeout(function(){
-                        var nav = $('nav').append('<a href="#"  class="back">&#x2B05;</a>');
+                        var template = _.template(backButtonHtml);
+                        var nav = $('nav').append(template(i18n));
                         $('.back', nav).on('click', _.bind(self.onClickBack, self));
                         $('#search, #user').addClass('hidden');
                         detailResultListView.setCollection(tmpWords);
@@ -96,7 +99,6 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 $('.back').remove();
                 $('#search, #user').removeClass('hidden');
                 $('#search, #user').css("-webkit-transform","translate(0px, 0px)");
-                window.history.back();
             }, 500);
 
 
