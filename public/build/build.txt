@@ -8,7 +8,7 @@ js/collections/languages.js
 js/models/word.js
 js/collections/abstractWords.js
 js/collections/words.js
-js/collections/detailWords.js
+js/collections/translations.js
 js/i18n.js
 js/nls/trailsy.js
 i18n!nls/trailsy
