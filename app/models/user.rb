@@ -1,4 +1,4 @@
-require 'digest'
+require 'active_support/secure_random'
 
 class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   # This method generates a verification code and sets the user to inactive
   def verification_init
-    self.verification_code = Digest::hexencode(Digest::SHA2.digest(self.email + self.password + rand.to_s + Time.current.to_s + 'reallybadsecret'))
+    self.verification_code = ActiveSupport::SecureRandom.hex(20)
     self.active = 0
   end
 
