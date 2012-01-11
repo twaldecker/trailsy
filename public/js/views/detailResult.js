@@ -24,6 +24,11 @@ function($,Backbone,_,detailResultTemplate, languages){
             this.template = _.template(detailResultTemplate);
         },
 
+        /**
+         * handle clicking on rating buttons
+         *
+         * @param direction
+         */
         onClickRating: function(direction) {
             if (false === AppRouter.checkLoginState()) return;
             var currentVote = this.model.get('user_voted');
