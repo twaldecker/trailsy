@@ -92,8 +92,6 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         onClickBack: function(e) {
             e.preventDefault();
             e.stopPropagation();
-
-
             $('#translations, .back').css("-webkit-transform","translate(450px, 0px)");
             setTimeout(function(){
                 $('.back').remove();
