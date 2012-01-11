@@ -1,7 +1,7 @@
 define(['backbone','underscore','collections/abstractWords'],function(Backbone,_,abstractWords){
-    var detailWords = abstractWords.extend({
+    var translations = abstractWords.extend({
 
     });
 
-    return detailWords;
+    return translations;
 });
