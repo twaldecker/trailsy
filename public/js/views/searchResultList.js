@@ -84,7 +84,7 @@ define(['jquery',
                     clearTimeout(this.searchTimeout);
                 }
                 var searchText = this.input.val();
-                if (searchText.length < 3) {
+                if (searchText.length < 1) {
                     this.blur();
                     AppRouter.navigate('home', true);
                     return true;
