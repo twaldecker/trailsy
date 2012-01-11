@@ -44,10 +44,18 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             this.loginState = loggedIn;
         },
 
+        /**
+         * return if a user is logged in
+         *
+         * @return bool loggedIn
+         */
         getLoginState: function() {
             return this.loginState;
         },
 
+        /**
+         * if not logged in show login dialog
+         */
         checkLoginState: function() {
             if (false === this.getLoginState()) {
                 this.navigate('login', true);
@@ -57,6 +65,26 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
             }
         },
 
+        /**
+         * slide to detailView when in mobile mode
+         *
+         * @param int targetLang
+         */
+        slideToDetailView: function(targetLang) {
+            $('#translations').css("-webkit-transform","translate(0px, 0px)");
+            $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
+            var self = this;
+            setTimeout(function(){
+                var template = _.template(backButtonHtml);
+                var nav = $('nav').append(template(i18n));
+                $('.back', nav).on('click', _.bind(self.onClickBack, self));
+                $('#search, #user').addClass('hidden');
+                searchResultListView.unrender();
+                searchResultListView.hide();
+                detailResultListView.render(targetLang);
+            }, 500);
+        },
+
         words: function(id, targetLang) {
             words.getOrFetch(id,_.bind(function() {
                 var model = words.get(id);
@@ -64,20 +92,10 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 this.setFromLangValue(model.get('language_id'));
                 var tmpWords = new translations(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
+                detailResultListView.setCollection(tmpWords);
                 if (true === $.browser.mobile) {
-                    $('#translations').css("-webkit-transform","translate(0px, 0px)");
-                    $('#search, #user').css("-webkit-transform","translate(-450px, 0px)");
-                    var self = this;
-                    setTimeout(function(){
-                        var template = _.template(backButtonHtml);
-                        var nav = $('nav').append(template(i18n));
-                        $('.back', nav).on('click', _.bind(self.onClickBack, self));
-                        $('#search, #user').addClass('hidden');
-                        detailResultListView.setCollection(tmpWords);
-                        detailResultListView.render(targetLang);
-                    }, 500);
+                    this.slideToDetailView(targetLang);
                 } else {
-                    detailResultListView.setCollection(tmpWords);
                     detailResultListView.render(targetLang);
                 }
 

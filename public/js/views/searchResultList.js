@@ -154,6 +154,16 @@ define(['jquery',
                 this.el.append('<a href="#" id="addWord">' + i18n.add +' '+ i18n.word +' '+ word +'</a>');
             },
 
+            /**
+             * only hide search ul
+             */
+            hide: function() {
+                this.items_element.addClass('hidden');
+            },
+
+            /**
+             * unrender all content
+             */
             unrender: function() {
                 this.items_element.html("");
                 $('#addWord', this.el).remove();
