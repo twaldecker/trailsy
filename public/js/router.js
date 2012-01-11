@@ -105,19 +105,42 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
         },
 
 
+        /**
+         * set the Value of the
+         * sourceLanguage select Box
+         *
+         * @param int fromLang
+         */
         setFromLangValue: function(fromLang) {
             $("#sourceLanguage").val(fromLang);
         },
 
+        /**
+         * set the value of the targetLanguage Box
+         *
+         * @param int targetLang
+         */
         setTargetLangValue: function(targetLang) {
             var options = $("#targetLanguage");
             options.val(targetLang);
         },
 
+        /**
+         * set the searchText of the search input filed
+         *
+         * @param string text
+         */
         setSearchText: function(text) {
             this.input.val(text);
         },
 
+        /**
+         * trigger search in backend
+         *
+         * @param string query
+         * @param int fromLang
+         * @param int toLang
+         */
         search: function(query, fromLang, toLang) {
             this.input.addClass('loading');
             words.fetch({data: jQuery.param({word: query, fromLang: fromLang }),
