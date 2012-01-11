@@ -65,6 +65,7 @@ class TranslationsController < ApplicationController
 
   end
 
+  #add votings to translation
   def addConnectionDetailsTo(translation)
     @connection = Connection.find_by_lang2_id translation.id
     translation['rating'] = @connection.votes_for - @connection.votes_against
