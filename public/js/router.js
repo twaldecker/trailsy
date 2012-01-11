@@ -7,11 +7,11 @@ define(['jquery',
         'views/signupDialog',
         'views/flashMessage',
         'collections/words',
-        'collections/detailWords',
+        'collections/translations',
         'i18n!nls/trailsy',
         'text!templates/backButton.html'],
 function($, _, Backbone, detailResultListView, searchResultListView, loginDialog,
-         signupDialog, flash, words, detailWords, i18n, backButtonHtml){
+         signupDialog, flash, words, translations, i18n, backButtonHtml){
     var appRouter = Backbone.Router.extend({
         
         loginState: false,
@@ -62,7 +62,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
                 var model = words.get(id);
                 this.setSearchText(model.get('word'));
                 this.setFromLangValue(model.get('language_id'));
-                var tmpWords = new detailWords(model.get('translations') );
+                var tmpWords = new translations(model.get('translations') );
                 tmpWords.url = 'words/'+id+'/translations';
                 if (true === $.browser.mobile) {
                     $('#translations').css("-webkit-transform","translate(0px, 0px)");
