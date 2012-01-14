@@ -146,7 +146,7 @@ function($, _, Backbone, detailResultListView, searchResultListView, loginDialog
          * @param string text
          */
         setSearchText: function(text) {
-            this.input.val(text);
+            this.input.val(_.escape(text));
         },
 
         /**
